@@ -7,7 +7,11 @@ public class QuestionManager : MonoBehaviour
 {
     public Dialog Question;
     public AnswersManager AnswersManager;
-    public Action<AnswerButton> HandleAnswers;
+    public Action<AnswerButton> HandleAnswers
+    {
+        get => AnswersManager.Handler;
+        set => AnswersManager.Handler = value;
+    }
 
     // Start is called before the first frame update
     void Start() { AnswersManager.Handler = HandleAnswers; }
@@ -24,6 +28,4 @@ public class QuestionManager : MonoBehaviour
 
     public void SetAnswers(List<string> answers) { AnswersManager.SetAnswers(answers); }
     public void SetQuestion(string question) { Question.SetText(question); }
-
-
 }

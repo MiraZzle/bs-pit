@@ -8,6 +8,9 @@ public class AnswersManager : MonoBehaviour
     public GameObject AnswerPrefab;
     public GameObject Parent;
 
+    public SoundManager ButtonSoundManager;
+    public AudioClip Clip;
+
     public Action<AnswerButton> Handler;
 
     private List<AnswerButton> _answers = new List<AnswerButton>();
@@ -43,8 +46,14 @@ public class AnswersManager : MonoBehaviour
 
         answer.SetText(text);
         answer.AnswerID = id;
-        answer.GetComponent<Button>().onClick.AddListener(() => Handler?.Invoke(answer));
+        answer.GetComponent<Button>().onClick.AddListener(() =>
+                                                          {
+                                                              ButtonSoundManager.PlaySound(Clip);
+                                                              Handle(answer);
+                                                          });
 
         return answer;
     }
+
+    private void Handle(AnswerButton button) { Handler?.Invoke(button); }
 }

@@ -270,3 +270,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 3868618969478728112}
   AnswerID: 0
+  sound: {fileID: 0}
+  clip: {fileID: 8300000, guid: 526e64a29590ce7b291a22a770dc8efa, type: 3}
