@@ -205,7 +205,27 @@ public class QuestionLoader : MonoBehaviour
         return _questions.Take(4).ToArray();
     }
 
-    //public Question GetQuestionForProperty()
+    public Question[] GetQuestionsForCandidate(Candidate candidate, int count = 3) {
+        Question[] questions = new Question[count];
+        questions[0] = candidate.SpecialSkill.GetQuestion();
+        int addedQuestions = 1;
+
+        foreach (Property property in candidate.GoodProperties) {
+            if (property.GetQuestion() is not null) {
+                questions[addedQuestions++] = property.GetQuestion();
+                break;
+            }
+        }
+
+        foreach (Property property in candidate.BadProperties) {
+            if (property.GetQuestion() is not null) {
+                questions[addedQuestions++] = property.GetQuestion();
+                if (addedQuestions == count) break;
+            }
+        }
+
+        return questions;
+    }
 
     void Start()
     {
