@@ -47,20 +47,24 @@ public class CardManager : MonoBehaviour {
 
     // Commie, Lover, Fascist, Putin, Thief, Corrupt, Murderer
     [SerializeField]
-    Sprite[] CardSprites = new Sprite[numCardsInGame];
+    Sprite[] CardSpritesEN = new Sprite[numCardsInGame];
+    Sprite[] CardSpritesCS = new Sprite[numCardsInGame];
 
-    Card[] cards = new Card[numCardsInGame];
+    Card[] cardsEN = new Card[numCardsInGame];
+    Card[] cardsCS = new Card[numCardsInGame];
 
     private void CreateCards() {
         for (int i = 0; i < numCardsInGame; i++) {
-            cards[i] = new Card(CardSprites[i], (CardType)i);
+            cardsEN[i] = new Card(CardSpritesEN[i], (CardType)i);
+            cardsCS[i] = new Card(CardSpritesCS[i], (CardType)i);
         }
     }
 
     public Card[] GetRandomCards(int num = 4) {
+        Card[] cardsToShuffle = (PlayerPrefs.GetString("language") == "english") ? cardsEN : cardsCS;
         num = Mathf.Clamp(num, 0, numCardsInGame);
-        cards.Shuffle();
-        return cards.Take(num).ToArray();
+        cardsToShuffle.Shuffle();
+        return cardsToShuffle.Take(num).ToArray();
     }
 
     void Start()
