@@ -80,8 +80,13 @@ public class PropertiesManager : MonoBehaviour
         }
     }
 
+    static void LoadProperties() {
+
+
+    }
+
     void Start()
     {
-        // load properties
+        LoadProperties();
     }
 }
