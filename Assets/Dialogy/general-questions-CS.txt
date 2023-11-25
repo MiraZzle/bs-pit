@@ -1,0 +1,102 @@
+﻿Formát souboru:
+#   Řádky co nezačínají na nějaký významný znak jsou ignorovány jsou ignorovány - například #
+#   O obecná otázka
+#   P populistická odpověď. Vyměnuje autenticitu za voliče
+#   N neutrální odpověď. Trochu zvyšuje autenticitu i voliče
+#   C 10 -5 custom odpověď. Zvýší autenticitu o 10 autenticitu, ale sníží voliče o 5
+#   END ukočuje blok
+
+Obecné otázky
+
+O Ekonomika a zaměstnanost
+    P Nebudeme do naší země pouštět imigranty a vytvoříme pracovní místa pro naše vlastní občany! 
+    P Zvýšíme minimální mzdu na dvojnásobek a tím zajistíme každému dostatečný příjem!
+    N Zaměříme se na vzdělání a školení, aby naši občané mohli lépe konkurovat na trhu práce.
+    N Budeme pracovat na vytvoření podmínek pro růst malých a středních podniků, které jsou hlavním motorem ekonomiky.
+    C 10 -5 Navýšíme investice do umělé inteligence, protože pracuje zadarmo a efektivně.
+END
+
+O Zdravotnicví
+    P Zajistíme zdravotní péči pro každého zdarma, bez ohledu na příjem!
+    P Rychle postavíme nové nemocnice a zvýšíme platy zdravotnického personálu!
+    N Budeme pracovat na optimalizaci stávajícího systému a snížení čekacích dob.
+    N Podpoříme inovace ve zdravotnictví a zabezpečíme dostupnost léků.
+    N Navýšíme investice do primární péče a prevence, abychom snížili zátěž na akutní zdravotní péči.
+    C 7 -3 Umožníme si zaplatit za snížení čekacích dob a prémiovou zdravotní péči. 
+END
+
+O Kriminalita a bezpečnost
+    P Zavedeme tvrdší tresty a posílíme policii, aby naše města byla bezpečnější!
+    P Vyhostíme všechny cizince, kteří jsou podezřelí z trestné činnosti, a tak zajistíme bezpečnost našich občanů!
+    N Investujeme do modernizace policejních sil a zlepšíme spolupráci mezi složkami bezpečnostních složek.
+    N Podporujeme programy prevence kriminality a pracujeme na sociální integraci.
+    C 10 0 Zabýváme se kořeny kriminality, například chudobou a nedostatkem vzdělání, abychom snížili její základnu.
+END
+
+O Životní prostředí a klimatické změny
+    P Zavedeme okamžitá omezení průmyslové produkce a zachráníme planetu před katastrofou!
+    P Globální oteplování je pouze mýtus a planeta se o sebe postará sama!
+    N Budeme podporovat vědecký výzkum a technologické inovace na snížení emisí skleníkových plynů.
+    N Implementujeme postupné změny ve směrování průmyslu ke snížení jeho dopadu na životní prostředí.
+    N Budeme pracovat na mezinárodní spolupráci na globální úrovni, abychom řešili klimatické změny jako celosvětový problém.
+END
+
+O Sociální rovnost
+    P Obnovíme komunismus a zajistíme, aby každý měl stejný příjem bez ohledu na své schopnosti nebo úsilí!
+    P Zdaníme bohaté a rozdělíme jejich bohatství mezi všechny občany pro dosažení skutečné sociální rovnosti!
+    N Přezkoumáme a aktualizujeme sociální programy s cílem zajistit spravedlivější rozdělení příležitostí.
+    N Budeme pracovat na odstranění překážek pro rovnost ve vzdělání a pracovních příležitostech.
+    N Implementujeme programy podpory pro ty, kteří jsou v největších potížích, aby měli příležitost zlepšit svou situaci.
+    C 10 -3 Všichni lidé mají různé schopnosti a proto koncept sociální rovnosti nedává smysl.
+END
+
+O Migrace a uprchlictví
+    P Zavřeme naše hranice a ochráníme naši zemi před vetřelci a zločinci!
+    P Zajistíme, aby naši občané měli vždy přednost před cizinci při přidělování pracovních a sociálních výhod!
+    N Posílíme naše hraniční kontroly a zefektivníme procesy azylu pro zajištění bezpečnosti naší země.
+    N Budeme spolupracovat s mezinárodními partnery na hledání dlouhodobých řešení pro migrační otázky.
+    N Vypracujeme humánní a spravedlivý migrační systém s ohledem na potřeby naší ekonomiky a humanitární povinnosti.
+END
+
+O Vzdělání
+    P Zrušíme veškeré školní testy a domácí úkoly, aby se každý student cítil úspěšný bez ohledu na své schopnosti!
+    P Zajistíme, aby ve všech školách byli ti nejlepší učitelé a děti dostaly tradiční vzdělání!
+    N Budeme investovat do technologického vzdělávání a modernizace školních programů.
+    N Posílíme odborné vzdělávání a spolupráci mezi školami a průmyslovým sektorem.
+    N Zreformujeme učební plány tak, aby lépe odpovídaly potřebám současného trhu práce.
+    C 7 7 Podpoříme učitele a zlepšíme podmínky vzdělávání s cílem zvýšit kvalitu výuky.
+END
+
+O Zahraniční politika
+    P udeme hájit naši zemi za každou cenu a ignorovat mezinárodní dohody, které nás přímo nepodpoří!
+    P Přerušíme veškerou spolupráci s Evropskou unií a postavíme na první místo naší národní suverenitu!
+    N Budeme aktivním členem mezinárodních dohod a spolupracovat na řešení globálních problémů.
+    N Posílíme diplomatické vztahy a spolupráci s našimi sousedy a partnery.
+    C 5 5 Budeme hájit naše zájmy, ale zároveň hledat kompromisy a společné řešení s mezinárodní komunitou.
+END
+
+O Sociální péče a důchody
+    P Zvýšíme sociální dávky pro všechny občany a zajistíme, aby nikdo nemusel pracovat, pokud nechce!
+    P Zdvojnásobíme důchody, aby senioři nežili v chudobě!
+    N Posílíme systém sociální péče s důrazem na podporu těch, kteří jsou nejvíce potřební.
+    N Postavíme se k dlouhodobé udržitelnosti sociálních programů a zajištění finanční stability.
+    N Zreformujeme důchodový systém tak, aby byl férovější a odpovídal aktuálním demografickým výzvám.
+    C 15 -7 Důchody není možné zvyšovat, protože populace stárne, tedy je čím dál více důchodců a čím dál méně pracujících.
+END
+
+O Rodinná politika
+    P Poskytneme každé rodině roční finanční bonus bez ohledu na jejich příjem a počet dětí!
+    P Zavedeme zákony na ochranu tradiční rodiny a zakážeme moderní trendy, které ohrožují rodinné hodnoty!
+    C -1 7 Poskytneme daňové úlevy a benefity pro rodiny s dětmi a podpoříme dostupnost péče o děti.
+    N Budeme pracovat na zlepšení dostupnosti a kvality mateřské a rodičovské dovolené a podporovat rovnost pohlaví v pracovním životě.
+    C 8 0 Zavedeme manželství pro všechny.
+END
+
+O Věda a výzkum
+    P Snížíme investice do výzkumu a raději je rozdělíme mezi občany!
+    C 10 10 Investujeme obrovské sumy peněz do Matfyzu a staneme se světovým lídrem ve vědeckých objevech!
+    N Podporujeme financování klíčových výzkumných oblastí a zvyšujeme spolupráci mezi vědeckými institucemi.
+    N Přezkoumáme stávající vědecké programy s cílem optimalizovat výzkumné zdroje.
+    N Zajistíme stabilní financování pro vědu a výzkum a podpoříme dlouhodobé vědecké projekty.
+    N Budeme spolupracovat s mezinárodní vědeckou komunitou a zajistíme, aby naše země byla konkurenceschopná ve vědeckém výzkumu.
+END

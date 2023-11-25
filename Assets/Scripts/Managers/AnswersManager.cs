@@ -8,9 +8,9 @@ public class AnswersManager : MonoBehaviour
     public GameObject AnswerPrefab;
     public GameObject Parent;
 
-    public Action<Answer> Handler;
+    public Action<AnswerButton> Handler;
 
-    private List<Answer> _answers = new List<Answer>();
+    private List<AnswerButton> _answers = new List<AnswerButton>();
     private VerticalLayoutGroup _alignment;
 
     // Start is called before the first frame update
@@ -36,10 +36,10 @@ public class AnswersManager : MonoBehaviour
         }
     }
 
-    private Answer CreateAnswer(string text, int id)
+    private AnswerButton CreateAnswer(string text, int id)
     {
         GameObject gameobj = Instantiate(AnswerPrefab, Parent.transform);
-        Answer answer = gameobj.GetComponent<Answer>();
+        AnswerButton answer = gameobj.GetComponent<AnswerButton>();
 
         answer.SetText(text);
         answer.AnswerID = id;
