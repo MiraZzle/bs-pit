@@ -45,9 +45,10 @@ public class Card {
 public class CardManager : MonoBehaviour {
     const int numCardsInGame = 7;
 
-    // Commie, Lover, Fascist, Putin, Thief, Corrupt, Murderer
+    // Commie, Lover, Fascist, Putin, Drunkard, Corrupt, Murderer
     [SerializeField]
     Sprite[] CardSpritesEN = new Sprite[numCardsInGame];
+    [SerializeField]
     Sprite[] CardSpritesCS = new Sprite[numCardsInGame];
 
     Card[] cardsEN = new Card[numCardsInGame];

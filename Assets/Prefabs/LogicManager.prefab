@@ -57,11 +57,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259e4f4309b0cea47b3924905ad46405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  CardSpritesEN:
+  - {fileID: 21300000, guid: e4199d83ab1e6f2f486c5d3b8fed637c, type: 3}
+  - {fileID: 21300000, guid: 2b084f31d7a76397bb38f7dbf116f9f8, type: 3}
+  - {fileID: 21300000, guid: ce474150100b006449e96f4f8803125d, type: 3}
+  - {fileID: 21300000, guid: 17a1da1ae0e3c056a9030a22b606ed98, type: 3}
+  - {fileID: 21300000, guid: 4de171af5f8d5894093941be996ea5c4, type: 3}
+  - {fileID: 21300000, guid: 59d207c458c96a948b9f4db1a40f9b98, type: 3}
+  - {fileID: 21300000, guid: 9686d47a21b763f4a96f423a12e50664, type: 3}
+  CardSpritesCS:
+  - {fileID: 21300000, guid: e4199d83ab1e6f2f486c5d3b8fed637c, type: 3}
+  - {fileID: 21300000, guid: 2b084f31d7a76397bb38f7dbf116f9f8, type: 3}
+  - {fileID: 21300000, guid: ce474150100b006449e96f4f8803125d, type: 3}
+  - {fileID: 21300000, guid: 17a1da1ae0e3c056a9030a22b606ed98, type: 3}
+  - {fileID: 21300000, guid: 4de171af5f8d5894093941be996ea5c4, type: 3}
+  - {fileID: 21300000, guid: 59d207c458c96a948b9f4db1a40f9b98, type: 3}
+  - {fileID: 21300000, guid: 9686d47a21b763f4a96f423a12e50664, type: 3}
