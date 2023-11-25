@@ -33,9 +33,9 @@ public class Card {
     public static void SetUpCards() {
         _relevantProperties[(int)CardType.Commie] = new() { PropertyType.Commie, PropertyType.ProRussian };
         _relevantProperties[(int)CardType.Lover] = new() { PropertyType.SSKollar };
-        _relevantProperties[(int)CardType.Fascist] = new() { PropertyType.Fasist };
+        _relevantProperties[(int)CardType.Fascist] = new() { PropertyType.Fascist };
         _relevantProperties[(int)CardType.Putin] = new() { PropertyType.Commie, PropertyType.ProRussian };
-        _relevantProperties[(int)CardType.Drunkard] = new() { PropertyType.SSAligator };
+        _relevantProperties[(int)CardType.Drunkard] = new() { PropertyType.Drunkard, PropertyType.SSAligator };
         _relevantProperties[(int)CardType.Corrupt] = new() { PropertyType.Corrupt, PropertyType.SSCapiHnizdo };
         _relevantProperties[(int)CardType.Murderer] = new() { PropertyType.SSKuciak, PropertyType.SSFlakanec };
     }

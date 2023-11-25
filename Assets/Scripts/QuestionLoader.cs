@@ -74,7 +74,7 @@ public record Question {
         int addedAnswers = 0;
 
         Answer[] answers = new Answer[3];
-        // get 1 populist answer
+        // try to get 1 populist answer
         foreach (Answer answer in _populistAnswers ) {
             if (!answer.IsUsed) {
                 answers[0] = answer;
