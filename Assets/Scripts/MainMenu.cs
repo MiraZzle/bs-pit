@@ -5,56 +5,56 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
-    private bool cz = false;        // jazyk
-    private Image languageImage;
+    private Image flagImage;
     private Image debateImage;
-    private Image langImage;
+    private Image languageImage;
     private Image quitImage;
 
-    [SerializeField] private Sprite czImg;
-    [SerializeField] private Sprite enImg;
-    [SerializeField] private Sprite debateCz;
-    [SerializeField] private Sprite debateEn;
-    [SerializeField] private Sprite quitCz;
-    [SerializeField] private Sprite quitEn;
-    [SerializeField] private Sprite langCz;
-    [SerializeField] private Sprite langEn;
+    [SerializeField] private Sprite flagCZ;
+    [SerializeField] private Sprite flagEN;
+    [SerializeField] private Sprite debateCZ;
+    [SerializeField] private Sprite debateEN;
+    [SerializeField] private Sprite quitCZ;
+    [SerializeField] private Sprite quitEN;
+    [SerializeField] private Sprite languageCZ;
+    [SerializeField] private Sprite languageEN;
 
     void Start() {
         GameObject objImg = GameObject.Find("Language");
-        languageImage = objImg.GetComponent<Image>();
+        flagImage = objImg.GetComponent<Image>();
 
         GameObject langImg = GameObject.Find("LanguageButton");
-        langImage = langImg.GetComponent<Image>();
+        languageImage = langImg.GetComponent<Image>();
         
         GameObject debateImg = GameObject.Find("DebateButton");
         debateImage = debateImg.GetComponent<Image>();
 
         GameObject quitImg = GameObject.Find("QuitButton");
         quitImage = quitImg.GetComponent<Image>();
+
+        if (!PlayerPrefs.HasKey("language")) {
+            PlayerPrefs.SetString("language", "english");
+        }
+        DrawIcons();
     }
 
     public void Debate() {
         SceneManager.LoadSceneAsync(1);
-        Debug.Log("CZ: " + cz);
     }
 
-    public void LanguageChange() {
-        if (languageImage.sprite == enImg){
-            cz = true;
-            languageImage.sprite = czImg;
 
-            debateImage.sprite = debateCz;
-            langImage.sprite = langCz;
-            quitImage.sprite = quitCz;
-        } else {
-            cz = false;
-            languageImage.sprite = enImg;
+    private void DrawIcons() {
+        string language = PlayerPrefs.GetString("language");
+        flagImage.sprite = (language == "english") ? flagEN : flagCZ;
+        debateImage.sprite = (language == "english") ? debateEN : debateCZ;
+        languageImage.sprite = (language == "english") ? languageEN : languageCZ;
+        quitImage.sprite = (language == "english") ? quitEN : quitCZ;
+    }
 
-            debateImage.sprite = debateEn;
-            langImage.sprite = langEn;
-            quitImage.sprite = quitEn;
-        }
+    public void ChangeLanguage() {
+        string newLang = (PlayerPrefs.GetString("language") == "english") ? "czech" : "english";
+        PlayerPrefs.SetString("language", newLang);
+        DrawIcons();
     }
 
     public void Quit() {

@@ -30,7 +30,7 @@ public class Candidate : MonoBehaviour
         }
     }
 
-    public void GenerateNewCandidate()
+    private void GenerateNewCandidate()
     {
         // generate new properties and special skill
         propertiesManager.ResetProperties();

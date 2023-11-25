@@ -10,16 +10,19 @@ public enum PropertyType {
 
 public class Property {
     public PropertyType Type { get; private set; }
-    public string TextEN { get; private set; }
-    public string TextCS { get; private set; }
+
+    private string _textEN;
+    private string _textCS;
+    public string Text => (PlayerPrefs.GetString("language") == "english") ? _textEN : _textCS;
+
     public bool IsGood { get; private set; }
 
     private readonly List<Question> _questions = new List<Question>();
 
     public Property(PropertyType type, string textEN, string textCS, bool isGood, List<Question> questions) {
         Type = type;
-        TextEN = textEN;
-        TextCS = textCS;
+        _textEN = textEN;
+        _textCS = textCS;
         IsGood = isGood;
         _questions = questions;
     }

@@ -28,8 +28,10 @@ static class MyExtensions {
 public record Answer {
     public int DeltaAuthenticity { get; private set; }
     public int DeltaVolici { get; private set; }
-    public string TextEN { get; private set; }
-    public string TextCS { get; private set; }
+
+    private string _textEN;
+    private string _textCS;
+    public string Text => (PlayerPrefs.GetString("language") == "english") ? _textEN : _textCS;
 
     public AnswerType Type { get; private set; }
 
@@ -37,22 +39,23 @@ public record Answer {
     public Answer(int deltaAuthenticity, int deltaVolici, string textEN, string textCS, AnswerType type) {
         DeltaAuthenticity = deltaAuthenticity;
         DeltaVolici = deltaVolici;
-        TextEN = textEN;
-        TextCS = textCS;
+        _textEN = textEN;
+        _textCS = textCS;
         Type = type;
     }
 }
 
 public record Question {
-    public string TextEN { get; private set; }
-    public string TextCS { get; private set; }
+    private string _textEN;
+    private string _textCS;
+    public string Text => (PlayerPrefs.GetString("language") == "english") ? _textEN : _textCS;
 
     private List<Answer> _populistAnswers = new();
     private List<Answer> _neutralAnswers = new();
 
     public Question(string textEN, string textCS, List<Answer> answers) {
-        TextEN = textEN;
-        TextCS = textCS;
+        _textEN = textEN;
+        _textCS = textCS;
 
         foreach (Answer answer in answers) {
             if (answer.Type == AnswerType.Neutral) _neutralAnswers.Add(answer);

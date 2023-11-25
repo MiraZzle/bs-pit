@@ -694,14 +694,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdbb762e67847ba39f04407cd83409b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  czImg: {fileID: 21300000, guid: 3cd64172c772709c0ac8fa77de7e32e9, type: 3}
-  enImg: {fileID: 21300000, guid: f9bfdda1f73011ae19a52d1e905df406, type: 3}
-  debateCz: {fileID: 21300000, guid: 7102e9484024bbce9a7ecf7f93f779a8, type: 3}
-  debateEn: {fileID: 21300000, guid: 55f97bf2c1d85b64484c8cae22bd5382, type: 3}
-  quitCz: {fileID: 21300000, guid: e936e44fca9b8903f928dbf526c7d1ff, type: 3}
-  quitEn: {fileID: 21300000, guid: 5e7d05a34a74b0c0b88658afb2f3374f, type: 3}
-  langCz: {fileID: 21300000, guid: 4e86c7ffd6eb1e9c79fc639df3d0968e, type: 3}
-  langEn: {fileID: 21300000, guid: 91792560c0104f6fa82789eb49c57c67, type: 3}
+  flagCZ: {fileID: 21300000, guid: 3cd64172c772709c0ac8fa77de7e32e9, type: 3}
+  flagEN: {fileID: 21300000, guid: f9bfdda1f73011ae19a52d1e905df406, type: 3}
+  debateCZ: {fileID: 21300000, guid: 7102e9484024bbce9a7ecf7f93f779a8, type: 3}
+  debateEN: {fileID: 21300000, guid: 55f97bf2c1d85b64484c8cae22bd5382, type: 3}
+  quitCZ: {fileID: 21300000, guid: e936e44fca9b8903f928dbf526c7d1ff, type: 3}
+  quitEN: {fileID: 21300000, guid: 5e7d05a34a74b0c0b88658afb2f3374f, type: 3}
+  languageCZ: {fileID: 21300000, guid: 4e86c7ffd6eb1e9c79fc639df3d0968e, type: 3}
+  languageEN: {fileID: 21300000, guid: 91792560c0104f6fa82789eb49c57c67, type: 3}
 --- !u!82 &1543098183
 AudioSource:
   m_ObjectHideFlags: 0
@@ -951,7 +951,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1543098182}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: LanguageChange
+        m_MethodName: ChangeLanguage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
