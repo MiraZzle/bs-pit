@@ -69,7 +69,7 @@ public class Dialog : MonoBehaviour
         Skip = false;
     }
 
-    void Start()
+    void Awake()
     {
         _textBox = GetComponent<TMP_Text>();
         if (dialogObj is null)

@@ -8,13 +8,27 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private QuestionManager questionManager;
 
-    void Start() { ModeratorQuestion(); }
+    [SerializeField]
+    private Dialog moderatorDialog;
 
-    void ModeratorQuestion()
+    [SerializeField]
+    private SpotlightManager spotlight;
+
+    public float ModeratorDelay = 0.75f;
+
+    void Start() { StartCoroutine(ModeratorSpeech()); }
+
+    IEnumerator ModeratorSpeech()
     {
-        questionManager.SetQuestion("Some random ...?");
-        questionManager.SetAnswers(new List<string> { "A", "B", "C" });
+        yield return new WaitForSeconds(ModeratorDelay);
 
-        questionManager.ShowQuestion(() => questionManager.ShowAnswers());
+        spotlight.SetSpotlightModerator(true);
+
+        yield return new WaitForSeconds(ModeratorDelay);
+
+        moderatorDialog.Show();
+        moderatorDialog.OnTypewriterEnd += ModeratorIntroduction;
     }
+
+    void ModeratorIntroduction() { }
 }
