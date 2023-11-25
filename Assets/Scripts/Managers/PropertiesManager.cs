@@ -24,6 +24,12 @@ public class Property {
         _questions = questions;
     }
 
+    public Question GetQuestion() {
+        if (_questions.Count == 0) return null;
+        _questions.Shuffle();
+        return _questions[0];
+    }
+
     public virtual void Reset() {
         foreach (Question question in _questions) question.ResetAnswers();
     }
