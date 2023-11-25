@@ -1,5 +1,5 @@
 ﻿Formát souboru:
-#   Řádky co nezacínají na nejaký významný znak jsou ignorovány jsou ignorovány - napríklad #
+#   Řádky co nezačínají na nejaký významný znak jsou ignorovány jsou ignorovány - napríklad #
 #   GroupOptional - zacátek nové sady mutex optional vlastností
 #   GroupRequired - zacátek nové sady mutex povinných vlastností
 #   P - property
