@@ -5,7 +5,7 @@ using System.Threading;
 using UnityEngine;
 
 public enum PropertyType {
-    Fasist, Commie, Ukraine, Izrael, Random, SpecialSkill
+    Fasist, Commie, ProRussian, Corrupt, Random, SSKuciak, SSCapiHnizdo, SSKollar, SSFlakanec, SSAligator
 }
 
 public class Property {
@@ -14,7 +14,7 @@ public class Property {
     public string TextCS { get; private set; }
     public bool IsGood { get; private set; }
 
-    private List<Question> _questions = new List<Question>();
+    private readonly List<Question> _questions = new List<Question>();
 
     public Property(PropertyType type, string textEN, string textCS, bool isGood, List<Question> questions) {
         Type = type;
@@ -38,8 +38,8 @@ public class Property {
 public class SpecialSkill : Property {
     public bool IsUsed;
 
-    public SpecialSkill(string textEN, string textCS, List<Question> questions)
-        : base(PropertyType.SpecialSkill, textEN, textCS, false, questions) { }
+    public SpecialSkill(PropertyType type, string textEN, string textCS, List<Question> questions)
+        : base(type, textEN, textCS, false, questions) { }
 
     public override void Reset() {
         base.Reset();
@@ -87,7 +87,6 @@ public class PropertiesManager : MonoBehaviour
     }
 
     static void LoadProperties() {
-
 
     }
 
