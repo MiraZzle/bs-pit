@@ -68,11 +68,14 @@ public record Question {
     public Answer[] GetAnswers() {
         ShuffleAnswers();
 
+        int addedAnswers = 0;
+
         Answer[] answers = new Answer[3];
         // get 1 populist answer
         foreach (Answer answer in _populistAnswers ) {
             if (!answer.IsUsed) {
                 answers[0] = answer;
+                ++addedAnswers;
                 break;
             }
         }
@@ -80,8 +83,8 @@ public record Question {
         // fill with normal answers
         foreach (Answer answer in _neutralAnswers ) {
             if (!answer.IsUsed) {
-                answers[answers.Length] = answer;
-                if (answers.Length == 3) break;
+                answers[addedAnswers++] = answer;
+                if (addedAnswers == 3) break;
             }
         }
 
@@ -201,6 +204,8 @@ public class QuestionLoader : MonoBehaviour
         _questions.Shuffle();
         return _questions.Take(4).ToArray();
     }
+
+    //public Question GetQuestionForProperty()
 
     void Start()
     {

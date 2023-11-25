@@ -1,0 +1,37 @@
+﻿Formát souboru:
+#   Řádky co nezacínají na nejaký významný znak jsou ignorovány jsou ignorovány - napríklad #
+#   GroupOptional - zacátek nové sady mutex optional vlastností
+#   GroupRequired - zacátek nové sady mutex povinných vlastností
+#   P - property
+#   Q - otázka moderátora na tuto vlastnost
+#   R 5 -5 reakce na otázku moderátora, zisk 5% autenticity, ztráta 5% volicu
+#   END - ukočuje blok
+
+GroupOptional
+P Neofašista
+    Q Múžete se nějak vyjádřit k vaší údajné účasti na neofašistických akcích?
+        R -10 10 Je to kampaň, naprosto odmítám mojí účast na nějaké takové akci!
+        R 0 5 Všichni pořád mluví o nějaké údajné účasti, ale nikdo nedokáže prezentovat žádné skutečné důkazy!
+        R 10 -5 Opravdu jsem se takové akce zúčastnil a uznávám, že to byla chyba.
+END
+
+
+
+
+- byl komouš
+- je komouš
+- je proruský
+- je rusofobní
+- podporuje pomoc ukrajincum x je proti pomoci ukrajincum
+- podporuje izrael x kritizuje izrael
+- background
+    - matematik, doktor, právník, filosof, katolický knez, miliardár (kapitalista), voják, politik (co delal?)
+
+- special skill
+  - Kuciak - podezrení z objednané vzaždy
+  - Capí hnízdo - danové podvody pres rodinu
+  - Boris - máš 13 detí s 11 ženami
+  - Flákanec - casto používá fyzické násilí 
+  - Aligátor - má problémy s becherovkou 
+  - Papa Joe - je tak starý, že má problémy s chuzí 
+  - Kleptomanie - má problém s vracením pujcených per
