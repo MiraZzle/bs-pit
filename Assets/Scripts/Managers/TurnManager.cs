@@ -70,7 +70,7 @@ public class TurnManager : MonoBehaviour
 
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
 
-        moderatorDialog.SetText("Player dasdsa das d asd asd as");
+        moderatorDialog.SetText("Candidate A, a seasoned politician, has more political baggage than a 10-term senator at an airport carousel. Critics say they navigate issues with all the agility of a sloth in a speed-eating contest.");
         moderatorDialog.Show();
         yield return new WaitWhile(() => moderatorDialog.IsActive);
 
@@ -84,7 +84,7 @@ public class TurnManager : MonoBehaviour
         yield return new WaitUntil(() => !Player.InfoCard.IsOpen);
 
         spotlight.SetSpotlightPlayer(false);
-        moderatorDialog.SetText("Enemy dasdsa das d asd asd as");
+        moderatorDialog.SetText("Candidate B, the private sector enthusiast, brings as much political experience as a goldfish in a game of chess – but hey, who needs political know-how when you've got a dynamic PowerPoint presentation?");
         moderatorDialog.Show();
         spotlight.SetSpotlightEnemy(true);
 
