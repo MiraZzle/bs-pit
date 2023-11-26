@@ -9,7 +9,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private QuestionManager questionManager;
     [SerializeField]
-    private DebateManager DebageManager;
+    private DebateManager debateManager;
 
     [SerializeField]
     private Dialog moderatorDialog;
@@ -86,7 +86,10 @@ public class TurnManager : MonoBehaviour
     {
         Title.text = "question phase";
 
-        Question? q = DebageManager.AskAnotherQuestion();
+        (Question q, Candidate c) = debateManager.AskAnotherQuestion();
+        if (q is null) {
+            // konec otazek --> konec hry
+        }
 
         questionManager.ShowQuestion(q);
 

@@ -600,6 +600,10 @@ PrefabInstance:
       propertyPath: InfoCard
       value: 
       objectReference: {fileID: 1367802951}
+    - target: {fileID: 3123899200216062918, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: DialogBox
+      value: 
+      objectReference: {fileID: 755116874}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2496,7 +2500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionManager: {fileID: 922770333}
-  DebageManager: {fileID: 1961715179}
+  debateManager: {fileID: 1961715179}
   moderatorDialog: {fileID: 2031230919}
   spotlight: {fileID: 634530839}
   Player: {fileID: 1771739307}
@@ -2856,7 +2860,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269154730}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2866,7 +2870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 300.69, y: 98}
+  m_AnchoredPosition: {x: 300.69, y: 98.00004}
   m_SizeDelta: {x: 601.381, y: 43.959}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269154732
@@ -4031,8 +4035,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1418386493}
   - {fileID: 1269154731}
+  - {fileID: 1418386493}
   m_Father: {fileID: 1727671428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4297,6 +4301,10 @@ PrefabInstance:
       propertyPath: InfoCard
       value: 
       objectReference: {fileID: 18052093}
+    - target: {fileID: 3123899200216062918, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: DialogBox
+      value: 
+      objectReference: {fileID: 822907571}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

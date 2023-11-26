@@ -88,8 +88,8 @@ public class DebateManager : MonoBehaviour
     private Question _lastQuestion;
     private Candidate _lastCandidate;
 
-    public (Question, Candidate)? AskAnotherQuestion() {
-        if (_questionNum >= _questionsInTotal) return null;
+    public (Question?, Candidate?) AskAnotherQuestion() {
+        if (_questionNum >= _questionsInTotal) return (null, null);
 
         (_lastQuestion, _lastCandidate) = _questions[_questionNum++];
         return (_lastQuestion, _lastCandidate);
