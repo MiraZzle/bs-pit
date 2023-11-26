@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterCard : MonoBehaviour
+public class CharacterInfoCard : MonoBehaviour
 {
     public Image Icon;
     public TMP_Text Name;

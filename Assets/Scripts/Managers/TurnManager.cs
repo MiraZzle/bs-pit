@@ -15,7 +15,9 @@ public class TurnManager : MonoBehaviour
     private SpotlightManager spotlight;
 
     [SerializeField]
-    private CharacterCard Card;
+    private Candidate Player;
+    [SerializeField]
+    private Candidate Enemy;
 
     public float ModeratorDelay = 0.75f;
 
@@ -36,24 +38,17 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator ModeratorIntroduction()
     {
+        var infos = Candidate.GetRandomInfo();
+
+        Player.SetInfo(infos[0, 0], infos[0, 1], infos[0, 2]);
+        Enemy.SetInfo(infos[1, 0], infos[1, 1], infos[1, 2]);
+
         moderatorDialog.Hide();
         spotlight.SetSpotlightPlayer(true);
 
         yield return new WaitForSeconds(ModeratorDelay);
 
-        Card.Name.text = "Bohuslav Novák";
-        Card.Age.text = "50";
-        Card.Mastery.text = "Alkoholik";
-        Card.Positives.text = "Charita";
-        Card.Negatives.text = "Komunista";
-
-        Card.Show();
-
-        yield return new WaitForSeconds(ModeratorDelay);
-
-        Card.Hide();
-
-        Turn();
+        Player.InfoCard.Show();
     }
 
     void Turn()
