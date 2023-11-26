@@ -64,7 +64,7 @@ public class Property
 
 public class SpecialSkill : Property
 {
-    public bool IsUsed;
+    public bool IsUsed = false;
 
     private string _descriptionEN;
     private string _descriptionCS;
@@ -127,10 +127,6 @@ public class PropertiesManager : MonoBehaviour
         foreach (Property property in _properties)
         {
             property.Reset();
-        }
-        foreach (SpecialSkill skill in _specialSkills)
-        {
-            skill.Reset();
         }
     }
 

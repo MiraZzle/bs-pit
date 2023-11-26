@@ -137,7 +137,7 @@ public class Candidate : MonoBehaviour {
     private void GenerateNewCandidate()
     {
         // generate new properties and special skill
-        propertiesManager.ResetProperties();
+        // propertiesManager.ResetProperties();
         GoodProperties = propertiesManager.GetCandidateProperties(good: true);
         BadProperties = propertiesManager.GetCandidateProperties(good: false);
         SpecialSkill = propertiesManager.GetSpecialSkill();

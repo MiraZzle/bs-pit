@@ -122,7 +122,7 @@ public class DebateManager : MonoBehaviour
         bool DecideWin(float multiplier)
         {
             float r = Random.Range(0f, 1f);
-            return PlayerAuthenticity / Candidate.MaxAuthenticity * multiplier > r;
+            return (float)PlayerAuthenticity / (float)Candidate.MaxAuthenticity * multiplier > r;
         }
         int CalculateResult(int number, float multiplier)
         {

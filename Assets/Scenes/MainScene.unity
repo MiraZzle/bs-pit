@@ -2060,7 +2060,7 @@ MonoBehaviour:
   interpunctuationDelay: 0.5
   Skip: 0
   dialogObj: {fileID: 1418386492}
-  sound: {fileID: 8300000, guid: 159be86cc1c2d661b901177e349fffb3, type: 3}
+  sound: {fileID: 8300000, guid: f6729d7f20dba8c48af79a67661b85df, type: 3}
   soundManager: {fileID: 1271056568}
 --- !u!114 &755116875
 MonoBehaviour:
@@ -2310,7 +2310,7 @@ MonoBehaviour:
   interpunctuationDelay: 0.5
   Skip: 0
   dialogObj: {fileID: 1269154730}
-  sound: {fileID: 8300000, guid: 159be86cc1c2d661b901177e349fffb3, type: 3}
+  sound: {fileID: 8300000, guid: f6729d7f20dba8c48af79a67661b85df, type: 3}
   soundManager: {fileID: 1271056568}
 --- !u!4 &857752721 stripped
 Transform:
@@ -3238,7 +3238,7 @@ MonoBehaviour:
   interpunctuationDelay: 0.5
   Skip: 0
   dialogObj: {fileID: 1720994806}
-  sound: {fileID: 8300000, guid: 159be86cc1c2d661b901177e349fffb3, type: 3}
+  sound: {fileID: 8300000, guid: f6729d7f20dba8c48af79a67661b85df, type: 3}
   soundManager: {fileID: 1271056568}
 --- !u!1 &1269154730
 GameObject:
