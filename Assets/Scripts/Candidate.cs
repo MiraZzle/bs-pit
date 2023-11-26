@@ -125,11 +125,12 @@ public class Candidate : MonoBehaviour
         string result = "";
         foreach (var prop in props)
         {
+            result += "- ";
             result += prop.Text;
-            result += ", ";
+            result += '\n';
         }
 
-        return result.Substring(0, result.Length - 2);
+        return result.Substring(0, result.Length);
     }
 
     void Start()
