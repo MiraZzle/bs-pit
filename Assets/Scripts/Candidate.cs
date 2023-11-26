@@ -27,7 +27,7 @@ public class Candidate : MonoBehaviour {
 
     public const int MaxAuthenticity = 100;
 
-    public int Authenticity { get; private set; } = MaxAuthenticity / 2;
+    public int Authenticity = MaxAuthenticity / 2;
 
     void Awake() { 
         propertiesManager = GameObject.FindGameObjectWithTag("logic").GetComponent<PropertiesManager>();
@@ -41,7 +41,8 @@ public class Candidate : MonoBehaviour {
     }
 
     public void ChangeAuthenticity(int deltaAuthenticity) {
-        Authenticity += Mathf.Clamp(deltaAuthenticity, 0, MaxAuthenticity);
+        Authenticity = Mathf.Clamp(Authenticity + deltaAuthenticity, 0, MaxAuthenticity);
+        Debug.Log(Authenticity);
         UpdateAuthenticityBar();
 
         if (Authenticity <= MaxAuthenticity / 10) {
