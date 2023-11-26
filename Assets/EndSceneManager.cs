@@ -10,8 +10,6 @@ public class EndSceneManager : MonoBehaviour {
     private TextMeshProUGUI nameCandidate;
     private TextMeshProUGUI textContinue;
 
-    private float timer = 0f;
-
     // ve formatu auth 50% plus/minus a hlasu 50% plus/minus
     [SerializeField] private Sprite plusplusCz;
     [SerializeField] private Sprite plusplusEn;
@@ -39,18 +37,16 @@ public class EndSceneManager : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey ("enter")) {
-            SceneManager.LoadSceneAsync(0);
+        if (Input.GetKeyDown("space")) {
+            Debug.Log("Click! Fuck!!!");
+            SceneManager.LoadScene("StartScene");
         }
+        
+        Invoke("enableContinue", 3f);
+    }
 
-        if (timer < 2.3f) {
-            timer += 0.01f;
-        } else {
-            textContinue.enabled = true;
-        }
-
-        Debug.Log(timer);
-
+    private void enableContinue() {
+        textContinue.enabled = true;
     }
     
     private void DrawImage() {
@@ -70,7 +66,7 @@ public class EndSceneManager : MonoBehaviour {
     private void changeTest() {
         PlayerPrefs.SetString("language", "english");
 
-        PlayerPrefs.SetString("name", "Honimír Obrovsky");
+        PlayerPrefs.SetString("name", "Dobroděj Zlomocny");
         PlayerPrefs.SetInt("autenticita", 50);
         PlayerPrefs.SetInt("volici", 60);
     }

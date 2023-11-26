@@ -39,7 +39,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void Debate() {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene("MainScene");
     }
 
 
@@ -53,6 +53,7 @@ public class MainMenu : MonoBehaviour {
 
     public void ChangeLanguage() {
         string newLang = (PlayerPrefs.GetString("language") == "english") ? "czech" : "english";
+
         PlayerPrefs.SetString("language", newLang);
         DrawIcons();
     }
