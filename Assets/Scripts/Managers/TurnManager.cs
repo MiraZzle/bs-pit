@@ -38,6 +38,7 @@ public class TurnManager : MonoBehaviour
     private Button[] _cardSlots;
 
     bool _hasCard = false;
+    bool _canContinue = false;
 
     void Start()
     {
@@ -74,6 +75,8 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.Show();
         yield return new WaitWhile(() => moderatorDialog.IsActive);
 
+        _canContinue = false;
+        yield return new WaitUntil(() => _canContinue);
         moderatorDialog.Hide();
         spotlight.SetSpotlightPlayer(true);
 
@@ -89,6 +92,8 @@ public class TurnManager : MonoBehaviour
         spotlight.SetSpotlightEnemy(true);
 
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
+        _canContinue = false;
+        yield return new WaitUntil(() => _canContinue);
 
         moderatorDialog.Hide();
         Enemy.InfoCard.Show();
@@ -168,6 +173,14 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _canContinue = true;
+        }
+    }
+
     void ShowCards()
     {
         foreach (var btn in _cardSlots)
@@ -184,12 +197,5 @@ public class TurnManager : MonoBehaviour
         debateManager.ProcessCardAttack(card);
 
         _hasCard = true;
-    }
-
-    IEnumerator AttackTurn()
-    {
-        Title.text = "attack phase";
-
-        yield break;
     }
 }
