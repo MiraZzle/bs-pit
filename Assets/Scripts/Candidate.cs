@@ -27,7 +27,7 @@ public class Candidate : MonoBehaviour {
 
     public const int MaxAuthenticity = 100;
 
-    public int Authenticity { get; private set; }
+    public int Authenticity { get; private set; } = MaxAuthenticity / 2;
 
     void Awake() { 
         propertiesManager = GameObject.FindGameObjectWithTag("logic").GetComponent<PropertiesManager>();
@@ -143,8 +143,8 @@ public class Candidate : MonoBehaviour {
         SetInfoCardParams();
 
         // set authenticity to 50%
-        if (authenticityBar is not null) authenticityBar.UpdateSlider(MaxAuthenticity / 2);
-
+        Authenticity = 50;
+        UpdateAuthenticityBar();
         InfoCard.Positives.text = PropertiesToString(GoodProperties);
         InfoCard.Negatives.text = PropertiesToString(BadProperties);
         InfoCard.Mastery.text = SpecialSkill.Description;
