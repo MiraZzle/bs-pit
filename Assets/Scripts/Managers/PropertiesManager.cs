@@ -155,7 +155,7 @@ public class PropertiesManager : MonoBehaviour
                                      new Answer(ans2Autenticity, ans2Volici, ans2EN, ans2CS, AnswerType.Neutral),
                                      new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real) };
 
-            Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers);
+            Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers, type);
             _properties.Add(new Property(type, textEN, textCS, isGood, new List<Question> { question }));
         }
 
@@ -178,7 +178,7 @@ public class PropertiesManager : MonoBehaviour
                                      new Answer(ans2Autenticity, ans2Volici, ans2EN, ans2CS, AnswerType.Neutral),
                                      new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real) };
 
-            Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers);
+            Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers, type);
             _specialSkills.Add(
                 new SpecialSkill(type, textEN, textCS, descriptionEN, descriptionCS, new List<Question> { question }));
         }

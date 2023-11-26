@@ -50,6 +50,7 @@ public record Answer
         _textEN = textEN;
         _textCS = textCS;
         Type = type;
+        
     }
 }
 
@@ -57,21 +58,22 @@ public enum QuestionType {
     Personal, General
 }
 
-public record Question
-{
+public record Question {
     private string _textEN;
     private string _textCS;
     public QuestionType Type { get; private set; }
+    public PropertyType? AssociatedProperty { get; private set; }
     public string Text => (PlayerPrefs.GetString("language") == "english") ? _textEN : _textCS;
 
     private List<Answer> _populistAnswers = new();
     private List<Answer> _neutralAnswers = new();
 
-    public Question(string textEN, string textCS, QuestionType type, List<Answer> answers)
+    public Question(string textEN, string textCS, QuestionType type, List<Answer> answers, PropertyType? property = null)
     {
         _textEN = textEN;
         _textCS = textCS;
         Type = type;
+        AssociatedProperty = property;
 
         foreach (Answer answer in answers)
         {

@@ -21,7 +21,7 @@ public class Card {
         LoserAuthenticityDelta = authenticityDelta;
     }
 
-    public bool IsRelevantToProperty(Property property) => _relevantProperties[(int)_type].Contains(property.Type);
+    public bool IsRelevantToProperty(PropertyType property) => _relevantProperties[(int)_type].Contains(property);
 
     // pole, kde je pro kazdy typ karty seznam relevantnich vlastnosti
     static List<PropertyType>[] _relevantProperties = new List<PropertyType>[Enum.GetNames(typeof(CardType)).Length];
