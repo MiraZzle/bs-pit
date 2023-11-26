@@ -22,8 +22,4 @@ public class ScaleBarManager : MonoBehaviour {
             percentRight.text = 100 - percentValue + "%";
         }
     }
-
-    private void Update() {
-        imageSlider.fillAmount = 0.4f;
-    }
 }

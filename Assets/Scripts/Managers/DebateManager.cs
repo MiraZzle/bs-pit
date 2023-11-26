@@ -6,8 +6,6 @@ using UnityEngine;
 
 
 
-
-
 public class DebateManager : MonoBehaviour
 {
     private Question[] _generalQuestions;
@@ -18,6 +16,9 @@ public class DebateManager : MonoBehaviour
     private int _questionNum = 0;
     private int _questionsInTotal;
 
+    [SerializeField]
+    ScaleBarManager votingBar;
+
     public int PlayerAuthenticity => Player.Authenticity;
     public int EnemyAuthenticity => Enemy.Authenticity;
     public int PlayerVoters { get; private set; } = 50;
@@ -26,11 +27,13 @@ public class DebateManager : MonoBehaviour
     {
         PlayerVoters += deltaVolici;
         PlayerVoters = Mathf.Clamp(PlayerVoters, 0, 100);
+        votingBar.UpdateSlider(PlayerVoters);
     }
     private void ChangeEnemyVoters(int deltaVolici)
     {
         PlayerVoters -= deltaVolici;
         PlayerVoters = Mathf.Clamp(PlayerVoters, 0, 100);
+        votingBar.UpdateSlider(PlayerVoters);
     }
 
     [SerializeField]
@@ -47,6 +50,8 @@ public class DebateManager : MonoBehaviour
         Enemy = _enemyObject.GetComponent<Candidate>();
         PlayerPrefs.SetString("name", Player.Name);
     }
+
+
 
     public void SetUpQuestions()
     {
