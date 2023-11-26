@@ -1,11 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
-
 
 public enum CardType {
     Commie, Lover, Fascist, Putin, Drunkard, Corrupt, Murderer, Thief
