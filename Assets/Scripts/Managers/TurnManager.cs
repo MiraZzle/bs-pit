@@ -9,7 +9,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private QuestionManager questionManager;
     [SerializeField]
-    private DebageManager DebageManager;
+    private DebateManager DebageManager;
 
     [SerializeField]
     private Dialog moderatorDialog;

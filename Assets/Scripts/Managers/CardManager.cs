@@ -14,7 +14,7 @@ public class Card {
     public Sprite Sprite { get; private set; }
 
     private CardType _type;
-    public Card(Sprite sprite, CardType type, int voliciDelta = 10, int authenticityDelta = 10) {
+    public Card(Sprite sprite, CardType type, int voliciDelta = 10, int authenticityDelta = -10) {
         Sprite = sprite;
         _type = type;
         WinnerVoliciDelta = voliciDelta;
