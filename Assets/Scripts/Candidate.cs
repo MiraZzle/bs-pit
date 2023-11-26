@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Candidate : MonoBehaviour {
     [SerializeField]
@@ -46,7 +47,8 @@ public class Candidate : MonoBehaviour {
         UpdateAuthenticityBar();
 
         if (Authenticity <= MaxAuthenticity / 10) {
-            // auto lose game
+
+            //SceneManager.LoadScene("EndScene");
         }
     }
 

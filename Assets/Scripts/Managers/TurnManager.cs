@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
@@ -115,7 +116,9 @@ public class TurnManager : MonoBehaviour
             (Question q, Candidate c) = debateManager.AskAnotherQuestion();
             if (q is null)
             {
-                // TODO:
+                yield return new WaitForSeconds(1);
+
+                SceneManager.LoadScene("EndScene");
                 break;
             }
 
