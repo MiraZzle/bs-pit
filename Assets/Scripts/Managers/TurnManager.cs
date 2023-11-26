@@ -43,15 +43,16 @@ public class TurnManager : MonoBehaviour
 
         moderatorDialog.Show();
 
-        yield return new WaitUntil(() => !moderatorDialog.IsOpenActive);
+        yield return new WaitUntil(() => !moderatorDialog.IsActive);
 
         var infos = Candidate.GetRandomInfo();
 
         Player.SetInfo(infos[0, 0], infos[0, 1], infos[0, 2]);
         Enemy.SetInfo(infos[1, 0], infos[1, 1], infos[1, 2]);
 
-        moderatorDialog.ReadNext("Player dasdsa das d asd asd as");
-        yield return new WaitUntil(() => !moderatorDialog.IsOpenActive);
+        moderatorDialog.SetText("Player dasdsa das d asd asd as");
+        moderatorDialog.Show();
+        yield return new WaitWhile(() => moderatorDialog.IsActive);
 
         moderatorDialog.Hide();
         spotlight.SetSpotlightPlayer(true);
@@ -67,7 +68,7 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.Show();
         spotlight.SetSpotlightEnemy(true);
 
-        yield return new WaitUntil(() => !moderatorDialog.IsOpenActive);
+        yield return new WaitUntil(() => !moderatorDialog.IsActive);
 
         moderatorDialog.Hide();
         Enemy.InfoCard.Show();
