@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1494346912067150972}
   - component: {fileID: 8960554757688000845}
   - component: {fileID: 8907914535264565875}
+  - component: {fileID: 1896427506809761594}
+  - component: {fileID: 2847148458029598246}
   m_Layer: 0
   m_Name: LogicManager
   m_TagString: logic
@@ -75,3 +77,29 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7ad815bb19933284ba9006e5000905cb, type: 3}
   - {fileID: 21300000, guid: 37cf0fada2ab1e14a95c1b68ec70ba19, type: 3}
   - {fileID: 21300000, guid: bfba90af3217506439f082377d48b1ce, type: 3}
+--- !u!114 &1896427506809761594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916542522409989472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f002a2d2f9d9094491ec3bc8dd5dfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerObject: {fileID: 0}
+  _enemyObject: {fileID: 0}
+--- !u!114 &2847148458029598246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916542522409989472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1acd8b8e2bc199499d344446216fb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

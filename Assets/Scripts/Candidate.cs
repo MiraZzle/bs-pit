@@ -1,33 +1,120 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEngine.UI.CanvasScaler;
+using UnityEngine.UIElements;
 
 public class Candidate : MonoBehaviour
 {
     [SerializeField]
     private ProgressBar authenticityBar;
 
-    private PropertiesManager propertiesManager
-        = GameObject.FindGameObjectWithTag("logic").GetComponent<PropertiesManager>();
+    public CharacterInfoCard InfoCard;
+
+    private PropertiesManager propertiesManager;
 
     public Property[] GoodProperties { get; private set; }
     public Property[] BadProperties { get; private set; }
     public SpecialSkill SpecialSkill { get; private set; }
 
     private const int maxAuthenticity = 100;
-    public int Authenticity
-    {
-        get => (int)authenticityBar.Value;
+
+
+    public int Authenticity { get; private set; }
+
+    void Awake() { propertiesManager = GameObject.FindGameObjectWithTag("logic").GetComponent<PropertiesManager>(); }
+
+    void UpdateAuthenticityBar() {
+        if (authenticityBar is not null) {
+            authenticityBar.Value = Authenticity;
+        }
     }
 
     public void ChangeAuthenticity(int deltaAuthenticity)
     {
-        authenticityBar.Value = Mathf.Clamp(deltaAuthenticity, 0, maxAuthenticity);
+        Authenticity += Mathf.Clamp(deltaAuthenticity, 0, maxAuthenticity);
+        UpdateAuthenticityBar();
+
         if (Authenticity <= maxAuthenticity / 10)
         {
             // auto lose game
         }
+    }
+
+    public static string[,] GetRandomInfo()
+    {
+        string[] firstNamesCS
+            = { "Kazisvět", "Radovan", "Honimír", "Horymír", "Spytihněv", "Kazimír", "Dobromír", "Mečislav" };
+
+        string[] lastNamesCS
+            = { "Dobrotivý", "Milosrdný", "Spravedlivý", "Krutý", "Laskavý", "Dobrosrdečný", "Zlobivý", "Urputný" };
+
+        string[] namesEN = {
+            "Ben Dover",   "Whimsy McSnicker", "Guffaw McChucklestein", "Barb Dwyer",
+            "Hal Jalikee", "Jestin Jesterson", "Justin Time",           "Drew Peacock",
+        };
+
+        int minAge = 26;
+        int maxAge = 80;
+
+        string[] biosCS = {
+            "Expert na rychlé rozhodování a ještě rychlejší kafe. Slogan kampaně: 'Jeden espresso, jedna země, jednoznačné rozhodnutí!'",
+            "Bývalý mistr v česání medvědů, nyní se snaží česat politické problémy. Jeho motto: 'Hladce od medvědů k zákonům!'",
+            "Přináší nový pohled na politiku, protože se vždy snažil vidět věci z výšky - doslova, byl totiž druhým nejvyšším chlapec ve své třídě.",
+            "Jediný kandidát, který dokáže rozpoznat 50 odstínů šedi v politických jednáních a zároveň uvařit skvělý guláš.",
+            "Jeho zkušenosti z oblasti vyjednávání začaly u stolu s rodiči o prodloužení večerního vysílání, nyní se s nimi snaží vyjednat novou budoucnost pro zemi.",
+            "Má nejlepší smysl pro humor v politice - každý jeho projev začíná vtipem a končí aplausem.",
+            "Jeho hlavní politická strategie je postavena na dvou pilířích: pravidelná koupel v pramenité vodě a každodenní poslech 'Eye of the Tiger' při cvičení.",
+            "Pracoval jako detektiv na odhalování tajných vzkazů ve školních poznámkách. Teď se věnuje odhalování skrytých potřeb národa.",
+            "Bývalý mistr ve střelbě ze squashe, teď zamířil svou přesnost k politickým cílům. Jeho heslo: 'Zásah do srdce problému!'",
+            "Petr Novák: Pracoval jako detektiv na odhalování tajných vzkazů ve školních poznámkách. Teď se věnuje odhalování skrytých potřeb národa.",
+        };
+
+        string[] biosEN = {
+            "Promising a chicken in every pot, a car in every garage, and a pet unicorn for every child – because political promises should be legendary!",
+            "Putting the 'hip' in 'Presidential.' Get ready for a four-year term of moonwalks and disco diplomacy.",
+            "Knows the real secret to world peace – mandatory pizza parties every Friday. Who can argue when there's pizza?",
+            "Committed to building bridges and solving problems, but mainly focused on who let the dogs out. Time for answers boys!",
+            "Promising a White House makeover with feng shui and unicorn glitter. Because a well-decorated leader is a happy leader.",
+            "Not just a candidate – a stand-up comedian in a suit. Get ready for a presidential roast at the State of the Union. Politics can be funny!",
+            "Advocating for mandatory nap times for all citizens. A well-rested nation is a productive nation – who doesn't love a good nap?",
+            "Believes in transparency, accountability, and free WiFi for everyone. A connected nation is a happy nation, and memes are diplomatic gold.",
+            "Ready to tackle big issues like whether pineapple belongs on pizza and if a hot dog is a sandwich. Pressing matters can be controversial!",
+            "Promising to replace the Oval Office desk with a giant etch-a-sketch for a fresh start every day. Shake things up, why not?",
+        };
+
+        firstNamesCS.Shuffle();
+        lastNamesCS.Shuffle();
+        namesEN.Shuffle();
+        biosCS.Shuffle();
+        biosEN.Shuffle();
+
+        string language = PlayerPrefs.GetString("language");
+
+        string name1 = (language == "english") ? namesEN[0] : firstNamesCS[0] + " " + lastNamesCS[0];
+        string age1 = UnityEngine.Random.Range(minAge, maxAge).ToString();
+        string bio1 = (language == "english") ? biosEN[0] : biosCS[0];
+
+        string name2 = (language == "english") ? namesEN[1] : firstNamesCS[1] + " " + lastNamesCS[1];
+        string age2 = UnityEngine.Random.Range(minAge, maxAge).ToString();
+        string bio2 = (language == "english") ? biosEN[1] : biosCS[1];
+
+        return new string[,] {
+            {name1, age1, bio1},
+            {name2, age2, bio2}
+        };
+    }
+
+    public void SetInfo(string name, string age, string bio)
+    {
+        InfoCard.Name.text = name;
+        InfoCard.Age.text = age;
+        InfoCard.Bio.text = bio;
     }
 
     private void GenerateNewCandidate()
@@ -39,12 +126,32 @@ public class Candidate : MonoBehaviour
         SpecialSkill = propertiesManager.GetSpecialSkill();
 
         // set authenticity to 50%
-        authenticityBar.Value = maxAuthenticity / 2;
+        // authenticityBar.Value = maxAuthenticity / 2;
+
+        InfoCard.Positives.text = PropertiesToString(GoodProperties);
+        InfoCard.Negatives.text = PropertiesToString(BadProperties);
+        InfoCard.Mastery.text = SpecialSkill.Description;
+        InfoCard.MasteryName.text = SpecialSkill.Text;
+    }
+
+    private string PropertiesToString(Property[] props)
+    {
+
+        string result = "";
+        foreach (var prop in props)
+        {
+            result += "- ";
+            result += prop.Text;
+            result += '\n';
+        }
+
+        return result.Substring(0, result.Length);
     }
 
     void Start()
     {
-        authenticityBar.Max = maxAuthenticity;
+        if (authenticityBar is not null) authenticityBar.Max = maxAuthenticity;
         GenerateNewCandidate();
+        UpdateAuthenticityBar();
     }
 }

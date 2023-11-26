@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
@@ -15,17 +16,28 @@ public class TurnManager : MonoBehaviour
     private SpotlightManager spotlight;
 
     [SerializeField]
-    private CharacterCard Card;
+    private Candidate Player;
+    [SerializeField]
+    private Candidate Enemy;
+
+    [SerializeField]
+    private TMP_Text Title;
 
     public float ModeratorDelay = 0.75f;
 
-    void Start() { StartCoroutine(ModeratorSpeech()); }
+    void Start()
+    {
+        Title.text = "";
+        StartCoroutine(ModeratorSpeech());
+    }
 
     IEnumerator ModeratorSpeech()
     {
         yield return new WaitForSeconds(ModeratorDelay);
 
         spotlight.SetSpotlightModerator(true);
+
+        Title.text = "intro";
 
         yield return new WaitForSeconds(ModeratorDelay);
 
@@ -36,28 +48,22 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator ModeratorIntroduction()
     {
+        var infos = Candidate.GetRandomInfo();
+
+        Player.SetInfo(infos[0, 0], infos[0, 1], infos[0, 2]);
+        Enemy.SetInfo(infos[1, 0], infos[1, 1], infos[1, 2]);
+
         moderatorDialog.Hide();
         spotlight.SetSpotlightPlayer(true);
 
         yield return new WaitForSeconds(ModeratorDelay);
 
-        Card.Name.text = "Bohuslav Novák";
-        Card.Age.text = "50";
-        Card.Mastery.text = "Alkoholik";
-        Card.Positives.text = "Charita";
-        Card.Negatives.text = "Komunista";
-
-        Card.Show();
-
-        yield return new WaitForSeconds(ModeratorDelay);
-
-        Card.Hide();
-
-        Turn();
+        Player.InfoCard.Show();
     }
 
-    void Turn()
+    void QuestionTurn()
     {
+        Title.text = "question phase";
 
         questionManager.SetQuestion("TOTO JE OTAZKA?");
         questionManager.HandleAnswers = HandleAnswers;
@@ -67,4 +73,6 @@ public class TurnManager : MonoBehaviour
     }
 
     void HandleAnswers(AnswerButton answer) { questionManager.HideAnswers(); }
+
+    void AttackTurn() { Title.text = "attack phase"; }
 }
