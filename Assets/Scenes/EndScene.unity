@@ -550,12 +550,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b918ee74702527d89e2b882816e6eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 71062385}
+  canvas: {fileID: 2016469698}
   textUp: {fileID: 734888387}
   textMid: {fileID: 1841589486}
   textDown: {fileID: 817662227}
   textTitle: {fileID: 585847229}
-  player: {fileID: 71062385}
-  canvas: {fileID: 1773509579}
 --- !u!82 &572344316
 AudioSource:
   m_ObjectHideFlags: 0
@@ -711,8 +711,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'DUEL: VOLBY 2025'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 90cd6182922dcad99aeef803bf99bed0, type: 2}
+  m_sharedMaterial: {fileID: 4364082702803214388, guid: 90cd6182922dcad99aeef803bf99bed0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1265,8 +1265,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "DOBROM\xCDR LASKAV\xDD"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 90cd6182922dcad99aeef803bf99bed0, type: 2}
-  m_sharedMaterial: {fileID: 4364082702803214388, guid: 90cd6182922dcad99aeef803bf99bed0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1727,7 +1727,7 @@ GameObject:
   - component: {fileID: 1773509578}
   - component: {fileID: 1773509577}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas255
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2025,7 +2025,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 572344312}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

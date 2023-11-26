@@ -9,16 +9,16 @@ using TMPro;
 public class EndSceneManager : MonoBehaviour {
     private TextMeshProUGUI nameCandidate;
     private TextMeshProUGUI textContinue;
-
     private float waitingTimeVideo = 4f;
+
+    [SerializeField] private VideoPlayer player;
+    [SerializeField] private Canvas canvas;
 
     [SerializeField] private TextMeshProUGUI textUp;
     [SerializeField] private TextMeshProUGUI textMid;
     [SerializeField] private TextMeshProUGUI textDown;
     [SerializeField] private TextMeshProUGUI textTitle;
 
-    public VideoPlayer player;
-    public Canvas canvas;
 
     void Start() {
         GameObject nameObj = GameObject.Find("nameCandidate");
