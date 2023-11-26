@@ -40,6 +40,7 @@ public class DebateManager : MonoBehaviour
     {
         _player = _playerObject.GetComponent<Candidate>();
         _enemy = _enemyObject.GetComponent<Candidate>();
+        PlayerPrefs.SetString("name", _player.Name);
     }
 
     public void SetUpQuestions() {
