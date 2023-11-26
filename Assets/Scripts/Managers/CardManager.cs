@@ -8,7 +8,7 @@ using UnityEngine;
 
 
 public enum CardType {
-    Commie, Lover, Fascist, Putin, Drunkard, Corrupt, Murderer
+    Commie, Lover, Fascist, Putin, Drunkard, Corrupt, Murderer, Thief
 }
 
 
@@ -38,31 +38,32 @@ public class Card {
         _relevantProperties[(int)CardType.Drunkard] = new() { PropertyType.Drunkard, PropertyType.SSAligator };
         _relevantProperties[(int)CardType.Corrupt] = new() { PropertyType.Corrupt, PropertyType.SSCapiHnizdo };
         _relevantProperties[(int)CardType.Murderer] = new() { PropertyType.SSKuciak, PropertyType.SSFlakanec };
+        _relevantProperties[(int)CardType.Thief] = new() { PropertyType.Kleptoman, PropertyType.Corrupt };
     }
 }
 
 
 public class CardManager : MonoBehaviour {
-    const int numCardsInGame = 7;
+    const int numCardsInGame = 8;
 
-    // Commie, Lover, Fascist, Putin, Drunkard, Corrupt, Murderer
+    // Commie, Lover, Fascist, Putin, Drunkard, Corrupt, Murderer, Thief
     [SerializeField]
     Sprite[] CardSpritesEN = new Sprite[numCardsInGame];
     [SerializeField]
     Sprite[] CardSpritesCS = new Sprite[numCardsInGame];
 
-    Card[] cardsEN = new Card[numCardsInGame];
-    Card[] cardsCS = new Card[numCardsInGame];
+    Card[] _cardsEN = new Card[numCardsInGame];
+    Card[] _cardsCS = new Card[numCardsInGame];
 
     private void CreateCards() {
         for (int i = 0; i < numCardsInGame; i++) {
-            cardsEN[i] = new Card(CardSpritesEN[i], (CardType)i);
-            cardsCS[i] = new Card(CardSpritesCS[i], (CardType)i);
+            _cardsEN[i] = new Card(CardSpritesEN[i], (CardType)i);
+            _cardsCS[i] = new Card(CardSpritesCS[i], (CardType)i);
         }
     }
 
     public Card[] GetRandomCards(int num = 4) {
-        Card[] cardsToShuffle = (PlayerPrefs.GetString("language") == "english") ? cardsEN : cardsCS;
+        Card[] cardsToShuffle = (PlayerPrefs.GetString("language") == "english") ? _cardsEN : _cardsCS;
         num = Mathf.Clamp(num, 0, numCardsInGame);
         cardsToShuffle.Shuffle();
         return cardsToShuffle.Take(num).ToArray();
