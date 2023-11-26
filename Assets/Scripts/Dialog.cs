@@ -127,7 +127,7 @@ public class Dialog : MonoBehaviour
 
             if (!Skip)
             {
-                if (character == '?' || character == '.' || character == ';' || character == '!' || character == '-')
+                if (character == '?' || character == '.' || character == ';' || character == '!')
                 {
                     yield return _interpunctuationDelay;
                 }

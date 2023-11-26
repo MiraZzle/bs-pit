@@ -113,8 +113,10 @@ public class DebateManager : MonoBehaviour
         _lastAnswer = answer;
     }
 
+    public int numCardsUsed = 0;
     public void ProcessCardAttack(Card card)
     {
+        ++numCardsUsed;
         // if the player attacked, than the last question must have been for the enemy
 
         bool DecideWin(float multiplier)
