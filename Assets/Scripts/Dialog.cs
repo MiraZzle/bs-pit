@@ -39,14 +39,25 @@ public class Dialog : MonoBehaviour
         get => !_readyForNew;
     }
 
+    public bool IsOpenActive { get; private set; }
+
+    public void ReadNext(string message)
+    {
+        SetText(message);
+        ResetProps();
+        PrepareNewText();
+    }
+
     public void Show()
     {
+        IsOpenActive = true;
         dialogObj.SetActive(true);
         ResetProps();
         PrepareNewText();
     }
     public void Hide()
     {
+        IsOpenActive = false;
         dialogObj.SetActive(false);
         if (_typewriterCoroutine is not null)
         {
@@ -59,6 +70,7 @@ public class Dialog : MonoBehaviour
         {
             _textBox = GetComponent<TMP_Text>();
         }
+        ResetProps();
         _textBox.text = text;
     }
 
@@ -95,6 +107,7 @@ public class Dialog : MonoBehaviour
             StopCoroutine(_typewriterCoroutine);
         }
         ResetProps();
+        IsOpenActive = true;
         _typewriterCoroutine = StartCoroutine(TypewriterAnimation());
     }
 
@@ -111,9 +124,12 @@ public class Dialog : MonoBehaviour
             {
                 _textBox.maxVisibleCharacters++;
                 yield return new WaitForSeconds(0.2f);
+
+                IsOpenActive = false;
+                Debug.LogWarning("A");
                 OnTypewriterEnd?.Invoke();
                 _readyForNew = true;
-                yield break;
+                break;
             }
 
             char character = info.characterInfo[_currVisIndex].character;
