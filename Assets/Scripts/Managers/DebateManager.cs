@@ -4,6 +4,10 @@ using UnityEngine;
 
 #nullable enable
 
+
+
+
+
 public class DebateManager : MonoBehaviour
 {
     private Question[] _generalQuestions;

@@ -4,13 +4,12 @@ using System.Net.NetworkInformation;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.Burst.Intrinsics.X86;
-using static UnityEngine.UI.CanvasScaler;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+using TMPro;
 
 public class Candidate : MonoBehaviour {
     [SerializeField]
-    private ProgressBar authenticityBar;
+    private Image authenticityBar;
 
     public Dialog DialogBox;
 
@@ -30,11 +29,14 @@ public class Candidate : MonoBehaviour {
 
     public int Authenticity { get; private set; }
 
-    void Awake() { propertiesManager = GameObject.FindGameObjectWithTag("logic").GetComponent<PropertiesManager>(); }
+    void Awake() { 
+        propertiesManager = GameObject.FindGameObjectWithTag("logic").GetComponent<PropertiesManager>();
+        UpdateAuthenticityBar();
+    }
 
     void UpdateAuthenticityBar() {
         if (authenticityBar is not null) {
-            authenticityBar.Value = Authenticity;
+            authenticityBar.fillAmount = (float)Authenticity / (float)MaxAuthenticity;
         }
     }
 
@@ -141,7 +143,7 @@ public class Candidate : MonoBehaviour {
         SetInfoCardParams();
 
         // set authenticity to 50%
-        if (authenticityBar is not null) authenticityBar.Value = MaxAuthenticity / 2;
+        if (authenticityBar is not null) authenticityBar.UpdateSlider(MaxAuthenticity / 2);
 
         InfoCard.Positives.text = PropertiesToString(GoodProperties);
         InfoCard.Negatives.text = PropertiesToString(BadProperties);
@@ -165,8 +167,6 @@ public class Candidate : MonoBehaviour {
 
     void Start()
     {
-        if (authenticityBar is not null)
-            authenticityBar.Max = MaxAuthenticity;
         GenerateNewCandidate();
         UpdateAuthenticityBar();
     }
