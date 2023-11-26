@@ -9,16 +9,16 @@ public enum CardType {
 
 
 public class Card {
-    public int VoliciDelta { get; private set; }
-    public int AuthenticityDelta { get; private set; }
+    public int WinnerVoliciDelta { get; private set; }
+    public int LoserAuthenticityDelta { get; private set; }
     public Sprite Sprite { get; private set; }
 
     private CardType _type;
     public Card(Sprite sprite, CardType type, int voliciDelta = 10, int authenticityDelta = 10) {
         Sprite = sprite;
         _type = type;
-        VoliciDelta = voliciDelta;
-        AuthenticityDelta = authenticityDelta;
+        WinnerVoliciDelta = voliciDelta;
+        LoserAuthenticityDelta = authenticityDelta;
     }
 
     public bool IsRelevantToProperty(Property property) => _relevantProperties[(int)_type].Contains(property.Type);
