@@ -21,7 +21,7 @@ public class Dialog : MonoBehaviour
     private WaitForSeconds _interpunctuationDelay;
 
     public bool Skip = false;
-    public event Action OnTypewriterEnd;
+    public Action OnTypewriterEnd;
 
     private TMP_Text _textBox;
     [Header("Dialog Object")]
@@ -39,8 +39,6 @@ public class Dialog : MonoBehaviour
         get => !_readyForNew;
     }
 
-    public bool IsOpenActive { get; private set; }
-
     public void ReadNext(string message)
     {
         SetText(message);
@@ -50,14 +48,12 @@ public class Dialog : MonoBehaviour
 
     public void Show()
     {
-        IsOpenActive = true;
         dialogObj.SetActive(true);
         ResetProps();
         PrepareNewText();
     }
     public void Hide()
     {
-        IsOpenActive = false;
         dialogObj.SetActive(false);
         if (_typewriterCoroutine is not null)
         {
@@ -107,7 +103,6 @@ public class Dialog : MonoBehaviour
             StopCoroutine(_typewriterCoroutine);
         }
         ResetProps();
-        IsOpenActive = true;
         _typewriterCoroutine = StartCoroutine(TypewriterAnimation());
     }
 
@@ -116,7 +111,6 @@ public class Dialog : MonoBehaviour
         yield return _normalDelay;
 
         var info = _textBox.textInfo;
-
         while (_currVisIndex < _textBox.text.Length)
         {
             var lastIndex = info.characterInfo.Length - 1;
@@ -124,12 +118,8 @@ public class Dialog : MonoBehaviour
             {
                 _textBox.maxVisibleCharacters++;
                 yield return new WaitForSeconds(0.2f);
-
-                IsOpenActive = false;
-                Debug.LogWarning("A");
-                OnTypewriterEnd?.Invoke();
-                _readyForNew = true;
-                break;
+                Handle();
+                yield break;
             }
 
             char character = info.characterInfo[_currVisIndex].character;
@@ -158,5 +148,13 @@ public class Dialog : MonoBehaviour
 
             _currVisIndex++;
         }
+        yield return new WaitForSeconds(0.2f);
+        Handle();
+    }
+
+    private void Handle()
+    {
+        _readyForNew = true;
+        OnTypewriterEnd?.Invoke();
     }
 }

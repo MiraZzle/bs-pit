@@ -5,7 +5,6 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Unity.Burst.Intrinsics.X86;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.UI.CanvasScaler;
 using UnityEngine.UIElements;
 
@@ -13,6 +12,8 @@ public class Candidate : MonoBehaviour
 {
     [SerializeField]
     private ProgressBar authenticityBar;
+
+    public Dialog DialogBox;
 
     public CharacterInfoCard InfoCard;
 
@@ -24,13 +25,14 @@ public class Candidate : MonoBehaviour
 
     private const int maxAuthenticity = 100;
 
-
     public int Authenticity { get; private set; }
 
     void Awake() { propertiesManager = GameObject.FindGameObjectWithTag("logic").GetComponent<PropertiesManager>(); }
 
-    void UpdateAuthenticityBar() {
-        if (authenticityBar is not null) {
+    void UpdateAuthenticityBar()
+    {
+        if (authenticityBar is not null)
+        {
             authenticityBar.Value = Authenticity;
         }
     }
@@ -150,7 +152,8 @@ public class Candidate : MonoBehaviour
 
     void Start()
     {
-        if (authenticityBar is not null) authenticityBar.Max = maxAuthenticity;
+        if (authenticityBar is not null)
+            authenticityBar.Max = maxAuthenticity;
         GenerateNewCandidate();
         UpdateAuthenticityBar();
     }

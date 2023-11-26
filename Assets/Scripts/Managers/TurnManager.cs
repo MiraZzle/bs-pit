@@ -8,6 +8,8 @@ public class TurnManager : MonoBehaviour
 
     [SerializeField]
     private QuestionManager questionManager;
+    [SerializeField]
+    private DebateManager debateManager;
 
     [SerializeField]
     private Dialog moderatorDialog;
@@ -38,53 +40,77 @@ public class TurnManager : MonoBehaviour
         spotlight.SetSpotlightModerator(true);
 
         Title.text = "intro";
+        /*
+                yield return new WaitForSeconds(ModeratorDelay);
 
-        yield return new WaitForSeconds(ModeratorDelay);
+                moderatorDialog.Show();
 
-        moderatorDialog.Show();
+                yield return new WaitUntil(() => !moderatorDialog.IsActive);
 
-        yield return new WaitUntil(() => !moderatorDialog.IsOpenActive);
+                var infos = Candidate.GetRandomInfo();
 
-        var infos = Candidate.GetRandomInfo();
+                Player.SetInfo(infos[0, 0], infos[0, 1], infos[0, 2]);
+                Enemy.SetInfo(infos[1, 0], infos[1, 1], infos[1, 2]);
 
-        Player.SetInfo(infos[0, 0], infos[0, 1], infos[0, 2]);
-        Enemy.SetInfo(infos[1, 0], infos[1, 1], infos[1, 2]);
+                moderatorDialog.SetText("Player dasdsa das d asd asd as");
+                moderatorDialog.Show();
+                yield return new WaitWhile(() => moderatorDialog.IsActive);
 
-        moderatorDialog.ReadNext("Player dasdsa das d asd asd as");
-        yield return new WaitUntil(() => !moderatorDialog.IsOpenActive);
+                moderatorDialog.Hide();
+                spotlight.SetSpotlightPlayer(true);
 
-        moderatorDialog.Hide();
-        spotlight.SetSpotlightPlayer(true);
+                yield return new WaitForSeconds(ModeratorDelay);
 
-        yield return new WaitForSeconds(ModeratorDelay);
+                Player.InfoCard.Show();
 
-        Player.InfoCard.Show();
-
-        yield return new WaitUntil(() => !Player.InfoCard.IsOpen);
-
+                yield return new WaitUntil(() => !Player.InfoCard.IsOpen);
+        */
         spotlight.SetSpotlightPlayer(false);
         moderatorDialog.SetText("Enemy dasdsa das d asd asd as");
         moderatorDialog.Show();
         spotlight.SetSpotlightEnemy(true);
 
-        yield return new WaitUntil(() => !moderatorDialog.IsOpenActive);
+        yield return new WaitUntil(() => !moderatorDialog.IsActive);
 
         moderatorDialog.Hide();
         Enemy.InfoCard.Show();
+
+        yield return new WaitUntil(() => !Enemy.InfoCard.IsOpen);
+
+        spotlight.SetSpotlightEnemy(false);
+
+        StartCoroutine(QuestionTurn());
     }
 
-    void QuestionTurn()
+    IEnumerator QuestionTurn()
     {
         Title.text = "question phase";
 
-        questionManager.SetQuestion("TOTO JE OTAZKA?");
-        questionManager.HandleAnswers = HandleAnswers;
-        questionManager.SetAnswers(new List<string> { "ANO", "NE", "NEVIM" });
+        (Question q, Candidate c) = debateManager.AskAnotherQuestion();
+        if (q is null) {
+            // konec otazek --> konec hry
+        }
 
-        questionManager.ShowQuestion(() => questionManager.ShowAnswers());
+        questionManager.ShowQuestion(q);
+
+        yield return new WaitUntil(() => questionManager.HasAnswer);
+
+        Player.DialogBox.SetText(questionManager.Selected.Text);
+        Player.DialogBox.Show();
+
+        questionManager.HideQuestion();
+
+        yield return new WaitUntil(() => !Player.DialogBox.IsActive);
+
+        yield return new WaitForSeconds(ModeratorDelay);
+
+        Player.DialogBox.Hide();
     }
 
-    void HandleAnswers(AnswerButton answer) { questionManager.HideAnswers(); }
+    IEnumerator AttackTurn()
+    {
+        Title.text = "attack phase";
 
-    void AttackTurn() { Title.text = "attack phase"; }
+        yield break;
+    }
 }

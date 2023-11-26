@@ -151,11 +151,11 @@ public class PropertiesManager : MonoBehaviour
             int ans3Volici = Random.Range(-2, 2);
 
             List<Answer> answers
-                = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Neutral),
+                = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Populist),
                                      new Answer(ans2Autenticity, ans2Volici, ans2EN, ans2CS, AnswerType.Neutral),
-                                     new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Neutral) };
+                                     new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real) };
 
-            Question question = new Question(questionEN, questionCS, answers);
+            Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers);
             _properties.Add(new Property(type, textEN, textCS, isGood, new List<Question> { question }));
         }
 
@@ -174,11 +174,11 @@ public class PropertiesManager : MonoBehaviour
             int ans3Volici = Random.Range(-5, 0);
 
             List<Answer> answers
-                = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Neutral),
+                = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Populist),
                                      new Answer(ans2Autenticity, ans2Volici, ans2EN, ans2CS, AnswerType.Neutral),
-                                     new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Neutral) };
+                                     new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real) };
 
-            Question question = new Question(questionEN, questionCS, answers);
+            Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers);
             _specialSkills.Add(
                 new SpecialSkill(type, textEN, textCS, descriptionEN, descriptionCS, new List<Question> { question }));
         }
@@ -333,7 +333,7 @@ public class PropertiesManager : MonoBehaviour
         _properties.Add(new Property(PropertyType.Random, "Charismatic", "Charizmatický", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Honest", "Upřímný", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Fair", "Spravedlivý", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Innovative ideas", "Inovativně přemýšlí", isGood: true));
+        _properties.Add(new Property(PropertyType.Random, "Innovative ideas", "Inovativně smýšlející", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Ethically minded", "Eticky smýšlející", isGood: true));
         _properties.Add(
             new Property(PropertyType.Random, "Environmentally conscious", "Ekologicky uvědomělý", isGood: true));
@@ -344,7 +344,7 @@ public class PropertiesManager : MonoBehaviour
         _properties.Add(new Property(PropertyType.Random, "Purposeful", "Cílevědomý", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Ambitions", "Ambiciózní", isGood: true));
         _properties.Add(
-            new Property(PropertyType.Random, "Organized and systematic", "Organizovaný a systematický", isGood: true));
+            new Property(PropertyType.Random, "Organized and systematic", "Organizovaný", isGood: true));
     }
 
     void Awake() { 

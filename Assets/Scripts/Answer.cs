@@ -6,7 +6,6 @@ public class AnswerButton : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text _text;
-    public int AnswerID;
-
+    public Answer Ans;
     public void SetText(string text) { _text.text = text; }
 }

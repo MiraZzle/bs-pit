@@ -11,7 +11,7 @@ public class AnswersManager : MonoBehaviour
     public SoundManager ButtonSoundManager;
     public AudioClip Clip;
 
-    public Action<AnswerButton> Handler;
+    public Action<Answer> Handler;
 
     private List<AnswerButton> _answers = new List<AnswerButton>();
     private VerticalLayoutGroup _alignment;
@@ -22,16 +22,16 @@ public class AnswersManager : MonoBehaviour
     public void Show() { Parent.SetActive(true); }
     public void Hide() { Parent.SetActive(false); }
 
-    public void SetAnswers(List<string> answers)
+    public void SetAnswers(Answer[] answers)
     {
         ClearAnswers();
-        for (int i = 0; i < answers.Count; i++)
+        for (int i = 0; i < answers.Length; i++)
         {
-            _answers.Add(CreateAnswer(answers[i], i));
+            _answers.Add(CreateAnswer(answers[i]));
         }
     }
 
-    private void ClearAnswers()
+    public void ClearAnswers()
     {
         foreach (var answer in _answers)
         {
@@ -39,21 +39,35 @@ public class AnswersManager : MonoBehaviour
         }
     }
 
-    private AnswerButton CreateAnswer(string text, int id)
+    public void DestroyExcept(Answer answer)
+    {
+        foreach (var ans in _answers)
+        {
+            if (ans.Ans.Text != answer.Text)
+            {
+                Destroy(ans.gameObject);
+            }
+            else
+            {
+                var but = ans.GetComponent<Button>();
+                but.interactable = false;
+            }
+        }
+    }
+
+    private AnswerButton CreateAnswer(Answer ans)
     {
         GameObject gameobj = Instantiate(AnswerPrefab, Parent.transform);
         AnswerButton answer = gameobj.GetComponent<AnswerButton>();
 
-        answer.SetText(text);
-        answer.AnswerID = id;
+        answer.SetText(ans.Text);
+        answer.Ans = ans;
         answer.GetComponent<Button>().onClick.AddListener(() =>
                                                           {
                                                               ButtonSoundManager.PlaySound(Clip);
-                                                              Handle(answer);
+                                                              Handler?.Invoke(ans);
                                                           });
 
         return answer;
     }
-
-    private void Handle(AnswerButton button) { Handler?.Invoke(button); }
 }
