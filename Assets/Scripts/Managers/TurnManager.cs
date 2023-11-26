@@ -40,31 +40,26 @@ public class TurnManager : MonoBehaviour
         spotlight.SetSpotlightModerator(true);
 
         Title.text = "intro";
-        /*
-                yield return new WaitForSeconds(ModeratorDelay);
+        
+        yield return new WaitForSeconds(ModeratorDelay);
 
-                moderatorDialog.Show();
+        moderatorDialog.Show();
 
-                yield return new WaitUntil(() => !moderatorDialog.IsActive);
+        yield return new WaitUntil(() => !moderatorDialog.IsActive);
 
-                var infos = Candidate.GetRandomInfo();
+        moderatorDialog.SetText("Player dasdsa das d asd asd as");
+        moderatorDialog.Show();
+        yield return new WaitWhile(() => moderatorDialog.IsActive);
 
-                Player.SetInfo(infos[0, 0], infos[0, 1], infos[0, 2]);
-                Enemy.SetInfo(infos[1, 0], infos[1, 1], infos[1, 2]);
+        moderatorDialog.Hide();
+        spotlight.SetSpotlightPlayer(true);
 
-                moderatorDialog.SetText("Player dasdsa das d asd asd as");
-                moderatorDialog.Show();
-                yield return new WaitWhile(() => moderatorDialog.IsActive);
+        yield return new WaitForSeconds(ModeratorDelay);
 
-                moderatorDialog.Hide();
-                spotlight.SetSpotlightPlayer(true);
+        Player.InfoCard.Show();
 
-                yield return new WaitForSeconds(ModeratorDelay);
-
-                Player.InfoCard.Show();
-
-                yield return new WaitUntil(() => !Player.InfoCard.IsOpen);
-        */
+        yield return new WaitUntil(() => !Player.InfoCard.IsOpen);
+        
         spotlight.SetSpotlightPlayer(false);
         moderatorDialog.SetText("Enemy dasdsa das d asd asd as");
         moderatorDialog.Show();

@@ -8,8 +8,7 @@ using static Unity.Burst.Intrinsics.X86;
 using static UnityEngine.UI.CanvasScaler;
 using UnityEngine.UIElements;
 
-public class Candidate : MonoBehaviour
-{
+public class Candidate : MonoBehaviour {
     [SerializeField]
     private ProgressBar authenticityBar;
 
@@ -23,32 +22,33 @@ public class Candidate : MonoBehaviour
     public Property[] BadProperties { get; private set; }
     public SpecialSkill SpecialSkill { get; private set; }
 
+    public int Age { get; private set; }
+    public string Name { get; private set; }
+    public string Bio { get; private set; }
+
     private const int maxAuthenticity = 100;
 
     public int Authenticity { get; private set; }
 
     void Awake() { propertiesManager = GameObject.FindGameObjectWithTag("logic").GetComponent<PropertiesManager>(); }
 
-    void UpdateAuthenticityBar()
-    {
-        if (authenticityBar is not null)
-        {
+    void UpdateAuthenticityBar() {
+        if (authenticityBar is not null) {
             authenticityBar.Value = Authenticity;
         }
     }
 
-    public void ChangeAuthenticity(int deltaAuthenticity)
-    {
+    public void ChangeAuthenticity(int deltaAuthenticity) {
         Authenticity += Mathf.Clamp(deltaAuthenticity, 0, maxAuthenticity);
         UpdateAuthenticityBar();
 
-        if (Authenticity <= maxAuthenticity / 10)
-        {
+        if (Authenticity <= maxAuthenticity / 10) {
             // auto lose game
         }
     }
 
-    public static string[,] GetRandomInfo()
+    private static List<string> _usedStrings = new(); 
+    public void SetRandomInfo()
     {
         string[] firstNamesCS
             = { "Kazisvět", "Radovan", "Honimír", "Horymír", "Spytihněv", "Kazimír", "Dobromír", "Mečislav" };
@@ -90,33 +90,43 @@ public class Candidate : MonoBehaviour
             "Promising to replace the Oval Office desk with a giant etch-a-sketch for a fresh start every day. Shake things up, why not?",
         };
 
-        firstNamesCS.Shuffle();
-        lastNamesCS.Shuffle();
-        namesEN.Shuffle();
-        biosCS.Shuffle();
-        biosEN.Shuffle();
 
         string language = PlayerPrefs.GetString("language");
 
-        string name1 = (language == "english") ? namesEN[0] : firstNamesCS[0] + " " + lastNamesCS[0];
-        string age1 = UnityEngine.Random.Range(minAge, maxAge).ToString();
-        string bio1 = (language == "english") ? biosEN[0] : biosCS[0];
+        // get name
+        while (true) {
+            firstNamesCS.Shuffle();
+            lastNamesCS.Shuffle();
+            namesEN.Shuffle();
 
-        string name2 = (language == "english") ? namesEN[1] : firstNamesCS[1] + " " + lastNamesCS[1];
-        string age2 = UnityEngine.Random.Range(minAge, maxAge).ToString();
-        string bio2 = (language == "english") ? biosEN[1] : biosCS[1];
+            if (_usedStrings.Contains(firstNamesCS[0]) || _usedStrings.Contains(lastNamesCS[0]) || _usedStrings.Contains(namesEN[0])) {
+                continue;
+            }
+            Name = (language == "english") ? namesEN[0] : firstNamesCS[0] + " " + lastNamesCS[0];
+            _usedStrings.AddRange(new List<string> { namesEN[0], firstNamesCS[0], lastNamesCS[0] });
+            break;
+        }
 
-        return new string[,] {
-            {name1, age1, bio1},
-            {name2, age2, bio2}
-        };
+        // get bio
+        biosCS.Shuffle();
+        biosEN.Shuffle();
+        // if the first one is used 
+        if (_usedStrings.Contains(biosCS[0]) || _usedStrings.Contains(biosEN[0])) {
+            Bio = (language == "english") ? biosEN[1] : biosCS[1];
+        }
+        else {
+            Bio = (language == "english") ? biosEN[0] : biosCS[0];
+        }
+        _usedStrings.Add(Bio);
+
+        Age = UnityEngine.Random.Range(minAge, maxAge);
     }
 
-    public void SetInfo(string name, string age, string bio)
+    public void SetInfoCardParams()
     {
-        InfoCard.Name.text = name;
-        InfoCard.Age.text = age;
-        InfoCard.Bio.text = bio;
+        InfoCard.Name.text = Name;
+        InfoCard.Age.text = Age.ToString();
+        InfoCard.Bio.text = Bio;
     }
 
     private void GenerateNewCandidate()
@@ -127,8 +137,11 @@ public class Candidate : MonoBehaviour
         BadProperties = propertiesManager.GetCandidateProperties(good: false);
         SpecialSkill = propertiesManager.GetSpecialSkill();
 
+        SetRandomInfo();
+        SetInfoCardParams();
+
         // set authenticity to 50%
-        // authenticityBar.Value = maxAuthenticity / 2;
+        if (authenticityBar is not null) authenticityBar.Value = maxAuthenticity / 2;
 
         InfoCard.Positives.text = PropertiesToString(GoodProperties);
         InfoCard.Negatives.text = PropertiesToString(BadProperties);

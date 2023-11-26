@@ -87,6 +87,7 @@ public class DebateManager : MonoBehaviour
 
     private Question _lastQuestion;
     private Candidate _lastCandidate;
+    private Answer _lastAnswer;
 
     public (Question?, Candidate?) AskAnotherQuestion() {
         if (_questionNum >= _questionsInTotal) return (null, null);
@@ -102,15 +103,15 @@ public class DebateManager : MonoBehaviour
             ChangePlayerVoters(answer.DeltaVolici);
         else 
             ChangeEnemyVoters(answer.DeltaVolici);
-
+        _lastAnswer = answer;
     }
 
     public void ProcessCardAttack(Card card) {
         // if the player attacked, than the last question must have been for the enemy
 
-        bool DecideWin(float probability) {
+        bool DecideWin(float percentPropability) {
             float r = Random.RandomRange(0, 1);
-            return probability >= r;
+            return percentPropability/100 > r;
         }
         int CalculateResult(int number, float multiplier) {
             float result = number * multiplier;
@@ -129,9 +130,16 @@ public class DebateManager : MonoBehaviour
                 return;
             }
             // personal question - irrelevant
+            if (!card.IsRelevantToProperty((PropertyType)_lastQuestion.AssociatedProperty!)) {
+                winProbability = PlayerAuthenticity * 0.5f;
+                return;
+            }
 
             // personal question - relevant
             // 1) enemy populist answer
+            if (_lastAnswer.Type == AnswerType.Populist) {
+                winProbability = PlayerAuthenticity;
+            }
 
             // 2) enemy neutral answer
 
