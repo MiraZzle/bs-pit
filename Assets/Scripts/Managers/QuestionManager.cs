@@ -17,9 +17,9 @@ public class QuestionManager : MonoBehaviour
 
     void Start() { AnswersManager.Handler += HandleAnswer; }
 
-    public void ShowQuestion(Question question)
+    public void ShowQuestion(Question question, Answer[] answers)
     {
-        AnswersManager.SetAnswers(question.GetAnswers());
+        AnswersManager.SetAnswers(answers);
         Selected = null;
         Question.SetText(question.Text);
         IsActive = true;
@@ -31,10 +31,11 @@ public class QuestionManager : MonoBehaviour
     {
         Question.Show();
         yield return new WaitUntil(() => !Question.IsActive);
-        AnswersManager.Show();
 
         IsActive = false;
     }
+
+    public void ShowAnswers() { AnswersManager.Show(); }
 
     public void HideQuestion()
     {
@@ -42,7 +43,7 @@ public class QuestionManager : MonoBehaviour
         AnswersManager.Hide();
     }
 
-    public void HideAnswers(Answer except) { AnswersManager.Hide(); }
+    public void HideAnswers() { AnswersManager.Hide(); }
     private void HandleAnswer(Answer answer)
     {
         AnswersManager.ClearAnswers();

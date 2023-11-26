@@ -50,15 +50,17 @@ public record Answer
         _textEN = textEN;
         _textCS = textCS;
         Type = type;
-        
     }
 }
 
-public enum QuestionType {
-    Personal, General
+public enum QuestionType
+{
+    Personal,
+    General
 }
 
-public record Question {
+public record Question
+{
     private string _textEN;
     private string _textCS;
     public QuestionType Type { get; private set; }
@@ -68,7 +70,8 @@ public record Question {
     private List<Answer> _populistAnswers = new();
     private List<Answer> _neutralAnswers = new();
 
-    public Question(string textEN, string textCS, QuestionType type, List<Answer> answers, PropertyType? property = null)
+    public Question(string textEN, string textCS, QuestionType type, List<Answer> answers,
+                    PropertyType? property = null)
     {
         _textEN = textEN;
         _textCS = textCS;
@@ -77,10 +80,10 @@ public record Question {
 
         foreach (Answer answer in answers)
         {
-            if (answer.Type == AnswerType.Neutral)
-                _neutralAnswers.Add(answer);
             if (answer.Type == AnswerType.Populist)
                 _populistAnswers.Add(answer);
+            else
+                _neutralAnswers.Add(answer);
         }
     }
 
@@ -131,7 +134,8 @@ public record Question {
     }
 }
 
-public class QuestionLoader : MonoBehaviour {
+public class QuestionLoader : MonoBehaviour
+{
     static string _questionsFilePath = Path.Combine(Application.streamingAssetsPath, "general-questions.txt");
 
     static List<Question> _questions = new List<Question>();
@@ -140,18 +144,23 @@ public class QuestionLoader : MonoBehaviour {
     static string[] englishSpecialString = { "E" };
     static string[] answerSpecialStrings = { "P", "N", "C" };
 
-    static void LoadQuestionsFromFile() {
-        string TextFromLine(string[] line, int textStartIndex) {
+    static void LoadQuestionsFromFile()
+    {
+        string TextFromLine(string[] line, int textStartIndex)
+        {
             StringBuilder text = new StringBuilder();
-            for (int i = textStartIndex; i < line.Length - 1; i++) {
+            for (int i = textStartIndex; i < line.Length - 1; i++)
+            {
                 text.Append(line[i] + " ");
             }
             text.Append(line[line.Length - 1]);
             return text.ToString();
         }
 
-        string[] ReadUntilSpecialString(StreamReader reader, string[] specialStrings, string terminator = "END") {
-            while (!reader.EndOfStream) {
+        string[] ReadUntilSpecialString(StreamReader reader, string[] specialStrings, string terminator = "END")
+        {
+            while (!reader.EndOfStream)
+            {
                 string[] line
                     = reader.ReadLine().Split(new char[] { ' ', '\t' }, System.StringSplitOptions.RemoveEmptyEntries);
                 if (line.Length == 0)
@@ -164,7 +173,8 @@ public class QuestionLoader : MonoBehaviour {
             return null;
         }
 
-        Answer? LoadAnswer(StreamReader reader) {
+        Answer? LoadAnswer(StreamReader reader)
+        {
             string[] answerLineCS = ReadUntilSpecialString(reader, answerSpecialStrings);
             if (answerLineCS[0] == "END")
                 return null; // end of question
@@ -177,7 +187,8 @@ public class QuestionLoader : MonoBehaviour {
             int answerDeltaVolici = 0;
             AnswerType answerType = (answerLineCS[0] == "P") ? AnswerType.Populist : AnswerType.Neutral;
 
-            switch (answerLineCS[0]) {
+            switch (answerLineCS[0])
+            {
                 case "P": // populist
                     answerDeltaAuthenticity = -Random.Range(7, 10);
                     answerDeltaVolici = Random.Range(7, 10);
@@ -200,7 +211,8 @@ public class QuestionLoader : MonoBehaviour {
             return new Answer(answerDeltaAuthenticity, answerDeltaVolici, answerTextEN, answerTextCS, answerType);
         }
 
-        Question? LoadQuestion(StreamReader reader) {
+        Question? LoadQuestion(StreamReader reader)
+        {
             string[] questionLineCS = ReadUntilSpecialString(reader, questionSpecialString);
             string[] questionLineEN = ReadUntilSpecialString(reader, englishSpecialString);
             if (questionLineCS == null)
@@ -211,7 +223,8 @@ public class QuestionLoader : MonoBehaviour {
 
             List<Answer> answers = new();
 
-            while (true) {
+            while (true)
+            {
                 Answer? answer = LoadAnswer(reader);
                 if (answer is null)
                     break;
@@ -221,8 +234,10 @@ public class QuestionLoader : MonoBehaviour {
             return new Question(questionTextEN, questionTextCS, QuestionType.General, answers);
         }
 
-        using (StreamReader reader = new StreamReader(_questionsFilePath)) {
-            while (!reader.EndOfStream) {
+        using (StreamReader reader = new StreamReader(_questionsFilePath))
+        {
+            while (!reader.EndOfStream)
+            {
                 Question? question = LoadQuestion(reader);
                 if (question is null)
                     break; // end of stream
@@ -232,33 +247,41 @@ public class QuestionLoader : MonoBehaviour {
         }
     }
 
-    private static void ResetQuestions() {
-        foreach (Question question in _questions) {
+    private static void ResetQuestions()
+    {
+        foreach (Question question in _questions)
+        {
             question.ResetAnswers();
         }
     }
 
     // this should be called at the start of the game to get 4 random general questions
-    public static Question[] GetRandomQuestions(int count = 4) {
+    public static Question[] GetRandomQuestions(int count = 4)
+    {
         ResetQuestions();
         _questions.Shuffle();
         return _questions.Take(4).ToArray();
     }
 
-    public static Question[] GetQuestionsForCandidate(Candidate candidate, int count = 3) {
+    public static Question[] GetQuestionsForCandidate(Candidate candidate, int count = 3)
+    {
         Question[] questions = new Question[count];
         questions[0] = candidate.SpecialSkill.GetQuestion();
         int addedQuestions = 1;
 
-        foreach (Property property in candidate.GoodProperties) {
-            if (property.GetQuestion() is not null) {
+        foreach (Property property in candidate.GoodProperties)
+        {
+            if (property.GetQuestion() is not null)
+            {
                 questions[addedQuestions++] = property.GetQuestion();
                 break;
             }
         }
 
-        foreach (Property property in candidate.BadProperties) {
-            if (property.GetQuestion() is not null) {
+        foreach (Property property in candidate.BadProperties)
+        {
+            if (property.GetQuestion() is not null)
+            {
                 questions[addedQuestions++] = property.GetQuestion();
                 if (addedQuestions == count)
                     break;
@@ -268,7 +291,5 @@ public class QuestionLoader : MonoBehaviour {
         return questions;
     }
 
-    void Awake() {
-        LoadQuestionsFromFile();
-    }
+    void Awake() { LoadQuestionsFromFile(); }
 }

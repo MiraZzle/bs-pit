@@ -35,8 +35,10 @@ public class AnswersManager : MonoBehaviour
     {
         foreach (var answer in _answers)
         {
-            Destroy(answer);
+            Destroy(answer.gameObject);
         }
+
+        _answers.Clear();
     }
 
     public void DestroyExcept(Answer answer)
@@ -57,6 +59,11 @@ public class AnswersManager : MonoBehaviour
 
     private AnswerButton CreateAnswer(Answer ans)
     {
+        if (ans is null)
+        {
+            Debug.Log("NULLA");
+        }
+
         GameObject gameobj = Instantiate(AnswerPrefab, Parent.transform);
         AnswerButton answer = gameobj.GetComponent<AnswerButton>();
 

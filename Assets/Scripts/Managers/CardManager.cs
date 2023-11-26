@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum CardType {
-    Commie, Lover, Fascist, Putin, Drunkard, Corrupt, Murderer, Thief
+public enum CardType
+{
+    Commie,
+    Lover,
+    Fascist,
+    Putin,
+    Drunkard,
+    Corrupt,
+    Murderer,
+    Thief
 }
 
-
-public class Card {
+public class Card
+{
     public int WinnerVoliciDelta { get; private set; }
     public int LoserAuthenticityDelta { get; private set; }
     public Sprite Sprite { get; private set; }
 
     private CardType _type;
-    public Card(Sprite sprite, CardType type, int voliciDelta = 10, int authenticityDelta = -10) {
+    public Card(Sprite sprite, CardType type, int voliciDelta = 10, int authenticityDelta = -10)
+    {
         Sprite = sprite;
         _type = type;
         WinnerVoliciDelta = voliciDelta;
@@ -26,7 +35,8 @@ public class Card {
     // pole, kde je pro kazdy typ karty seznam relevantnich vlastnosti
     static List<PropertyType>[] _relevantProperties = new List<PropertyType>[Enum.GetNames(typeof(CardType)).Length];
 
-    public static void SetUpCards() {
+    public static void SetUpCards()
+    {
         _relevantProperties[(int)CardType.Commie] = new() { PropertyType.Commie, PropertyType.ProRussian };
         _relevantProperties[(int)CardType.Lover] = new() { PropertyType.SSKollar };
         _relevantProperties[(int)CardType.Fascist] = new() { PropertyType.Fascist };
@@ -38,8 +48,8 @@ public class Card {
     }
 }
 
-
-public class CardManager : MonoBehaviour {
+public class CardManager : MonoBehaviour
+{
     const int numCardsInGame = 8;
 
     // Commie, Lover, Fascist, Putin, Drunkard, Corrupt, Murderer, Thief
@@ -51,14 +61,17 @@ public class CardManager : MonoBehaviour {
     Card[] _cardsEN = new Card[numCardsInGame];
     Card[] _cardsCS = new Card[numCardsInGame];
 
-    private void CreateCards() {
-        for (int i = 0; i < numCardsInGame; i++) {
+    private void CreateCards()
+    {
+        for (int i = 0; i < numCardsInGame; i++)
+        {
             _cardsEN[i] = new Card(CardSpritesEN[i], (CardType)i);
             _cardsCS[i] = new Card(CardSpritesCS[i], (CardType)i);
         }
     }
 
-    public Card[] GetRandomCards(int num = 4) {
+    public Card[] GetRandomCards(int num = 4)
+    {
         Card[] cardsToShuffle = (PlayerPrefs.GetString("language") == "english") ? _cardsEN : _cardsCS;
         num = Mathf.Clamp(num, 0, numCardsInGame);
         cardsToShuffle.Shuffle();

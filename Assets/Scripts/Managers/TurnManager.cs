@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
 
     [SerializeField]
     private QuestionManager questionManager;
+
     [SerializeField]
     private DebateManager debateManager;
+
+    [SerializeField]
+    private CardManager cardManager;
 
     [SerializeField]
     private Dialog moderatorDialog;
@@ -27,6 +32,13 @@ public class TurnManager : MonoBehaviour
 
     public float ModeratorDelay = 0.75f;
 
+    private Card[] _availableCards;
+
+    [SerializeField]
+    private Button[] _cardSlots;
+
+    bool _hasCard = false;
+
     void Start()
     {
         Title.text = "";
@@ -35,12 +47,23 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator ModeratorSpeech()
     {
+        _availableCards = cardManager.GetRandomCards();
+
+        int index = 0;
+        foreach (var cardBtn in _cardSlots)
+        {
+            var img = cardBtn.GetComponent<Image>();
+            img.sprite = _availableCards[index++].Sprite;
+            cardBtn.onClick.AddListener(() =>
+                                        { HandleCards(cardBtn, _availableCards[index - 1]); });
+        }
+
         yield return new WaitForSeconds(ModeratorDelay);
 
         spotlight.SetSpotlightModerator(true);
 
         Title.text = "intro";
-        
+
         yield return new WaitForSeconds(ModeratorDelay);
 
         moderatorDialog.Show();
@@ -59,7 +82,7 @@ public class TurnManager : MonoBehaviour
         Player.InfoCard.Show();
 
         yield return new WaitUntil(() => !Player.InfoCard.IsOpen);
-        
+
         spotlight.SetSpotlightPlayer(false);
         moderatorDialog.SetText("Enemy dasdsa das d asd asd as");
         moderatorDialog.Show();
@@ -74,32 +97,93 @@ public class TurnManager : MonoBehaviour
 
         spotlight.SetSpotlightEnemy(false);
 
-        StartCoroutine(QuestionTurn());
+        StartCoroutine(GameLoop());
     }
 
-    IEnumerator QuestionTurn()
+    IEnumerator GameLoop()
     {
-        Title.text = "question phase";
 
-        (Question q, Candidate c) = debateManager.AskAnotherQuestion();
-        if (q is null) {
-            // konec otazek --> konec hry
+        while (true)
+        {
+            Title.text = "question phase";
+
+            (Question q, Candidate c) = debateManager.AskAnotherQuestion();
+            if (q is null)
+            {
+                // TODO:
+                break;
+            }
+
+            var answers = q.GetAnswers();
+
+            foreach (var a in answers)
+            {
+                Debug.Log(a.Text);
+            }
+
+            questionManager.ShowQuestion(q, answers);
+
+            yield return new WaitUntil(() => !questionManager.IsActive);
+
+            Answer selectedAnswer;
+            if (c == Player)
+            {
+                questionManager.ShowAnswers();
+                yield return new WaitUntil(() => questionManager.HasAnswer);
+                questionManager.HideAnswers();
+                selectedAnswer = questionManager.Selected;
+            }
+            else
+            {
+                answers.Shuffle();
+                selectedAnswer = answers[0];
+            }
+            selectedAnswer.IsUsed = true;
+
+            debateManager.ProcessAnswer(selectedAnswer);
+            c.DialogBox.SetText(selectedAnswer.Text);
+            c.DialogBox.Show();
+
+            yield return new WaitUntil(() => !c.DialogBox.IsActive);
+
+            if (c != Player)
+            {
+                _hasCard = false;
+                Title.text = "attack phase";
+                ShowCards();
+
+                yield return new WaitUntil(() => _hasCard);
+                HideCards();
+            }
+
+            c.DialogBox.Hide();
         }
+    }
 
-        questionManager.ShowQuestion(q);
+    void HideCards()
+    {
+        foreach (var btn in _cardSlots)
+        {
+            btn.gameObject.SetActive(false);
+        }
+    }
 
-        yield return new WaitUntil(() => questionManager.HasAnswer);
+    void ShowCards()
+    {
+        foreach (var btn in _cardSlots)
+        {
+            btn.gameObject.SetActive(true);
+        }
+    }
 
-        Player.DialogBox.SetText(questionManager.Selected.Text);
-        Player.DialogBox.Show();
+    void HandleCards(Button btn, Card card)
+    {
+        btn.interactable = false;
+        btn.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
 
-        questionManager.HideQuestion();
+        debateManager.ProcessCardAttack(card);
 
-        yield return new WaitUntil(() => !Player.DialogBox.IsActive);
-
-        yield return new WaitForSeconds(ModeratorDelay);
-
-        Player.DialogBox.Hide();
+        _hasCard = true;
     }
 
     IEnumerator AttackTurn()
