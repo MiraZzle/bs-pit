@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,14 +19,27 @@ public class CharacterInfoCard : MonoBehaviour
     [SerializeField]
     private TMP_Text help;
 
-    public void Show() { gameObject.SetActive(true); }
-    public void Hide() { gameObject.SetActive(false); }
+    public event Action OnClose;
+
+    public bool IsOpen { get; private set; }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        IsOpen = true;
+    }
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+        IsOpen = false;
+    }
 
     void Update()
     {
         if (isActiveAndEnabled && Input.GetKeyDown(KeyCode.Space))
         {
             Hide();
+            OnClose?.Invoke();
         }
     }
 }

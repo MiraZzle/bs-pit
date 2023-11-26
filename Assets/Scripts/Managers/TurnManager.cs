@@ -42,16 +42,16 @@ public class TurnManager : MonoBehaviour
         yield return new WaitForSeconds(ModeratorDelay);
 
         moderatorDialog.Show();
-        moderatorDialog.OnTypewriterEnd += () =>
-        { StartCoroutine(ModeratorIntroduction()); };
-    }
 
-    IEnumerator ModeratorIntroduction()
-    {
+        yield return new WaitUntil(() => !moderatorDialog.IsOpenActive);
+
         var infos = Candidate.GetRandomInfo();
 
         Player.SetInfo(infos[0, 0], infos[0, 1], infos[0, 2]);
         Enemy.SetInfo(infos[1, 0], infos[1, 1], infos[1, 2]);
+
+        moderatorDialog.ReadNext("Player dasdsa das d asd asd as");
+        yield return new WaitUntil(() => !moderatorDialog.IsOpenActive);
 
         moderatorDialog.Hide();
         spotlight.SetSpotlightPlayer(true);
@@ -59,6 +59,18 @@ public class TurnManager : MonoBehaviour
         yield return new WaitForSeconds(ModeratorDelay);
 
         Player.InfoCard.Show();
+
+        yield return new WaitUntil(() => !Player.InfoCard.IsOpen);
+
+        spotlight.SetSpotlightPlayer(false);
+        moderatorDialog.SetText("Enemy dasdsa das d asd asd as");
+        moderatorDialog.Show();
+        spotlight.SetSpotlightEnemy(true);
+
+        yield return new WaitUntil(() => !moderatorDialog.IsOpenActive);
+
+        moderatorDialog.Hide();
+        Enemy.InfoCard.Show();
     }
 
     void QuestionTurn()
