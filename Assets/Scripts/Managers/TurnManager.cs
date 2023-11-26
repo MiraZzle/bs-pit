@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
@@ -19,15 +20,24 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private Candidate Enemy;
 
+    [SerializeField]
+    private TMP_Text Title;
+
     public float ModeratorDelay = 0.75f;
 
-    void Start() { StartCoroutine(ModeratorSpeech()); }
+    void Start()
+    {
+        Title.text = "";
+        StartCoroutine(ModeratorSpeech());
+    }
 
     IEnumerator ModeratorSpeech()
     {
         yield return new WaitForSeconds(ModeratorDelay);
 
         spotlight.SetSpotlightModerator(true);
+
+        Title.text = "intro";
 
         yield return new WaitForSeconds(ModeratorDelay);
 
@@ -51,8 +61,9 @@ public class TurnManager : MonoBehaviour
         Player.InfoCard.Show();
     }
 
-    void Turn()
+    void QuestionTurn()
     {
+        Title.text = "question phase";
 
         questionManager.SetQuestion("TOTO JE OTAZKA?");
         questionManager.HandleAnswers = HandleAnswers;
@@ -62,4 +73,6 @@ public class TurnManager : MonoBehaviour
     }
 
     void HandleAnswers(AnswerButton answer) { questionManager.HideAnswers(); }
+
+    void AttackTurn() { Title.text = "attack phase"; }
 }

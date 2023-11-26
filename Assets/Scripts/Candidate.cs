@@ -40,38 +40,17 @@ public class Candidate : MonoBehaviour
         }
     }
 
-    public static string[,] GetRandomInfo() {
-        string[] firstNamesCS = {
-            "Kazisvět",
-            "Radovan",
-            "Honimír",
-            "Horymír",
-            "Spytihněv",
-            "Kazimír",
-            "Dobromír",
-            "Mečislav"
-        };
+    public static string[,] GetRandomInfo()
+    {
+        string[] firstNamesCS
+            = { "Kazisvět", "Radovan", "Honimír", "Horymír", "Spytihněv", "Kazimír", "Dobromír", "Mečislav" };
 
-        string[] lastNamesCS = {
-            "Dobrotivý",
-            "Milosrdný",
-            "Spravedlivý",
-            "Krutý",
-            "Laskavý",
-            "Dobrosrdečný",
-            "Zlobivý",
-            "Urputný"
-        };
+        string[] lastNamesCS
+            = { "Dobrotivý", "Milosrdný", "Spravedlivý", "Krutý", "Laskavý", "Dobrosrdečný", "Zlobivý", "Urputný" };
 
         string[] namesEN = {
-            "Ben Dover",
-            "Whimsy McSnicker",
-            "Guffaw McChucklestein",
-            "Barb Dwyer",
-            "Hal Jalikee",
-            "Jestin Jesterson",
-            "Justin Time",
-            "Drew Peacock",
+            "Ben Dover",   "Whimsy McSnicker", "Guffaw McChucklestein", "Barb Dwyer",
+            "Hal Jalikee", "Jestin Jesterson", "Justin Time",           "Drew Peacock",
         };
 
         int minAge = 26;
@@ -103,8 +82,6 @@ public class Candidate : MonoBehaviour
             "Promising to replace the Oval Office desk with a giant etch-a-sketch for a fresh start every day. Shake things up, why not?",
         };
 
-
-
         firstNamesCS.Shuffle();
         lastNamesCS.Shuffle();
         namesEN.Shuffle();
@@ -120,7 +97,6 @@ public class Candidate : MonoBehaviour
         string name2 = (language == "english") ? namesEN[1] : firstNamesCS[1] + lastNamesCS[1];
         string age2 = UnityEngine.Random.Range(minAge, maxAge).ToString();
         string bio2 = (language == "english") ? biosEN[1] : biosCS[1];
-
 
         return new string[,] {
             {name1, age1, bio1},
@@ -148,7 +124,8 @@ public class Candidate : MonoBehaviour
 
         InfoCard.Positives.text = PropertiesToString(GoodProperties);
         InfoCard.Negatives.text = PropertiesToString(BadProperties);
-        InfoCard.Mastery.text = SpecialSkill.Text + ": " + SpecialSkill.Description;
+        InfoCard.Mastery.text = SpecialSkill.Description;
+        InfoCard.MasteryName.text = SpecialSkill.Text;
     }
 
     private string PropertiesToString(Property[] props)
