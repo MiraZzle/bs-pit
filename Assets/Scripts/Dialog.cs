@@ -154,7 +154,6 @@ public class Dialog : MonoBehaviour
 
     private void Handle()
     {
-        Debug.LogWarning("B");
         _readyForNew = true;
         OnTypewriterEnd?.Invoke();
     }
