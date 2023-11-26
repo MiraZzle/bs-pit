@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 using TMPro;
 
 public class EndSceneManager : MonoBehaviour {
     private Image textCandidate;
     private TextMeshProUGUI nameCandidate;
     private TextMeshProUGUI textContinue;
+    public VideoPlayer player;
+    public Canvas canvas;
+
+    private float waitingTimeVideo = 4f;
+    private bool videoPaused = false;
+
 
     // ve formatu auth 50% plus/minus a hlasu 50% plus/minus
     [SerializeField] private Sprite plusplusCz;
@@ -31,18 +38,35 @@ public class EndSceneManager : MonoBehaviour {
         GameObject contObj = GameObject.Find("textContinue");
         textContinue = contObj.GetComponent<TextMeshProUGUI>();
 
+        canvas.enabled = false;
+        player.playOnAwake = true;
+
+        player.Prepare();
+        player.Play();
+        StartCoroutine(waitForVideoPause());
+
         textContinue.enabled = false;
 
         DrawImage();
     }
 
     void Update() {
-        if (Input.GetKeyDown("space")) {
-            Debug.Log("Click! Fuck!!!");
+        if (Input.GetKeyDown("space"))
             SceneManager.LoadScene("StartScene");
-        }
         
-        Invoke("enableContinue", 3f);
+        Invoke("enableContinue", 5f);
+    }
+
+
+
+    IEnumerator waitForVideoPause() {
+        Debug.Log("Čekám 4 sekundy");  
+        yield return new WaitForSeconds(waitingTimeVideo);  // ceka 4 sekundy
+        videoPaused = true;                                 // pausne video
+        player.Pause();
+        player.enabled = false;
+        canvas.enabled = true;
+        Debug.Log("Dočkal jsem se konce videa.");
     }
 
     private void enableContinue() {
