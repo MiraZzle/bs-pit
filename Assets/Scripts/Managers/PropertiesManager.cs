@@ -347,5 +347,7 @@ public class PropertiesManager : MonoBehaviour
             new Property(PropertyType.Random, "Organized and systematic", "Organizovaný a systematický", isGood: true));
     }
 
-    void Awake() { LoadProperties(); }
+    void Awake() { 
+        LoadProperties(); 
+    }
 }

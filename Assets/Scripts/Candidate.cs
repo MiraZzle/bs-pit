@@ -24,16 +24,22 @@ public class Candidate : MonoBehaviour
 
     private const int maxAuthenticity = 100;
 
-    public int Authenticity
-    {
-        get => (int)authenticityBar.Value;
-    }
+
+    public int Authenticity { get; private set; }
 
     void Awake() { propertiesManager = GameObject.FindGameObjectWithTag("logic").GetComponent<PropertiesManager>(); }
 
+    void UpdateAuthenticityBar() {
+        if (authenticityBar is not null) {
+            authenticityBar.Value = Authenticity;
+        }
+    }
+
     public void ChangeAuthenticity(int deltaAuthenticity)
     {
-        authenticityBar.Value = Mathf.Clamp(deltaAuthenticity, 0, maxAuthenticity);
+        Authenticity += Mathf.Clamp(deltaAuthenticity, 0, maxAuthenticity);
+        UpdateAuthenticityBar();
+
         if (Authenticity <= maxAuthenticity / 10)
         {
             // auto lose game
@@ -90,11 +96,11 @@ public class Candidate : MonoBehaviour
 
         string language = PlayerPrefs.GetString("language");
 
-        string name1 = (language == "english") ? namesEN[0] : firstNamesCS[0] + lastNamesCS[0];
+        string name1 = (language == "english") ? namesEN[0] : firstNamesCS[0] + " " + lastNamesCS[0];
         string age1 = UnityEngine.Random.Range(minAge, maxAge).ToString();
         string bio1 = (language == "english") ? biosEN[0] : biosCS[0];
 
-        string name2 = (language == "english") ? namesEN[1] : firstNamesCS[1] + lastNamesCS[1];
+        string name2 = (language == "english") ? namesEN[1] : firstNamesCS[1] + " " + lastNamesCS[1];
         string age2 = UnityEngine.Random.Range(minAge, maxAge).ToString();
         string bio2 = (language == "english") ? biosEN[1] : biosCS[1];
 
@@ -144,7 +150,8 @@ public class Candidate : MonoBehaviour
 
     void Start()
     {
-        // authenticityBar.Max = maxAuthenticity;
+        if (authenticityBar is not null) authenticityBar.Max = maxAuthenticity;
         GenerateNewCandidate();
+        UpdateAuthenticityBar();
     }
 }

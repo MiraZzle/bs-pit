@@ -8,8 +8,9 @@ public class DebageManager : MonoBehaviour
     private Question[] _playerQuestions;
     private Question[] _enemyQuestions;
 
-    public int PlayerAuthenticity { get; private set; }
-    public int EnemyAuthenticity { get; private set; }
+    public int PlayerAuthenticity => _player.Authenticity;
+    public int EnemyAuthenticity => _enemy.Authenticity;
+    public int PlayerVoters { get; private set; } = 50;
 
     [SerializeField]
     private GameObject _playerObject;
@@ -25,20 +26,21 @@ public class DebageManager : MonoBehaviour
     {
         _player = _playerObject.GetComponent<Candidate>();
         _enemy = _enemyObject.GetComponent<Candidate>();
-
-        Debug.Log(_player == null);
-
-        //_generalQuestions = QuestionLoader.GetRandomQuestions();
-        //_playerQuestions = QuestionLoader.GetQuestionsForCandidate(_player);
-        //_playerQuestions = QuestionLoader.GetQuestionsForCandidate(_enemy);
-
-        //Debug.Log(_playerQuestions[0].Text);
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SetUpQuestion() {
+        // TOHLE SE NEMUZE VOLAT VE STARTU, PAK JE NULL REFERENCE EXEPTION
+
+        _generalQuestions = QuestionLoader.GetRandomQuestions();
+        _playerQuestions = QuestionLoader.GetQuestionsForCandidate(_player);
+        _enemyQuestions = QuestionLoader.GetQuestionsForCandidate(_enemy);
+
+        Debug.Log(_playerQuestions[0].Text);
+        Debug.Log(_enemyQuestions[0].Text);
+        Debug.Log(_generalQuestions[0].Text);
+    }
+
+    public void AskAnotherQuestion() {
+
     }
 }
