@@ -1,7 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEngine.UI.CanvasScaler;
+using UnityEngine.UIElements;
 
 public class Candidate : MonoBehaviour
 {
@@ -34,61 +40,87 @@ public class Candidate : MonoBehaviour
         }
     }
 
-    public static string[,] GetRandomInfo()
-    {
-        string[] names = {
-            "Jack Statesman",         "Olivia Diplomacia",     "Winston Debatewell",   "Harper Policyson",
-            "Grace Lawmaker",         "Felix Governance",      "Sylvia Senatestar",    "Maxwell Publicservant",
-            "Eleanor Republica",      "Victor Capitolwise",    "Penelope Pollster",    "Harrison Legislationaire",
-            "Amelia Statescraft",     "Dexter Politikid",      "Valerie Caucusqueen",  "Leo Campaigner",
-            "Clara Electra",          "Desmond Rhetorico",     "Fiona Parliamentress", "Oscar Statutekeeper",
-            "Zoey Debateguru",        "Preston Politypioneer", "Serena Rulermind",     "Nolan Policywise",
-            "Lila Legislaturelia",    "Dominic Civicman",      "Vanessa Politiq",      "Simon Governington",
-            "Mira Consensushine",     "Elliott Politeer",      "Abigail Voteville",    "Angus Bureaucraton",
-            "Isabella Ballotbelle",   "Felix Mandateman",      "Nadia Caucusfire",     "Graham Statesmind",
-            "Celeste Parliamentista", "Owen Legislativeon",    "Maya Electique",       "Nolan Publiconductor",
-            "Zoe Politess",           "Vincent Policygeist",   "Harper Statedancer",   "Gemma Ballotbabe",
-            "Oliver Civicwise",       "Lydia Lawlady",         "Quentin Pollitician",  "Esme Policygem",
-            "Theodore Governator",    "Phoebe Politiqueen",
+    public static string[,] GetRandomInfo() {
+        string[] firstNamesCS = {
+            "Kazisvět",
+            "Radovan",
+            "Honimír",
+            "Horymír",
+            "Spytihněv",
+            "Kazimír",
+            "Dobromír",
+            "Mečislav"
+        };
 
+        string[] lastNamesCS = {
+            "Dobrotivý",
+            "Milosrdný",
+            "Spravedlivý",
+            "Krutý",
+            "Laskavý",
+            "Dobrosrdečný",
+            "Zlobivý",
+            "Urputný"
+        };
+
+        string[] namesEN = {
+            "Ben Dover",
+            "Whimsy McSnicker",
+            "Guffaw McChucklestein",
+            "Barb Dwyer",
+            "Hal Jalikee",
+            "Jestin Jesterson",
+            "Justin Time",
+            "Drew Peacock",
         };
 
         int minAge = 26;
         int maxAge = 80;
 
-        string[] bios = {
-            "Born into a family with a legacy of political intrigue, this candidate has mastered the art of manipulation and backroom dealings. Their rise through the ranks is marked by a shrewd and calculated approach to power.",
-            "With a background in intelligence and covert operations, this candidate's political career is shrouded in secrecy. Their connections to shadowy organizations raise questions about their true allegiance and motives.",
-            "A master of disinformation, this candidate has honed the skill of shaping public perception through manipulation. Their campaigns are marked by smear tactics and a willingness to exploit fears for personal gain.",
-            "Descended from a lineage known for ruthless governance, this candidate embraces a Machiavellian approach to politics. Their ambition knows no bounds, and they are willing to sacrifice ethics for the sake of amassing power.",
-            "Raised in a family with a history of corruption, this candidate's political journey is stained by scandals and unethical practices. Their pursuit of personal wealth and influence takes precedence over the welfare of the constituents.",
-            "A puppeteer behind the scenes, this candidate thrives on orchestrating political chaos to create opportunities for personal gain. Their connections to clandestine networks make them a dangerous force in the world of politics.",
-            "From a background of organized crime, this candidate has seamlessly transitioned into the political arena, using their network to control key power structures. Their policies serve the interests of the underworld rather than the public.",
-            "Dedication to public service is a façade for this candidate, who secretly leverages their position for personal enrichment. Behind the scenes, they engage in corruption and exploit their authority for personal gain.",
-            "Passion for democratic values masks this candidate's true agenda of undermining institutions. Their commitment to civic engagement is a smokescreen for sowing discord and eroding the foundations of democracy.",
-            "A wolf in sheep's clothing, this candidate presents a polished image while harboring authoritarian tendencies. Their vision for governance involves consolidating power and suppressing dissent through any means necessary.",
-            "Born into a family of public servants, this candidate has dedicated their life to upholding the principles of justice and fairness. Their extensive experience in international relations makes them a seasoned diplomat ready to navigate the complexities of modern politics.",
-            "With a background in foreign affairs and a passion for diplomacy, this candidate has spent years fostering connections between nations. Their commitment to building bridges and finding common ground makes them an ideal candidate for promoting global harmony.",
-            "A skilled orator from an early age, this candidate's prowess in debates and discussions has earned them a reputation for being articulate and persuasive. Their commitment to open dialogue makes them a strong advocate for transparent governance.",
-            "A childhood dream of shaping policies that positively impact lives has driven this candidate's career in politics. With a keen understanding of socio-economic issues, they aim to implement effective policies that address the needs of diverse communities.",
-            "Raised in a family with a history of public service, this candidate is driven by a deep sense of responsibility to their community. Their legal background equips them with the tools needed to craft legislation that promotes justice and equality.",
-            "A technocrat with a vision for streamlined governance, this candidate brings innovative solutions to the political arena. Their expertise in leveraging technology for efficient public administration sets them apart as a forward-thinking candidate.",
-            "From grassroots activism to the Senate, this candidate's journey exemplifies their commitment to social justice. Their advocacy for marginalized communities and legislative experience make them a compassionate and effective legislator.",
-            "Dedication to public service is rooted in this candidate's belief in the power of community-driven initiatives. Their experience working with non-profit organizations showcases their commitment to making a positive impact on society.",
-            "Passion for democratic values led this candidate to champion electoral reforms and civic engagement. With a history of community organizing, they aspire to empower citizens to actively participate in shaping their government.",
-            "A career in public administration and finance positions this candidate as someone with a strong grasp of economic policies. Their commitment to fiscal responsibility and strategic planning makes them a reliable steward of public resources.",
+        string[] biosCS = {
+            "Expert na rychlé rozhodování a ještě rychlejší kafe. Slogan kampaně: 'Jeden espresso, jedna země, jednoznačné rozhodnutí!'",
+            "Bývalý mistr v česání medvědů, nyní se snaží česat politické problémy. Jeho motto: 'Hladce od medvědů k zákonům!'",
+            "Přináší nový pohled na politiku, protože se vždy snažil vidět věci z výšky - doslova, byl totiž druhým nejvyšším chlapec ve své třídě.",
+            "Jediný kandidát, který dokáže rozpoznat 50 odstínů šedi v politických jednáních a zároveň uvařit skvělý guláš.",
+            "Jeho zkušenosti z oblasti vyjednávání začaly u stolu s rodiči o prodloužení večerního vysílání, nyní se s nimi snaží vyjednat novou budoucnost pro zemi.",
+            "Má nejlepší smysl pro humor v politice - každý jeho projev začíná vtipem a končí aplausem.",
+            "Jeho hlavní politická strategie je postavena na dvou pilířích: pravidelná koupel v pramenité vodě a každodenní poslech 'Eye of the Tiger' při cvičení.",
+            "Pracoval jako detektiv na odhalování tajných vzkazů ve školních poznámkách. Teď se věnuje odhalování skrytých potřeb národa.",
+            "Bývalý mistr ve střelbě ze squashe, teď zamířil svou přesnost k politickým cílům. Jeho heslo: 'Zásah do srdce problému!'",
+            "Petr Novák: Pracoval jako detektiv na odhalování tajných vzkazů ve školních poznámkách. Teď se věnuje odhalování skrytých potřeb národa.",
         };
 
-        names.Shuffle();
-        bios.Shuffle();
+        string[] biosEN = {
+            "Promising a chicken in every pot, a car in every garage, and a pet unicorn for every child – because political promises should be legendary!",
+            "Putting the 'hip' in 'Presidential.' Get ready for a four-year term of moonwalks and disco diplomacy.",
+            "Knows the real secret to world peace – mandatory pizza parties every Friday. Who can argue when there's pizza?",
+            "Committed to building bridges and solving problems, but mainly focused on who let the dogs out. Time for answers boys!",
+            "Promising a White House makeover with feng shui and unicorn glitter. Because a well-decorated leader is a happy leader.",
+            "Not just a candidate – a stand-up comedian in a suit. Get ready for a presidential roast at the State of the Union. Politics can be funny!",
+            "Advocating for mandatory nap times for all citizens. A well-rested nation is a productive nation – who doesn't love a good nap?",
+            "Believes in transparency, accountability, and free WiFi for everyone. A connected nation is a happy nation, and memes are diplomatic gold.",
+            "Ready to tackle big issues like whether pineapple belongs on pizza and if a hot dog is a sandwich. Pressing matters can be controversial!",
+            "Promising to replace the Oval Office desk with a giant etch-a-sketch for a fresh start every day. Shake things up, why not?",
+        };
 
-        string name1 = names[0];
+
+
+        firstNamesCS.Shuffle();
+        lastNamesCS.Shuffle();
+        namesEN.Shuffle();
+        biosCS.Shuffle();
+        biosEN.Shuffle();
+
+        string language = PlayerPrefs.GetString("language");
+
+        string name1 = (language == "english") ? namesEN[0] : firstNamesCS[0] + lastNamesCS[0];
         string age1 = UnityEngine.Random.Range(minAge, maxAge).ToString();
-        string bio1 = bios[0];
+        string bio1 = (language == "english") ? biosEN[0] : biosCS[0];
 
-        string name2 = names[1];
+        string name2 = (language == "english") ? namesEN[1] : firstNamesCS[1] + lastNamesCS[1];
         string age2 = UnityEngine.Random.Range(minAge, maxAge).ToString();
-        string bio2 = bios[1];
+        string bio2 = (language == "english") ? biosEN[1] : biosCS[1];
+
 
         return new string[,] {
             {name1, age1, bio1},
