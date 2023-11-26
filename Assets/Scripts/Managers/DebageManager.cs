@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#nullable enable
+
 public class DebageManager : MonoBehaviour
 {
     private Question[] _generalQuestions;
@@ -10,10 +12,20 @@ public class DebageManager : MonoBehaviour
     private Question[] _questions;
 
     private int _questionNum = 0;
+    private int _questionsInTotal;
 
     public int PlayerAuthenticity => _player.Authenticity;
     public int EnemyAuthenticity => _enemy.Authenticity;
     public int PlayerVoters { get; private set; } = 50;
+
+    private void ChangePlayerVoters(int deltaVolici) {
+        PlayerVoters += deltaVolici;
+        PlayerVoters = Mathf.Clamp(PlayerVoters, 0, 100);
+    }
+    private void ChangeEnemyVoters(int deltaVolici) {
+        PlayerVoters -= deltaVolici;
+        PlayerVoters = Mathf.Clamp(PlayerVoters, 0, 100);
+    }
 
     [SerializeField]
     private GameObject _playerObject;
@@ -51,19 +63,65 @@ public class DebageManager : MonoBehaviour
             
             _generalQuestions[3],
         };
+        _questionsInTotal = _questions.Length;
     }
 
-    /*
-    bool ready = false;
+    
+    bool _ready = false;
     public void Update() {
-        if (!ready) {
+        if (!_ready) {
             SetUpQuestions();
-            ready = true;
+            _ready = true;
         }
     }
-    */
 
-    public void AskAnotherQuestion() {
-        
+
+    private Question _lastQuestion;
+    private Candidate _lastCandidate;
+
+    public Question? AskAnotherQuestion() {
+        if (_questionNum >= _questionsInTotal) return null;
+
+        _lastQuestion = _questions[_questionNum++];
+        return _lastQuestion;
+    }
+
+    public void ProcessAnswer(Answer answer) {
+        _lastCandidate.ChangeAuthenticity(answer.DeltaAuthenticity);
+
+        if (_lastCandidate == _player) 
+            ChangePlayerVoters(answer.DeltaVolici);
+        else 
+            ChangeEnemyVoters(answer.DeltaVolici);
+
+    }
+
+    public void ProcessCardAttack(Card card) {
+        // if the player attacked, than the last question must have been for the enemy
+
+        int deltaAuth = 0;
+        int deltaVolici = 0;
+        bool playerWon = false;
+
+        // general question
+
+
+        // personal question - irrelevant
+
+        // personal question - relevant
+        // 1) enemy populist answer
+
+        // 2) enemy neutral answer
+
+        // 3) enemy real answer
+
+
+        if (playerWon) {
+            _enemy.ChangeAuthenticity(deltaAuth);
+        }
+        else {
+
+        }
+
     }
 }

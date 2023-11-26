@@ -151,11 +151,11 @@ public class PropertiesManager : MonoBehaviour
             int ans3Volici = Random.Range(-2, 2);
 
             List<Answer> answers
-                = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Neutral),
+                = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Populist),
                                      new Answer(ans2Autenticity, ans2Volici, ans2EN, ans2CS, AnswerType.Neutral),
-                                     new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Neutral) };
+                                     new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real) };
 
-            Question question = new Question(questionEN, questionCS, answers);
+            Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers);
             _properties.Add(new Property(type, textEN, textCS, isGood, new List<Question> { question }));
         }
 
@@ -174,11 +174,11 @@ public class PropertiesManager : MonoBehaviour
             int ans3Volici = Random.Range(-5, 0);
 
             List<Answer> answers
-                = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Neutral),
+                = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Populist),
                                      new Answer(ans2Autenticity, ans2Volici, ans2EN, ans2CS, AnswerType.Neutral),
-                                     new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Neutral) };
+                                     new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real) };
 
-            Question question = new Question(questionEN, questionCS, answers);
+            Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers);
             _specialSkills.Add(
                 new SpecialSkill(type, textEN, textCS, descriptionEN, descriptionCS, new List<Question> { question }));
         }

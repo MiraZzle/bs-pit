@@ -13,7 +13,8 @@ using Random = UnityEngine.Random;
 public enum AnswerType
 {
     Populist,
-    Neutral
+    Neutral,
+    Real
 }
 
 static class MyExtensions
@@ -52,19 +53,25 @@ public record Answer
     }
 }
 
+public enum QuestionType {
+    Personal, General
+}
+
 public record Question
 {
     private string _textEN;
     private string _textCS;
+    public QuestionType Type { get; private set; }
     public string Text => (PlayerPrefs.GetString("language") == "english") ? _textEN : _textCS;
 
     private List<Answer> _populistAnswers = new();
     private List<Answer> _neutralAnswers = new();
 
-    public Question(string textEN, string textCS, List<Answer> answers)
+    public Question(string textEN, string textCS, QuestionType type, List<Answer> answers)
     {
         _textEN = textEN;
         _textCS = textCS;
+        Type = type;
 
         foreach (Answer answer in answers)
         {
@@ -209,7 +216,7 @@ public class QuestionLoader : MonoBehaviour {
                 answers.Add(answer);
             }
 
-            return new Question(questionTextEN, questionTextCS, answers);
+            return new Question(questionTextEN, questionTextCS, QuestionType.General, answers);
         }
 
         using (StreamReader reader = new StreamReader(_questionsFilePath)) {
