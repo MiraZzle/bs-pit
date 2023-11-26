@@ -78,7 +78,7 @@ public class CardManager : MonoBehaviour
         return cardsToShuffle.Take(num).ToArray();
     }
 
-    void Start()
+    void Awake()
     {
         CreateCards();
         Card.SetUpCards();
