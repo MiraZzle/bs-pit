@@ -158,6 +158,7 @@ public class TurnManager : MonoBehaviour
             {
                 _hasCard = false;
                 Title.text = "attack phase";
+
                 ShowCards();
 
                 yield return new WaitUntil(() => _hasCard);
@@ -186,10 +187,16 @@ public class TurnManager : MonoBehaviour
 
     void ShowCards()
     {
+        int i = 0;
         foreach (var btn in _cardSlots)
         {
             btn.gameObject.SetActive(true);
+            if (!btn.interactable) ++i;
         }
+        if (i == 4) {
+            _hasCard = true;
+        }
+        HideCards();
     }
 
     void HandleCards(Button btn, Card card)
