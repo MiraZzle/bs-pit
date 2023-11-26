@@ -8,39 +8,22 @@ public class ScaleBarManager : MonoBehaviour {
     [SerializeField] private Image imageSlider;
     [SerializeField] private TMP_Text percentLeft;
     [SerializeField] private TMP_Text percentRight;
-    [SerializeField] private Canvas splitLine;
 
-    private float percentVaule = 50f;
-    private float imgWidth = 0, imgHeight = 0;
 
-    void Start() {
-        RectTransform rectTransform = imageSlider.GetComponent<RectTransform>();
-        imgWidth = rectTransform.rect.width;
-        imgHeight = rectTransform.rect.height;
+    private void Start() {
+        UpdateSlider(50f);
     }
 
-    void Update() {
-        RectTransform splitTrasnform = splitLine.GetComponent<RectTransform>();
-        Vector2 splitPos = splitTrasnform.anchoredPosition;
+    public void UpdateSlider(float percentValue) {
+        imageSlider.fillAmount = percentValue / 100f;
 
-        float newX = splitPos.x, newY = splitPos.y;
-        if (Input.GetMouseButtonDown(0) && percentVaule > 0) {
-            percentVaule --;
-            if (splitTrasnform.rect.width < splitTrasnform.rect.height)
-                newX = splitPos.x - imgWidth/100;
-            else
-                newY = splitPos.y - imgHeight/100;
-        } else if (Input.GetMouseButtonDown(1) && percentVaule < 100) {
-            percentVaule++;
-            if (splitTrasnform.rect.width < splitTrasnform.rect.height)
-                newX = splitPos.x + imgWidth/100;
-            else
-                newY = splitPos.y + imgHeight/100;
+        if (percentLeft is not null) {
+            percentLeft.text = percentValue + "%";
+            percentRight.text = 100 - percentValue + "%";
         }
+    }
 
-        imageSlider.fillAmount = percentVaule/100;
-        splitTrasnform.anchoredPosition = new Vector2(newX, newY);
-        percentLeft.text = percentVaule + "%";
-        percentRight.text = 100-percentVaule + "%";
+    private void Update() {
+        imageSlider.fillAmount = 0.4f;
     }
 }

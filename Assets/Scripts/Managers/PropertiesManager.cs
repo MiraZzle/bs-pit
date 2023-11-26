@@ -333,18 +333,14 @@ public class PropertiesManager : MonoBehaviour
         _properties.Add(new Property(PropertyType.Random, "Charismatic", "Charizmatický", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Honest", "Upřímný", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Fair", "Spravedlivý", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Innovative ideas", "Inovativně smýšlející", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Ethically minded", "Eticky smýšlející", isGood: true));
-        _properties.Add(
-            new Property(PropertyType.Random, "Environmentally conscious", "Ekologicky uvědomělý", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Highly educated", "Vysoce vzdělaný", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Good strategist", "Dobrý stratég", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Intelligent", "Inteligetní", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Creative", "Kreativní", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Purposeful", "Cílevědomý", isGood: true));
         _properties.Add(new Property(PropertyType.Random, "Ambitions", "Ambiciózní", isGood: true));
-        _properties.Add(
-            new Property(PropertyType.Random, "Organized and systematic", "Organizovaný", isGood: true));
+        _properties.Add(new Property(PropertyType.Random, "Well Organized", "Organizovaný", isGood: true));
     }
 
     void Awake() { 
