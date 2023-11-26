@@ -26,7 +26,7 @@ public class Candidate : MonoBehaviour {
     public string Name { get; private set; }
     public string Bio { get; private set; }
 
-    private const int maxAuthenticity = 100;
+    public const int MaxAuthenticity = 100;
 
     public int Authenticity { get; private set; }
 
@@ -39,10 +39,10 @@ public class Candidate : MonoBehaviour {
     }
 
     public void ChangeAuthenticity(int deltaAuthenticity) {
-        Authenticity += Mathf.Clamp(deltaAuthenticity, 0, maxAuthenticity);
+        Authenticity += Mathf.Clamp(deltaAuthenticity, 0, MaxAuthenticity);
         UpdateAuthenticityBar();
 
-        if (Authenticity <= maxAuthenticity / 10) {
+        if (Authenticity <= MaxAuthenticity / 10) {
             // auto lose game
         }
     }
@@ -141,7 +141,7 @@ public class Candidate : MonoBehaviour {
         SetInfoCardParams();
 
         // set authenticity to 50%
-        if (authenticityBar is not null) authenticityBar.Value = maxAuthenticity / 2;
+        if (authenticityBar is not null) authenticityBar.Value = MaxAuthenticity / 2;
 
         InfoCard.Positives.text = PropertiesToString(GoodProperties);
         InfoCard.Negatives.text = PropertiesToString(BadProperties);
@@ -166,7 +166,7 @@ public class Candidate : MonoBehaviour {
     void Start()
     {
         if (authenticityBar is not null)
-            authenticityBar.Max = maxAuthenticity;
+            authenticityBar.Max = MaxAuthenticity;
         GenerateNewCandidate();
         UpdateAuthenticityBar();
     }

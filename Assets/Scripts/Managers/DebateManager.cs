@@ -110,9 +110,9 @@ public class DebateManager : MonoBehaviour
     public void ProcessCardAttack(Card card) {
         // if the player attacked, than the last question must have been for the enemy
 
-        bool DecideWin(float percentPropability) {
-            float r = Random.RandomRange(0, 1);
-            return percentPropability/100 > r;
+        bool DecideWin(float multiplier) {
+            float r = Random.Range(0f, 1f);
+            return PlayerAuthenticity/Candidate.MaxAuthenticity * multiplier > r;
         }
         int CalculateResult(int number, float multiplier) {
             float result = number * multiplier;
@@ -120,38 +120,45 @@ public class DebateManager : MonoBehaviour
             return (int)roundedResult;
         }
 
-        float winProbability = 0;
-        float powerMultiplier = 1;
+        float probabilityMultiplier = 1f;
+        float powerMultiplier = 1f;
 
         void SetProbabilityAndMultiplier() {
             // general question
             if (_lastQuestion.Type == QuestionType.General) {
-                winProbability = PlayerAuthenticity;
+                probabilityMultiplier = 1f;
                 powerMultiplier = 0.65f;
                 return;
             }
             // personal question - irrelevant
             if (!card.IsRelevantToProperty((PropertyType)_lastQuestion.AssociatedProperty!)) {
-                winProbability = PlayerAuthenticity * 0.5f;
+                probabilityMultiplier = 0.5f;
+                powerMultiplier = 1f;
                 return;
             }
 
             // personal question - relevant
-            // 1) enemy populist answer
-            if (_lastAnswer.Type == AnswerType.Populist) {
-                winProbability = PlayerAuthenticity;
+            switch (_lastAnswer.Type) {
+                case AnswerType.Populist:
+                    probabilityMultiplier = 1f;
+                    powerMultiplier = 1.5f;
+                    break;
+                case AnswerType.Neutral:
+                    probabilityMultiplier = 1f;
+                    powerMultiplier = 1f;
+                    break;
+                case AnswerType.Real:
+                    probabilityMultiplier = 3f;
+                    powerMultiplier = 0.5f;
+                    break;
+                default:
+                    break;
             }
-
-            // 2) enemy neutral answer
-
-            // 3) enemy real answer
         }
-
-
 
         SetProbabilityAndMultiplier();
 
-        bool playerWon = DecideWin(winProbability);
+        bool playerWon = DecideWin(probabilityMultiplier);
         int loserDeltaAuth = CalculateResult(card.LoserAuthenticityDelta, powerMultiplier);
         int winnerDeltaVolici = CalculateResult(card.WinnerVoliciDelta, powerMultiplier);
         if (playerWon) {
