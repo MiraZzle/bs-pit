@@ -29,6 +29,9 @@ public class TurnManager : MonoBehaviour
     private Candidate Enemy;
 
     [SerializeField]
+    Button skipButton;
+
+    [SerializeField]
     private TMP_Text Title;
 
     public float ModeratorDelay = 0.75f;
@@ -169,8 +172,14 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    public void Skip() {
+        _hasCard = true;
+    }
+
     void HideCards()
     {
+        skipButton.gameObject.SetActive(false);
+
         foreach (var btn in _cardSlots)
         {
             btn.gameObject.SetActive(false);
@@ -187,9 +196,12 @@ public class TurnManager : MonoBehaviour
 
     void ShowCards()
     {
+        skipButton.gameObject.SetActive(true);
+
         foreach (var btn in _cardSlots)
         {
             btn.gameObject.SetActive(true);
+
         }
 
     }

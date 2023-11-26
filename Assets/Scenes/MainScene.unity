@@ -522,9 +522,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3879448896506588933, guid: 497ac617d1c553c759c7a8f17d82f7af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4479537888741581318, guid: 497ac617d1c553c759c7a8f17d82f7af, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6007625086438506113, guid: 497ac617d1c553c759c7a8f17d82f7af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 985043307}
+    - target: {fileID: 6007625086438506113, guid: 497ac617d1c553c759c7a8f17d82f7af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Skip
+      objectReference: {fileID: 0}
+    - target: {fileID: 6007625086438506113, guid: 497ac617d1c553c759c7a8f17d82f7af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6007625086438506113, guid: 497ac617d1c553c759c7a8f17d82f7af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6545880875579582281, guid: 497ac617d1c553c759c7a8f17d82f7af, type: 3}
       propertyPath: m_Name
@@ -1867,6 +1887,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 551954ed626e7bd40a6f6a13f754da7a, type: 3}
+--- !u!114 &615712450 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6007625086438506113, guid: 497ac617d1c553c759c7a8f17d82f7af, type: 3}
+  m_PrefabInstance: {fileID: 67005251}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &634530837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2873,6 +2904,7 @@ MonoBehaviour:
   spotlight: {fileID: 634530839}
   Player: {fileID: 1771739307}
   Enemy: {fileID: 972832691}
+  skipButton: {fileID: 615712450}
   Title: {fileID: 1846705848}
   ModeratorDelay: 0.75
   _cardSlots:
@@ -4305,7 +4337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -319}
+  m_AnchoredPosition: {x: 0, y: -237}
   m_SizeDelta: {x: 765.3221, y: 169.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1720994808
