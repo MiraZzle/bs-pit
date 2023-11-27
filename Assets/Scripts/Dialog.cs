@@ -9,9 +9,8 @@ public class Dialog : MonoBehaviour
 {
     //[Header("Dialog Settings")]
     //[SerializeField, Min(11)]
-    private float charactersPerSecond = 30;
-    [SerializeField]
-    private float interpunctuationDelay = 0.4f;
+    private float charactersPerSecond = 35;
+    private float interpunctuationDelay = 0.3f;
 
     private int _currVisIndex;
     private Coroutine _typewriterCoroutine;
