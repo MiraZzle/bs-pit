@@ -258,14 +258,10 @@ public class TurnManager : MonoBehaviour
     }
 
 
-    Vector3 _sceenCenter = new Vector3(0, 200, 0);
 
     void HandleCards(Button btn, Card card)
     {
-        Vector3 originalPosition = btn.transform.position;
-        // pohnout do stredu
         // dat razitko
-        // pohnout zpatky
 
         btn.interactable = false;
         btn.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
