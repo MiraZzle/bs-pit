@@ -1,4 +1,4 @@
-// Ignore Spelling: Volici
+﻿// Ignore Spelling: Volici
 #nullable enable
 
 using System.Collections;
@@ -122,7 +122,6 @@ public record Question
             }
         }
 
-        Debug.Log(string.Format("NUM ANSWERS = {0}", addedAnswers));
         return answers;
     }
 
@@ -282,6 +281,32 @@ public class QuestionLoader : MonoBehaviour
 
         questions.Shuffle();
         return questions;
+    }
+
+    public static Question GetFinalQuestion() {
+        string questionTextEN = "As we conclude this debate, each candidate now has the chance for final thoughts or comments. Is there anything you'd like to share with the audience and voters before we finish?";
+        string questionTextCS = "Na závěr této debaty má každý z kandidátů možnost vyjádřit své závěrečné myšlenky a připomínky. Je něco, o co byste se chtěli podělit s publikem a voliči, než skončíme?";
+
+        string[] answerTextsEN = new string[] {
+            "In these challenging times, it is more important than ever that we come together as a nation. Let's unite for a better future in Callibristan.",
+            "I believe tonight showcased the strength of our vision for the country. With your support, we'll make positive changes for all.",
+            "Regardless of your political affiliation, I urge everyone to participate in the election. Your voice matters, and together, we can shape the future of our nation.",
+            "This debate is just one step in a long journey. I'm excited about the upcoming opportunities to engage with the voters."
+        };
+
+        string[] answerTextsCS = new string[] {
+            "V této náročné době je důležitější než kdy jindy, abychom se jako národ spojili. I přes naše rozdíly máme společný cíl - lepší budoucnost pro Callibristán.",
+            "Věřím, že dnešní večer ukázal sílu naší vize pro tento národ. Jsem přesvědčen, že s vaší podporou můžeme dosáhnout pozitivních změn pro všechny naše občany.",
+            "Bez ohledu na vaši politickou příslušnost vyzývám každého, aby se voleb zúčastnil. Na vašem hlase záleží a společně můžeme utvářet budoucnost našeho národa.",
+            "Tato debata je jen jedním z kroků na dlouhé cestě. Těším se na nadcházející příležitosti, kdy budu moci opět navázat kontakt s voliči."
+        };
+
+        List<Answer> answers = new();
+        for (int i = 0; i < answerTextsCS.Length; i++) {
+            answers.Add(new Answer(3, 0, answerTextsEN[i], answerTextsCS[i], AnswerType.Neutral) );
+        }
+
+        return new Question(questionTextEN, questionTextCS, QuestionType.General, answers);
     }
 
     void Awake() { LoadQuestionsFromFile(); }

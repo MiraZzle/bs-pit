@@ -73,8 +73,8 @@ public class Candidate : MonoBehaviour {
             = { "Dobrotivý", "Milosrdný", "Spravedlivý", "Laskavý", "Dobrosrdečný", "Zlobivý", "Urputný" };
 
         string[] namesEN = {
-            "Ben Dover",   "Whimsy McSnicker", "Guffaw McChucklestein", "Barb Dwyer",
-            "Hal Jalikee", "Jestin Jesterson", "Justin Time",           "Drew Peacock",
+            "Ben Dover",   "Whimsy McSnicker", "Barb Dwyer",
+            "Hal Jalikee", "Jestin Jesterson", "Justin Time", "Drew Peacock",
         };
 
         int minAge = 26;

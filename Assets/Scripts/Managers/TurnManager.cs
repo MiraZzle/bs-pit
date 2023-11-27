@@ -53,14 +53,13 @@ public class TurnManager : MonoBehaviour
             StartCoroutine(GameLoop());
         }
         else {
-            StartCoroutine(ModeratorSpeech());
+            StartCoroutine(IntroModeratorSpeech());
         }
     }
 
     bool PressedContinue() => Input.GetKeyDown(KeyCode.Space);
-    bool _inIntro = true;
 
-    IEnumerator ModeratorSpeech() {
+    IEnumerator IntroModeratorSpeech() {
         yield return new WaitForSeconds(ModeratorDelay);
         spotlight.SetSpotlightModerator(true);
         yield return new WaitForSeconds(ModeratorDelay);
@@ -109,14 +108,14 @@ public class TurnManager : MonoBehaviour
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
         yield return new WaitUntil(() => PressedContinue());
         moderatorDialog.Hide();
-
+        yield return new WaitForSeconds(2*ModeratorDelay);
+        
         StartCoroutine(GameLoop());
     }
 
     IEnumerator GameLoop()
     {
         // setup
-        _inIntro = false;
         _availableCards = cardManager.GetRandomCards();
         debateManager.SetUpQuestions();
         int index = 0;
@@ -126,8 +125,6 @@ public class TurnManager : MonoBehaviour
             cardBtn.onClick.AddListener(() => { HandleCards(cardBtn, _availableCards[index - 1]); });
         }
 
-        // PAK DAT PRYC
-        //yield return new WaitForSeconds(ModeratorDelay);
         debateManager.ShowBars();
 
         Question? lastQuestion = null;
@@ -137,13 +134,7 @@ public class TurnManager : MonoBehaviour
             (Question question, Candidate candidate) = debateManager.AskAnotherQuestion();
             if (question is null)
             {
-                // end game
-                yield return new WaitForSeconds(1);
-
-                PlayerPrefs.SetInt("autenticita", debateManager.PlayerAuthenticity);
-                PlayerPrefs.SetInt("volici", debateManager.PlayerVoters);
-
-                SceneManager.LoadScene("EndScene");
+                // if the debate ended --> ukoncit debatu
                 break;
             }
 
@@ -194,7 +185,7 @@ public class TurnManager : MonoBehaviour
 
             yield return new WaitUntil(() => !candidate.DialogBox.IsActive);
 
-            if (candidate == debateManager.Enemy && debateManager.numCardsUsed < 4)
+            if (candidate == debateManager.Enemy && debateManager.ShouldShowCards)
             {
                 yield return new WaitForSeconds(ModeratorDelay);
                 _hasCard = false;
@@ -209,9 +200,34 @@ public class TurnManager : MonoBehaviour
             candidate.DialogBox.Hide();
             spotlight.SetSpotlightEnemy(false);
             spotlight.SetSpotlightPlayer(false);
-            //yield return new WaitForSeconds(ModeratorDelay);
             lastQuestion = question;
         }
+
+        questionManager.HideAnswers();
+        questionManager.HideQuestion();
+        yield return new WaitForSeconds(ModeratorDelay);
+        spotlight.SetSpotlightModerator(true);
+        yield return new WaitForSeconds(ModeratorDelay);
+
+        //if (Player.Authenticity <= debateManager.MinAuthenticity || Enemy.Authenticity <= debateManager.MinAuthenticity) {
+            // nekoho vyhodime
+        //}
+        else {
+            StartCoroutine(DebateOutro());
+        }
+    }
+
+    IEnumerator DebateOutro() {
+        moderatorDialog.SetText(debateManager.GetOutroText());
+        moderatorDialog.PlayText();
+        yield return new WaitUntil(() => !moderatorDialog.IsActive);
+        yield return new WaitUntil(() => PressedContinue());
+        moderatorDialog.Hide();
+
+        // save results and load end scene
+        PlayerPrefs.SetInt("autenticita", debateManager.PlayerAuthenticity);
+        PlayerPrefs.SetInt("volici", debateManager.PlayerVoters);
+        SceneManager.LoadScene("EndScene");
     }
 
     public void SkipCardAttack() {
@@ -230,7 +246,7 @@ public class TurnManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && _inIntro) {
+        if (Input.GetKeyDown(KeyCode.Return)) {
             moderatorDialog.Skip = true;
         }
     }

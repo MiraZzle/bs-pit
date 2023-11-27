@@ -7,9 +7,6 @@ using UnityEngine;
 
 
 public class DebateManager : MonoBehaviour {
-    private Question[] _generalQuestions;
-    private Question[] _playerQuestions;
-    private Question[] _enemyQuestions;
     private (Question, Candidate)[] _questions;
 
     private int _questionNum = 0;
@@ -30,6 +27,7 @@ public class DebateManager : MonoBehaviour {
 
     public int PlayerAuthenticity => Player.Authenticity;
     public int EnemyAuthenticity => Enemy.Authenticity;
+    public int MinAuthenticity => (int)0.15 * Candidate.MaxAuthenticity;
     public int PlayerVoters { get; private set; } = 50;
 
     private void ChangePlayerVoters(int deltaVolici) {
@@ -55,7 +53,7 @@ public class DebateManager : MonoBehaviour {
         Player = _playerObject.GetComponent<Candidate>();
         Enemy = _enemyObject.GetComponent<Candidate>();
         PlayerPrefs.SetString("name", Player.Name);
-        _language = PlayerPrefs.GetString("language"); 
+        _language = PlayerPrefs.GetString("language");
         HideVotingBar();
     }
 
@@ -67,25 +65,22 @@ public class DebateManager : MonoBehaviour {
 
 
     public void SetUpQuestions() {
-        _generalQuestions = QuestionLoader.GetRandomQuestions();
-        _playerQuestions = QuestionLoader.GetQuestionsForCandidate(Player);
-        _enemyQuestions = QuestionLoader.GetQuestionsForCandidate(Enemy);
+        var _generalQuestions = QuestionLoader.GetRandomQuestions();
+        var _playerQuestions = QuestionLoader.GetQuestionsForCandidate(Player);
+        var _enemyQuestions = QuestionLoader.GetQuestionsForCandidate(Enemy);
+        var _finalQuestion = QuestionLoader.GetFinalQuestion();
         _questions = new (Question, Candidate)[] { 
             // round 1
             (_generalQuestions[0], Player), (_generalQuestions[0], Enemy),
-
             (_playerQuestions[0], Player), (_enemyQuestions[0], Enemy),
             // round2
             (_generalQuestions[1], Player), (_generalQuestions[1], Enemy),
-
             (_playerQuestions[1], Player), (_enemyQuestions[1], Enemy),
             // round 3
             (_generalQuestions[2], Player), (_generalQuestions[2], Enemy),
-
             (_playerQuestions[2], Player), (_enemyQuestions[2], Enemy),
-
-            // last question
-            (_generalQuestions[3], Player), (_generalQuestions[3], Enemy)
+            (_generalQuestions[3], Player), (_generalQuestions[3], Enemy),
+            (_finalQuestion, Player), (_finalQuestion, Enemy)
         };
         _questionsInTotal = _questions.Length;
     }
@@ -102,7 +97,7 @@ public class DebateManager : MonoBehaviour {
         return (_lastQuestion, _lastCandidate);
     }
 
-     public string GetIntroText() {
+    public string GetIntroText() {
         string introCS = "Dámy a pánové, vítejte u prezidentské debaty, která je klíčovým okamžikem v historii našeho národa. Dnes večer představí kandidáti " + Player.Name + " a " + Enemy.Name + " různé vize naší budoucnosti. Děkujeme vám, že jste se rozhodli státi svědky tohoto zásadního rozhovoru.";
         string introEN = "Ladies and gentlemen, welcome to the presidential debate, a pivotal moment in our nation's journey. Tonight, our candidates " + Player.Name + " and " + Enemy.Name + " present diverse visions for our future. Thank you for joining this critical conversation.";
         return (_language == "english") ? introEN : introCS;
@@ -126,6 +121,20 @@ public class DebateManager : MonoBehaviour {
         return (_language == "english") ? introEN : introCS;
     }
 
+    public string GetKickOutOfDebateText(Candidate candidate) {
+        string candidateLastName = candidate.Name.Split(' ')[1];
+
+        string textEN = "Mr " + candidateLastName + ", in this debate we stress the importance of transparency and the truthful presentation of information. Unfortunately, because of your repeated false and extremely populist statements, we have to exclude you from the debate. Thank you for your understanding and respect for the rules of this debate.";
+        string textCS = "Pane " + candidateLastName + ", v rámci této debaty zdůrazňujeme důležitost transparentnosti a pravdivé prezentace informací. Kvůli opakovaným nepravdivým a extrémně populistickým prohlášením vás bohužel musíme vyjmout z debaty. Děkujeme za pochopení a respektování pravidel této debaty.";
+        return (_language == "english") ? textEN : textCS;
+
+    }
+    public string GetOutroText() {
+        string textEN = "Ladies and gentlemen, that's all from today's presidential debate. I would like to thank both candidates for their participation and their openness in discussing key issues for our country. We hope that this debate has answered your questions. Thank you for watching.";
+        string textCS = "Dámy a pánové, to je pro dnešní prezidentskou debatu vše. Chtěl bych poděkovat oběma kandidátům za jejich účast a otevřenost v diskusi o klíčových otázkách pro naši zemi. Doufáme, že vám tato debata odpověděla na vaše otázky. Děkujeme vám za sledování a přejeme šťastnou volbu.";
+        return (_language == "english") ? textEN : textCS;
+    }
+
 
     public void ProcessAnswer(Answer answer)
     {
@@ -138,10 +147,12 @@ public class DebateManager : MonoBehaviour {
         _lastAnswer = answer;
     }
 
-    public int numCardsUsed = 0;
+    // dont show cards when all are used and when this is the final question 
+    public bool ShouldShowCards => _numCardsUsed < CardManager.NumCards && _questionNum < _questionsInTotal-1;
+    private int _numCardsUsed = 0;
     public void ProcessCardAttack(Card card)
     {
-        ++numCardsUsed;
+        ++_numCardsUsed;
         // if the player attacked, than the last question must have been for the enemy
 
         bool DecideWin(float multiplier)

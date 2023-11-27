@@ -70,12 +70,13 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public Card[] GetRandomCards(int num = 4)
+    public static int NumCards { get; private set; } = 4;
+    public Card[] GetRandomCards()
     {
         Card[] cardsToShuffle = (PlayerPrefs.GetString("language") == "english") ? _cardsEN : _cardsCS;
-        num = Mathf.Clamp(num, 0, numCardsInGame);
+        NumCards = Mathf.Clamp(NumCards, 0, numCardsInGame);
         cardsToShuffle.Shuffle();
-        return cardsToShuffle.Take(num).ToArray();
+        return cardsToShuffle.Take(NumCards).ToArray();
     }
 
     void Awake()

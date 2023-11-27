@@ -40,7 +40,7 @@ public class EndSceneManager : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Space))
             SceneManager.LoadScene("StartScene");
         
         Invoke("enableContinue", 5f);
