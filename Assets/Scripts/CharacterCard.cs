@@ -16,9 +16,6 @@ public class CharacterInfoCard : MonoBehaviour
     public TMP_Text Positives;
     public TMP_Text Negatives;
 
-    [SerializeField]
-    private TMP_Text help;
-
     public event Action OnClose;
 
     public bool IsOpen { get; private set; }

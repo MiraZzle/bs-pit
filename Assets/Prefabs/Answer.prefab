@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.9725952, y: 0.0014953613}
+  m_SizeDelta: {x: -27.3656, y: -24.0107}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1807263159479557563
 CanvasRenderer:
@@ -65,10 +65,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: My positions are based on pragmatism and cooperation with different countries.
+    I do not cooperate with any country at the expense of our interests, and that
+    includes Russia.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8076621db2874c247b256a8fbac14eef, type: 2}
-  m_sharedMaterial: {fileID: -5740220516213559011, guid: 8076621db2874c247b256a8fbac14eef, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 27f23a9cc3bacc2478576349a9b0d627, type: 2}
+  m_sharedMaterial: {fileID: 1262429263067696901, guid: 27f23a9cc3bacc2478576349a9b0d627, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -172,7 +174,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 225.61841, y: -196.81686}
-  m_SizeDelta: {x: 411.5095, y: 105.4125}
+  m_SizeDelta: {x: 411.5095, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8997409996645002443
 CanvasRenderer:

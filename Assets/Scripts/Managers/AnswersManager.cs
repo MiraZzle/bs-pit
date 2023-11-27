@@ -61,7 +61,7 @@ public class AnswersManager : MonoBehaviour
     {
         if (ans is null)
         {
-            Debug.Log("NULLA");
+            Debug.Log("Odpoved na otázku je null.");
         }
 
         GameObject gameobj = Instantiate(AnswerPrefab, Parent.transform);
