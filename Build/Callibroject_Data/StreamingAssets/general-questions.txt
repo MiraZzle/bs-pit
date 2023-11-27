@@ -56,7 +56,7 @@ E Crime and Security
     P Vyhostíme všechny cizince, kteří jsou podezřelí z trestné činnosti, a tak zajistíme bezpečnost našich občanů!
     E We will deport all foreigners suspected of criminal activity to ensure the safety of our citizens!
     
-    N Investujeme do modernizace policejních sil a zlepšíme spolupráci mezi složkami bezpečnostních složek.
+    N Investujeme do modernizace policejních sil a zlepšíme spolupráci mezi jednotlivými částmi bezpečnostních složek.
     E We will invest in modernizing police forces and improve cooperation between security agencies.
     
     N Podporujeme programy prevence kriminality a pracujeme na sociální integraci.
