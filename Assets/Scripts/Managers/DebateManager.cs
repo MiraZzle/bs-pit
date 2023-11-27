@@ -113,7 +113,7 @@ public class DebateManager : MonoBehaviour {
 
      public string GetIntroText() {
         string introCS = "Dámy a pánové, vítejte u prezidentské debaty, která je klíčovým okamžikem v historii našeho národa. Dnes večer představí kandidáti " + Player.Name + " a " + Enemy.Name + " různé vize naší budoucnosti. Děkujeme vám, že jste se rozhodli státi svědky tohoto zásadního rozhovoru.";
-        string introEN = "Ladies and gentlemen, welcome to the presidential debate, a pivotal moment in our nation's journey. Tonight, our candidates " + Player.Name + " and " + Enemy.Name + " present diverse visions for our future. Let's transcend partisanship, focusing on the issues that matter. Thank you for joining this critical conversation.";
+        string introEN = "Ladies and gentlemen, welcome to the presidential debate, a pivotal moment in our nation's journey. Tonight, our candidates " + Player.Name + " and " + Enemy.Name + " present diverse visions for our future. Thank you for joining this critical conversation.";
         return (_language == "english") ? introEN : introCS;
     }
 
