@@ -212,9 +212,9 @@ public class TurnManager : MonoBehaviour
         //if (Player.Authenticity <= debateManager.MinAuthenticity || Enemy.Authenticity <= debateManager.MinAuthenticity) {
             // nekoho vyhodime
         //}
-        else {
+        //else {
             StartCoroutine(DebateOutro());
-        }
+        //}
     }
 
     IEnumerator DebateOutro() {
