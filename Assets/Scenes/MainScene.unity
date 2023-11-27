@@ -540,7 +540,7 @@ PrefabInstance:
       objectReference: {fileID: 985043307}
     - target: {fileID: 6007625086438506113, guid: 497ac617d1c553c759c7a8f17d82f7af, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Skip
+      value: SkipCardAttack
       objectReference: {fileID: 0}
     - target: {fileID: 6007625086438506113, guid: 497ac617d1c553c759c7a8f17d82f7af, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
