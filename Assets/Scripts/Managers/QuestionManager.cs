@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class QuestionManager : MonoBehaviour
 {
-    public Dialog Question;
+    public Dialog QuestionDialog;
     public AnswersManager AnswersManager;
 
     public Action<Answer> Handler;
@@ -21,16 +21,20 @@ public class QuestionManager : MonoBehaviour
     {
         AnswersManager.SetAnswers(answers);
         Selected = null;
-        Question.SetText(question.Text);
+        QuestionDialog.SetText(question.Text);
         IsActive = true;
         HasAnswer = false;
         StartCoroutine(ShowAll());
     }
 
+    public void SkipTyping() {
+        QuestionDialog.Skip = true;
+    }
+
     private IEnumerator ShowAll()
     {
-        Question.PlayText();
-        yield return new WaitUntil(() => !Question.IsActive);
+        QuestionDialog.PlayText();
+        yield return new WaitUntil(() => !QuestionDialog.IsActive);
 
         IsActive = false;
     }
@@ -39,7 +43,7 @@ public class QuestionManager : MonoBehaviour
 
     public void HideQuestion()
     {
-        Question.Hide();
+        QuestionDialog.Hide();
         AnswersManager.Hide();
     }
 

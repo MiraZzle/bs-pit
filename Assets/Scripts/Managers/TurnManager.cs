@@ -149,8 +149,10 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(ModeratorDelay);
                 spotlight.SetSpotlightModerator(false);
             }
+            else {
+                yield return new WaitForSeconds(ModeratorDelay);
+            }
 
-            yield return new WaitForSeconds(ModeratorDelay);
             Answer selectedAnswer;
             if (candidate == Player)
             {
@@ -174,10 +176,10 @@ public class TurnManager : MonoBehaviour
             }
 
             // process the answer
-            Debug.Log(selectedAnswer.Text);
             selectedAnswer.IsUsed = true;
             candidate.DialogBox.SetText(selectedAnswer.Text);
             candidate.DialogBox.PlayText();
+
             yield return new WaitUntil(() => !candidate.DialogBox.IsActive);
 
             if (candidate == debateManager.Enemy && debateManager.ShouldShowCards)
@@ -232,6 +234,9 @@ public class TurnManager : MonoBehaviour
     void Update() {
         if (Input.GetKeyDown(KeyCode.Return)) {
             moderatorDialog.Skip = true;
+            Player.DialogBox.Skip = true;
+            Enemy.DialogBox.Skip = true;
+            questionManager.SkipTyping();
         }
         if (Input.GetKeyDown(KeyCode.Space) && _waithingForPickCard) {
             _cardHandled = true;

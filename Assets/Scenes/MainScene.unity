@@ -2817,7 +2817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53245d6e0d2d74c88b4494657967020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Question: {fileID: 1241008825}
+  QuestionDialog: {fileID: 1241008825}
   AnswersManager: {fileID: 938801532}
 --- !u!4 &922770334
 Transform:
