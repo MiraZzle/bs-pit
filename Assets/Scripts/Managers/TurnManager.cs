@@ -7,6 +7,8 @@ using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+#nullable enable
+
 public class TurnManager : MonoBehaviour
 {
 
@@ -45,6 +47,8 @@ public class TurnManager : MonoBehaviour
     bool skipIntro = true;
     void Start()
     {
+        Debug.Log("TADY SE VOLA START");
+
         if (skipIntro) {
             StartCoroutine(GameLoop());
         }
@@ -125,6 +129,7 @@ public class TurnManager : MonoBehaviour
         yield return new WaitForSeconds(ModeratorDelay);
         debateManager.ShowBars();
 
+        Question? lastQuestion = null;
         // ask questions
         while (true)
         {
@@ -143,12 +148,19 @@ public class TurnManager : MonoBehaviour
 
             // show question
             var answers = question.GetAnswers();
-            questionManager.ShowQuestion(question, answers);
-            yield return new WaitUntil(() => !questionManager.IsActive);
-            yield return new WaitForSeconds(ModeratorDelay);
-            spotlight.SetSpotlightModerator(false);
-            //yield return new WaitForSeconds(ModeratorDelay);
 
+            // if this is the second turn of a general question, dont display it again
+            if (question != lastQuestion) {
+                // if this is not the first question
+                if (lastQuestion is not null) spotlight.SetSpotlightModerator(true);
+                if (lastQuestion is not null) yield return new WaitForSeconds(ModeratorDelay);
+
+                questionManager.ShowQuestion(question, answers);
+                yield return new WaitUntil(() => !questionManager.IsActive);
+                yield return new WaitForSeconds(ModeratorDelay);
+                spotlight.SetSpotlightModerator(false);
+            }
+      
             Answer selectedAnswer;
             if (candidate == Player)
             {
@@ -172,6 +184,7 @@ public class TurnManager : MonoBehaviour
             }
 
             // process the answer
+            Debug.Log(selectedAnswer.Text);
             selectedAnswer.IsUsed = true;
             debateManager.ProcessAnswer(selectedAnswer);
             candidate.DialogBox.SetText(selectedAnswer.Text);
@@ -195,8 +208,7 @@ public class TurnManager : MonoBehaviour
             spotlight.SetSpotlightEnemy(false);
             spotlight.SetSpotlightPlayer(false);
             yield return new WaitForSeconds(ModeratorDelay);
-            spotlight.SetSpotlightModerator(true);
-            yield return new WaitForSeconds(ModeratorDelay);
+            lastQuestion = question;
         }
     }
 
