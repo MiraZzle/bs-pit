@@ -67,36 +67,27 @@ public class DebateManager : MonoBehaviour {
 
 
     public void SetUpQuestions() {
-        // TOHLE SE NEMUZE VOLAT VE STARTU, PAK JE NULL REFERENCE EXEPTION
-
         _generalQuestions = QuestionLoader.GetRandomQuestions();
         _playerQuestions = QuestionLoader.GetQuestionsForCandidate(Player);
         _enemyQuestions = QuestionLoader.GetQuestionsForCandidate(Enemy);
-        _questions = new (Question, Candidate)[] { // round 1
-                                                  (_generalQuestions[0], Player), (_generalQuestions[0], Enemy),
+        _questions = new (Question, Candidate)[] { 
+            // round 1
+            (_generalQuestions[0], Player), (_generalQuestions[0], Enemy),
 
-                                                  (_playerQuestions[0], Player), (_enemyQuestions[0], Enemy),
-                                                  // round2
-                                                  (_generalQuestions[1], Player), (_generalQuestions[1], Enemy),
+            (_playerQuestions[0], Player), (_enemyQuestions[0], Enemy),
+            // round2
+            (_generalQuestions[1], Player), (_generalQuestions[1], Enemy),
 
-                                                  (_playerQuestions[1], Player), (_enemyQuestions[1], Enemy),
-                                                  // round 3
-                                                  (_generalQuestions[2], Player), (_generalQuestions[2], Enemy),
+            (_playerQuestions[1], Player), (_enemyQuestions[1], Enemy),
+            // round 3
+            (_generalQuestions[2], Player), (_generalQuestions[2], Enemy),
 
-                                                  (_playerQuestions[2], Player), (_enemyQuestions[2], Enemy),
+            (_playerQuestions[2], Player), (_enemyQuestions[2], Enemy),
 
-                                                  // last question
-                                                  (_generalQuestions[3], Player), (_generalQuestions[3], Enemy)
+            // last question
+            (_generalQuestions[3], Player), (_generalQuestions[3], Enemy)
         };
         _questionsInTotal = _questions.Length;
-    }
-
-    bool _ready = false;
-    public void Update() {
-        if (!_ready) {
-            SetUpQuestions();
-            _ready = true;
-        }
     }
 
     private Question _lastQuestion;

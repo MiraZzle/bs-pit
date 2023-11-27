@@ -122,6 +122,7 @@ public record Question
             }
         }
 
+        Debug.Log(string.Format("NUM ANSWERS = {0}", addedAnswers));
         return answers;
     }
 
@@ -269,15 +270,6 @@ public class QuestionLoader : MonoBehaviour
         questions[0] = candidate.SpecialSkill.GetQuestion();
         int addedQuestions = 1;
 
-        foreach (Property property in candidate.GoodProperties)
-        {
-            if (property.GetQuestion() is not null)
-            {
-                questions[addedQuestions++] = property.GetQuestion();
-                break;
-            }
-        }
-
         foreach (Property property in candidate.BadProperties)
         {
             if (property.GetQuestion() is not null)
@@ -288,6 +280,7 @@ public class QuestionLoader : MonoBehaviour
             }
         }
 
+        questions.Shuffle();
         return questions;
     }
 

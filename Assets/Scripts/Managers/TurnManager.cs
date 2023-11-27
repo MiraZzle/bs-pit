@@ -44,7 +44,7 @@ public class TurnManager : MonoBehaviour
 
     bool _hasCard = false;
 
-    bool skipIntro = true;
+    bool skipIntro = false;
     void Start()
     {
         Debug.Log("TADY SE VOLA START");
@@ -118,6 +118,7 @@ public class TurnManager : MonoBehaviour
         // setup
         _inIntro = false;
         _availableCards = cardManager.GetRandomCards();
+        debateManager.SetUpQuestions();
         int index = 0;
         foreach (var cardBtn in _cardSlots) {
             var img = cardBtn.GetComponent<Image>();
@@ -126,7 +127,7 @@ public class TurnManager : MonoBehaviour
         }
 
         // PAK DAT PRYC
-        yield return new WaitForSeconds(ModeratorDelay);
+        //yield return new WaitForSeconds(ModeratorDelay);
         debateManager.ShowBars();
 
         Question? lastQuestion = null;
@@ -160,7 +161,8 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(ModeratorDelay);
                 spotlight.SetSpotlightModerator(false);
             }
-      
+
+            yield return new WaitForSeconds(ModeratorDelay);
             Answer selectedAnswer;
             if (candidate == Player)
             {
@@ -207,7 +209,7 @@ public class TurnManager : MonoBehaviour
             candidate.DialogBox.Hide();
             spotlight.SetSpotlightEnemy(false);
             spotlight.SetSpotlightPlayer(false);
-            yield return new WaitForSeconds(ModeratorDelay);
+            //yield return new WaitForSeconds(ModeratorDelay);
             lastQuestion = question;
         }
     }

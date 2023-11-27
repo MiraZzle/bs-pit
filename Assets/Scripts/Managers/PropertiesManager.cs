@@ -21,8 +21,7 @@ public enum PropertyType
     Random
 }
 
-public class Property
-{
+public class Property {
     public PropertyType Type { get; private set; }
 
     private string _textEN;
@@ -30,6 +29,7 @@ public class Property
     public string Text => (PlayerPrefs.GetString("language") == "english") ? _textEN : _textCS;
 
     public bool IsGood { get; private set; }
+    public bool IsUsed { get; set; } = false;
 
     private readonly List<Question> _questions = new List<Question>();
 
@@ -55,8 +55,9 @@ public class Property
         return _questions[0];
     }
 
-    public virtual void Reset()
+    public void Reset()
     {
+        IsUsed = false;
         foreach (Question question in _questions)
             question.ResetAnswers();
     }
@@ -64,8 +65,6 @@ public class Property
 
 public class SpecialSkill : Property
 {
-    public bool IsUsed = false;
-
     private string _descriptionEN;
     private string _descriptionCS;
 
@@ -77,12 +76,6 @@ public class SpecialSkill : Property
     {
         _descriptionEN = descriptionEN;
         _descriptionCS = descriptionCS;
-    }
-
-    public override void Reset()
-    {
-        base.Reset();
-        IsUsed = false;
     }
 }
 
@@ -98,8 +91,11 @@ public class PropertiesManager : MonoBehaviour
         Property[] randomProperties = new Property[num];
         foreach (Property property in _properties)
         {
-            if (property.IsGood == good)
+            if (property.IsGood == good && !property.IsUsed) {
+                property.IsUsed = true;
                 randomProperties[addedProperties++] = property;
+            }
+            
             if (addedProperties == num)
                 break;
         }
