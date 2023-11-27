@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -32,9 +33,6 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     Button skipButton;
 
-    [SerializeField]
-    private TMP_Text Title;
-
     public float ModeratorDelay = 0.75f;
 
     private Card[] _availableCards;
@@ -43,12 +41,16 @@ public class TurnManager : MonoBehaviour
     private Button[] _cardSlots;
 
     bool _hasCard = false;
-    bool _canContinue = false;
 
+    bool skipIntro = true;
     void Start()
     {
-        Title.text = "";
-        StartCoroutine(ModeratorSpeech());
+        if (skipIntro) {
+            StartCoroutine(GameLoop());
+        }
+        else {
+            StartCoroutine(ModeratorSpeech());
+        }
     }
 
     bool PressedContinue() => Input.GetKeyDown(KeyCode.Space);
@@ -109,9 +111,8 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator GameLoop()
     {
+        // setup
         _inIntro = false;
-        debateManager.ShowBars();
-
         _availableCards = cardManager.GetRandomCards();
         int index = 0;
         foreach (var cardBtn in _cardSlots) {
@@ -120,13 +121,15 @@ public class TurnManager : MonoBehaviour
             cardBtn.onClick.AddListener(() => { HandleCards(cardBtn, _availableCards[index - 1]); });
         }
 
+        // PAK DAT PRYC
+        yield return new WaitForSeconds(ModeratorDelay);
+        debateManager.ShowBars();
+
         // ask questions
         while (true)
         {
-            Title.text = "question phase";
-
-            (Question q, Candidate c) = debateManager.AskAnotherQuestion();
-            if (q is null)
+            (Question question, Candidate candidate) = debateManager.AskAnotherQuestion();
+            if (question is null)
             {
                 // end game
                 yield return new WaitForSeconds(1);
@@ -138,13 +141,21 @@ public class TurnManager : MonoBehaviour
                 break;
             }
 
-            var answers = q.GetAnswers();
-            questionManager.ShowQuestion(q, answers);
+            // show question
+            var answers = question.GetAnswers();
+            questionManager.ShowQuestion(question, answers);
             yield return new WaitUntil(() => !questionManager.IsActive);
+            yield return new WaitForSeconds(ModeratorDelay);
+            spotlight.SetSpotlightModerator(false);
+            //yield return new WaitForSeconds(ModeratorDelay);
 
             Answer selectedAnswer;
-            if (c == Player)
+            if (candidate == Player)
             {
+                // if it is for the player, show answers
+                spotlight.SetSpotlightPlayer(true);
+                yield return new WaitForSeconds(ModeratorDelay);
+
                 questionManager.ShowAnswers();
                 yield return new WaitUntil(() => questionManager.HasAnswer);
                 questionManager.HideAnswers();
@@ -152,29 +163,40 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
+                spotlight.SetSpotlightEnemy(true);
+                yield return new WaitForSeconds(ModeratorDelay);
+
+                // pick a random answer
                 answers.Shuffle();
                 selectedAnswer = answers[0];
             }
+
+            // process the answer
             selectedAnswer.IsUsed = true;
-
             debateManager.ProcessAnswer(selectedAnswer);
-            c.DialogBox.SetText(selectedAnswer.Text);
-            c.DialogBox.PlayText();
+            candidate.DialogBox.SetText(selectedAnswer.Text);
+            candidate.DialogBox.PlayText();
 
-            yield return new WaitUntil(() => !c.DialogBox.IsActive);
+            yield return new WaitUntil(() => !candidate.DialogBox.IsActive);
 
-            if (c != Player && debateManager.numCardsUsed < 4)
+            if (candidate == debateManager.Enemy && debateManager.numCardsUsed < 4)
             {
+                yield return new WaitForSeconds(ModeratorDelay);
                 _hasCard = false;
-                Title.text = "attack phase";
-
                 ShowCards();
-
                 yield return new WaitUntil(() => _hasCard);
                 HideCards();
             }
+            else {
+                yield return new WaitUntil(() => PressedContinue());
+            }
 
-            c.DialogBox.Hide();
+            candidate.DialogBox.Hide();
+            spotlight.SetSpotlightEnemy(false);
+            spotlight.SetSpotlightPlayer(false);
+            yield return new WaitForSeconds(ModeratorDelay);
+            spotlight.SetSpotlightModerator(true);
+            yield return new WaitForSeconds(ModeratorDelay);
         }
     }
 
@@ -194,10 +216,6 @@ public class TurnManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _canContinue = true;
-        }
         if (Input.GetKeyDown(KeyCode.Return) && _inIntro) {
             moderatorDialog.Skip = true;
         }
