@@ -44,7 +44,7 @@ public class Card
         _relevantProperties[(int)CardType.Drunkard] = new() { PropertyType.Drunkard, PropertyType.SSAligator };
         _relevantProperties[(int)CardType.Corrupt] = new() { PropertyType.Corrupt, PropertyType.SSCapiHnizdo };
         _relevantProperties[(int)CardType.Murderer] = new() { PropertyType.SSKuciak, PropertyType.SSFlakanec };
-        _relevantProperties[(int)CardType.Thief] = new() { PropertyType.Kleptoman, PropertyType.Corrupt };
+        _relevantProperties[(int)CardType.Thief] = new() { PropertyType.Kleptoman, PropertyType.Corrupt, PropertyType.SSCapiHnizdo };
     }
 }
 

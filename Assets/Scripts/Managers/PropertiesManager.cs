@@ -196,7 +196,7 @@ public class PropertiesManager : MonoBehaviour
             ans1EN: "I am not a communist! I'm here for the people, fighting for social justice and equality. In short, I am an ordinary hero of working people!",
             ans1CS: "Nejsem komunista! Jsem tu pro lidi, bojuji za sociální spravedlnost a rovnost. Zkrátka jsem obyčejný hrdina pracujících lidí!",
             ans2EN: "Political labels can be misleading. My approach to politics is based on concrete proposals and solutions for citizens, not labels.",
-            ans2CS: "Politické škatulky a označení mohou být zavádějící. Můj přístup k politice je postaven na konkrétních návrzích a řešeních pro občany, ne na štítcích.",
+            ans2CS: "Politické škatulky a označení mohou být zavádějící. Můj přístup k politice je postaven na konkrétních návrzích a řešeních pro občany, ne na nálepkách.",
             ans3EN: "Yes, in my younger years I was involved in the Communist Party. And I still think we should give communism another chance.",
             ans3CS: "Ano, ve svých mladých letech jsem se angažoval v komunistické straně. A stále si myslím, že bychom komunismu měli dát ještě jednu šanci.");
 

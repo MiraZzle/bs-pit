@@ -32,9 +32,6 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private Candidate Enemy;
 
-    [SerializeField]
-    Button skipButton;
-
     public float ModeratorDelay = 0.75f;
 
     private Card[] _availableCards;
@@ -42,7 +39,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private Button[] _cardSlots;
 
-    bool _hasCard = false;
+    bool _cardHandled = false;
 
     bool skipIntro = false;
     void Start()
@@ -108,7 +105,7 @@ public class TurnManager : MonoBehaviour
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
         yield return new WaitUntil(() => PressedContinue());
         moderatorDialog.Hide();
-        yield return new WaitForSeconds(2*ModeratorDelay);
+        yield return new WaitForSeconds(1.5f*ModeratorDelay);
         
         StartCoroutine(GameLoop());
     }
@@ -179,23 +176,25 @@ public class TurnManager : MonoBehaviour
             // process the answer
             Debug.Log(selectedAnswer.Text);
             selectedAnswer.IsUsed = true;
-            debateManager.ProcessAnswer(selectedAnswer);
             candidate.DialogBox.SetText(selectedAnswer.Text);
             candidate.DialogBox.PlayText();
-
             yield return new WaitUntil(() => !candidate.DialogBox.IsActive);
 
             if (candidate == debateManager.Enemy && debateManager.ShouldShowCards)
             {
                 yield return new WaitForSeconds(ModeratorDelay);
-                _hasCard = false;
+                debateManager.ProcessAnswer(selectedAnswer);
+
+                _cardHandled = false;
                 ShowCards();
-                yield return new WaitUntil(() => _hasCard);
+                yield return new WaitUntil(() => _cardHandled);
                 HideCards();
             }
             else {
                 yield return new WaitUntil(() => PressedContinue());
+                debateManager.ProcessAnswer(selectedAnswer);
             }
+
 
             candidate.DialogBox.Hide();
             spotlight.SetSpotlightEnemy(false);
@@ -230,46 +229,49 @@ public class TurnManager : MonoBehaviour
         SceneManager.LoadScene("EndScene");
     }
 
-    public void SkipCardAttack() {
-        _hasCard = true;
-    }
-
-    void HideCards()
-    {
-        skipButton.gameObject.SetActive(false);
-
-        foreach (var btn in _cardSlots)
-        {
-            btn.gameObject.SetActive(false);
-        }
-    }
-
-    void Update()
-    {
+    void Update() {
         if (Input.GetKeyDown(KeyCode.Return)) {
             moderatorDialog.Skip = true;
         }
+        if (Input.GetKeyDown(KeyCode.Space) && _waithingForPickCard) {
+            _cardHandled = true;
+        }
     }
+
+    bool _waithingForPickCard = false;
 
     void ShowCards()
     {
-        skipButton.gameObject.SetActive(true);
-
         foreach (var btn in _cardSlots)
         {
             btn.gameObject.SetActive(true);
-
         }
+        _waithingForPickCard = true;
 
     }
 
+    void HideCards() {
+        foreach (var btn in _cardSlots) {
+            btn.gameObject.SetActive(false);
+        }
+        _waithingForPickCard = false;
+    }
+
+
+    Vector3 _sceenCenter = new Vector3(0, 200, 0);
+
     void HandleCards(Button btn, Card card)
     {
+        Vector3 originalPosition = btn.transform.position;
+        // pohnout do stredu
+        // dat razitko
+        // pohnout zpatky
+
         btn.interactable = false;
         btn.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
 
         debateManager.ProcessCardAttack(card);
 
-        _hasCard = true;
+        _cardHandled = true;
     }
 }
