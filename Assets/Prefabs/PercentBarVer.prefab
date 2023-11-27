@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -440
       objectReference: {fileID: 0}
+    - target: {fileID: 468362278839050512, guid: b90732592ec127ad8bf26ef7f29fc858, type: 3}
+      propertyPath: percentLeft
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 468362278839050512, guid: b90732592ec127ad8bf26ef7f29fc858, type: 3}
+      propertyPath: percentRight
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1025685988320049470, guid: b90732592ec127ad8bf26ef7f29fc858, type: 3}
       propertyPath: m_SizeDelta.x
       value: 35
@@ -75,6 +83,10 @@ PrefabInstance:
     - target: {fileID: 1673499763257006832, guid: b90732592ec127ad8bf26ef7f29fc858, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 63
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922053365456045112, guid: b90732592ec127ad8bf26ef7f29fc858, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2147082300073236433, guid: b90732592ec127ad8bf26ef7f29fc858, type: 3}
       propertyPath: m_Name
@@ -227,6 +239,10 @@ PrefabInstance:
     - target: {fileID: 5702482389653393636, guid: b90732592ec127ad8bf26ef7f29fc858, type: 3}
       propertyPath: m_Name
       value: Filling
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702482389653393636, guid: b90732592ec127ad8bf26ef7f29fc858, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6165172028198095364, guid: b90732592ec127ad8bf26ef7f29fc858, type: 3}
       propertyPath: m_SizeDelta.x

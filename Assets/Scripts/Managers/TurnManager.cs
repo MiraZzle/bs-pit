@@ -50,70 +50,76 @@ public class TurnManager : MonoBehaviour
         StartCoroutine(ModeratorSpeech());
     }
 
-    IEnumerator ModeratorSpeech()
-    {
-        _availableCards = cardManager.GetRandomCards();
+    bool PressedContinue() => Input.GetKeyDown(KeyCode.Space);
 
-        int index = 0;
-        foreach (var cardBtn in _cardSlots)
-        {
-            var img = cardBtn.GetComponent<Image>();
-            img.sprite = _availableCards[index++].Sprite;
-            cardBtn.onClick.AddListener(() =>
-                                        { HandleCards(cardBtn, _availableCards[index - 1]); });
-        }
-
+    IEnumerator ModeratorSpeech() {
         yield return new WaitForSeconds(ModeratorDelay);
-
         spotlight.SetSpotlightModerator(true);
-
-        Title.text = "intro";
-
         yield return new WaitForSeconds(ModeratorDelay);
 
-        moderatorDialog.Show();
-
+        moderatorDialog.SetText(debateManager.GetIntroText());
+        moderatorDialog.PlayText();
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
+        yield return new WaitUntil(() => PressedContinue());
 
-        yield return new WaitForSeconds(ModeratorDelay);
+
+        moderatorDialog.Hide();
+
         spotlight.SetSpotlightPlayer(true);
+        yield return new WaitForSeconds(ModeratorDelay);
 
-        moderatorDialog.SetText("Řeřicha. Candidate A, a seasoned politician, has more political baggage than a 10-term senator at an airport carousel. Critics say they navigate issues with all the agility of a sloth in a speed-eating contest.");
-        moderatorDialog.Show();
+        moderatorDialog.SetText(debateManager.GetPlayerIntroText());
+        moderatorDialog.PlayText();
         yield return new WaitWhile(() => moderatorDialog.IsActive);
-
-        _canContinue = false;
-        yield return new WaitUntil(() => _canContinue);
+        yield return new WaitUntil(() => PressedContinue());
         moderatorDialog.Hide();
 
         yield return new WaitForSeconds(ModeratorDelay);
-
         Player.InfoCard.Show();
-
         yield return new WaitUntil(() => !Player.InfoCard.IsOpen);
 
-        spotlight.SetSpotlightEnemy(true);
+        yield return new WaitForSeconds(ModeratorDelay);
         spotlight.SetSpotlightPlayer(false);
-        moderatorDialog.SetText("Řeřicha. Candidate B, the private sector enthusiast, brings as much political experience as a goldfish in a game of chess – but hey, who needs political know-how when you've got a dynamic PowerPoint presentation?");
-        moderatorDialog.Show();
+        yield return new WaitForSeconds(ModeratorDelay);
+        spotlight.SetSpotlightEnemy(true);
+        yield return new WaitForSeconds(ModeratorDelay);
 
+        moderatorDialog.SetText(debateManager.GetEnemyIntroText());
+        moderatorDialog.PlayText();
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
-        _canContinue = false;
-        yield return new WaitUntil(() => _canContinue);
-
+        yield return new WaitUntil(() => PressedContinue());
         moderatorDialog.Hide();
-        Enemy.InfoCard.Show();
 
+        yield return new WaitForSeconds(ModeratorDelay);
+        Enemy.InfoCard.Show();
         yield return new WaitUntil(() => !Enemy.InfoCard.IsOpen);
 
+        yield return new WaitForSeconds(ModeratorDelay);
         spotlight.SetSpotlightEnemy(false);
+        yield return new WaitForSeconds(ModeratorDelay);
+
+        moderatorDialog.SetText(debateManager.GetStartQuestionsIntroText());
+        moderatorDialog.PlayText();
+        yield return new WaitUntil(() => !moderatorDialog.IsActive);
+        yield return new WaitForSeconds(ModeratorDelay);
+        moderatorDialog.Hide();
 
         StartCoroutine(GameLoop());
     }
 
     IEnumerator GameLoop()
     {
+        debateManager.ShowBars();
 
+        _availableCards = cardManager.GetRandomCards();
+        int index = 0;
+        foreach (var cardBtn in _cardSlots) {
+            var img = cardBtn.GetComponent<Image>();
+            img.sprite = _availableCards[index++].Sprite;
+            cardBtn.onClick.AddListener(() => { HandleCards(cardBtn, _availableCards[index - 1]); });
+        }
+
+        // ask questions
         while (true)
         {
             Title.text = "question phase";
@@ -132,14 +138,7 @@ public class TurnManager : MonoBehaviour
             }
 
             var answers = q.GetAnswers();
-
-            foreach (var a in answers)
-            {
-                Debug.Log(a.Text);
-            }
-
             questionManager.ShowQuestion(q, answers);
-
             yield return new WaitUntil(() => !questionManager.IsActive);
 
             Answer selectedAnswer;
@@ -159,7 +158,7 @@ public class TurnManager : MonoBehaviour
 
             debateManager.ProcessAnswer(selectedAnswer);
             c.DialogBox.SetText(selectedAnswer.Text);
-            c.DialogBox.Show();
+            c.DialogBox.PlayText();
 
             yield return new WaitUntil(() => !c.DialogBox.IsActive);
 

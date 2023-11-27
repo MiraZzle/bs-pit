@@ -11,6 +11,16 @@ using UnityEngine.SceneManagement;
 public class Candidate : MonoBehaviour {
     [SerializeField]
     private Image authenticityBar;
+    [SerializeField]
+    private GameObject authenticityBarParent;
+
+
+    public void ShowAuthenticityBar() {
+        authenticityBarParent.SetActive(true);
+    }
+    private void HideAuthenticityBar() {
+        authenticityBarParent.SetActive(false);
+    }
 
     public Dialog DialogBox;
 
@@ -33,6 +43,7 @@ public class Candidate : MonoBehaviour {
     void Awake() { 
         propertiesManager = GameObject.FindGameObjectWithTag("logic").GetComponent<PropertiesManager>();
         UpdateAuthenticityBar();
+        InfoCard.Hide();
     }
 
     void UpdateAuthenticityBar() {
@@ -160,7 +171,6 @@ public class Candidate : MonoBehaviour {
         string result = "";
         foreach (var prop in props)
         {
-            result += "- ";
             result += prop.Text;
             result += '\n';
         }
@@ -172,5 +182,6 @@ public class Candidate : MonoBehaviour {
     {
         GenerateNewCandidate();
         UpdateAuthenticityBar();
+        HideAuthenticityBar();
     }
 }

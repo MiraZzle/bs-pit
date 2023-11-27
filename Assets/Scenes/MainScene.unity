@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3205778658269438053, guid: cd67ba7602b700d939f621545a272955, type: 3}
+      propertyPath: m_wordWrappingRatios
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9171983653969128902, guid: cd67ba7602b700d939f621545a272955, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -750,6 +754,10 @@ PrefabInstance:
       propertyPath: authenticityBar
       value: 
       objectReference: {fileID: 1924221074}
+    - target: {fileID: 3123899200216062918, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: authenticityBarParent
+      value: 
+      objectReference: {fileID: 1158597093}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1586,7 +1594,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 33aa11dff1fe4a04b8c5c06ae64c2b5a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.372
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2056,7 +2064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0500a480f36319800a70daf4f0c18f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charactersPerSecond: 20
   interpunctuationDelay: 0.5
   Skip: 0
   dialogObj: {fileID: 1418386492}
@@ -2310,7 +2317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0500a480f36319800a70daf4f0c18f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charactersPerSecond: 20
   interpunctuationDelay: 0.5
   Skip: 0
   dialogObj: {fileID: 1269154730}
@@ -2856,6 +2862,11 @@ MonoBehaviour:
   Parent: {fileID: 1439423645}
   ButtonSoundManager: {fileID: 1271056568}
   Clip: {fileID: 8300000, guid: 526e64a29590ce7b291a22a770dc8efa, type: 3}
+--- !u!1 &951072565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8296320030545909502, guid: 1edb4c255e51a47769149e270753dc4b, type: 3}
+  m_PrefabInstance: {fileID: 2138952659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &972832689 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1887637352710801336, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
@@ -2948,7 +2959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1119447764
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2966,7 +2977,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -293.55276}
+  m_AnchoredPosition: {x: 0, y: -362}
   m_SizeDelta: {x: -434.7567, y: -825.1381}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1119447765
@@ -3091,6 +3102,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1158597093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8296320030545909502, guid: 1edb4c255e51a47769149e270753dc4b, type: 3}
+  m_PrefabInstance: {fileID: 1602377624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1241008821
 GameObject:
   m_ObjectHideFlags: 0
@@ -3239,7 +3255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0500a480f36319800a70daf4f0c18f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charactersPerSecond: 20
   interpunctuationDelay: 0.5
   Skip: 0
   dialogObj: {fileID: 1720994806}
@@ -4850,6 +4865,10 @@ PrefabInstance:
       propertyPath: authenticityBar
       value: 
       objectReference: {fileID: 402044548}
+    - target: {fileID: 3123899200216062918, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: authenticityBarParent
+      value: 
+      objectReference: {fileID: 951072565}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4921,6 +4940,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1896427506809761594, guid: a2d723c86cad443488f13781d9362c26, type: 3}
       propertyPath: votingBar
+      value: 
+      objectReference: {fileID: 1898759342}
+    - target: {fileID: 1896427506809761594, guid: a2d723c86cad443488f13781d9362c26, type: 3}
+      propertyPath: _votingBar
       value: 
       objectReference: {fileID: 1898759342}
     - target: {fileID: 1896427506809761594, guid: a2d723c86cad443488f13781d9362c26, type: 3}
@@ -5027,7 +5050,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0500a480f36319800a70daf4f0c18f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charactersPerSecond: 50
   interpunctuationDelay: 0.5
   Skip: 1
   dialogObj: {fileID: 1119447763}
@@ -5083,8 +5105,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5100,7 +5122,7 @@ MonoBehaviour:
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.024
+  m_wordWrappingRatios: 0.3
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
@@ -5485,6 +5507,10 @@ PrefabInstance:
     - target: {fileID: 8378109001763341591, guid: 1edb4c255e51a47769149e270753dc4b, type: 3}
       propertyPath: m_Name
       value: PercentBarVer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378109001763341591, guid: 1edb4c255e51a47769149e270753dc4b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -14,7 +14,7 @@ public class DialogManager : MonoBehaviour
         }
 
         activeDialog = dialog;
-        dialog.Show();
+        dialog.PlayText();
     }
 
     void HideActive()

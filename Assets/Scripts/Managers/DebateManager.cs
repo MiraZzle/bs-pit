@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +6,7 @@ using UnityEngine;
 
 
 
-public class DebateManager : MonoBehaviour
-{
+public class DebateManager : MonoBehaviour {
     private Question[] _generalQuestions;
     private Question[] _playerQuestions;
     private Question[] _enemyQuestions;
@@ -16,45 +15,58 @@ public class DebateManager : MonoBehaviour
     private int _questionNum = 0;
     private int _questionsInTotal;
 
+    string _language;
+
+
     [SerializeField]
-    ScaleBarManager votingBar;
+    private ScaleBarManager _votingBar;
+
+    private void ShowVotingBar() {
+        _votingBar.gameObject.SetActive(true);
+    }
+    private void HideVotingBar() {
+        _votingBar.gameObject.SetActive(false);
+    }
 
     public int PlayerAuthenticity => Player.Authenticity;
     public int EnemyAuthenticity => Enemy.Authenticity;
     public int PlayerVoters { get; private set; } = 50;
 
-    private void ChangePlayerVoters(int deltaVolici)
-    {
+    private void ChangePlayerVoters(int deltaVolici) {
         PlayerVoters += deltaVolici;
         PlayerVoters = Mathf.Clamp(PlayerVoters, 0, 100);
-        votingBar.UpdateSlider(PlayerVoters);
+        _votingBar.UpdateSlider(PlayerVoters);
     }
-    private void ChangeEnemyVoters(int deltaVolici)
-    {
+    private void ChangeEnemyVoters(int deltaVolici) {
         PlayerVoters -= deltaVolici;
         PlayerVoters = Mathf.Clamp(PlayerVoters, 0, 100);
-        votingBar.UpdateSlider(PlayerVoters);
+        _votingBar.UpdateSlider(PlayerVoters);
     }
 
     [SerializeField]
     private GameObject _playerObject;
-    public Candidate Player;
+    public Candidate Player { get; private set; }
 
     [SerializeField]
     private GameObject _enemyObject;
-    public Candidate Enemy;
+    public Candidate Enemy { get; private set; }
 
-    void Start()
-    {
+    void Start() {
         Player = _playerObject.GetComponent<Candidate>();
         Enemy = _enemyObject.GetComponent<Candidate>();
         PlayerPrefs.SetString("name", Player.Name);
+        _language = PlayerPrefs.GetString("language"); 
+        HideVotingBar();
+    }
+
+    public void ShowBars() {
+        ShowVotingBar();
+        Player.ShowAuthenticityBar();
+        Enemy.ShowAuthenticityBar();
     }
 
 
-
-    public void SetUpQuestions()
-    {
+    public void SetUpQuestions() {
         // TOHLE SE NEMUZE VOLAT VE STARTU, PAK JE NULL REFERENCE EXEPTION
 
         _generalQuestions = QuestionLoader.GetRandomQuestions();
@@ -80,10 +92,8 @@ public class DebateManager : MonoBehaviour
     }
 
     bool _ready = false;
-    public void Update()
-    {
-        if (!_ready)
-        {
+    public void Update() {
+        if (!_ready) {
             SetUpQuestions();
             _ready = true;
         }
@@ -93,14 +103,38 @@ public class DebateManager : MonoBehaviour
     private Candidate _lastCandidate;
     private Answer _lastAnswer;
 
-    public (Question?, Candidate?) AskAnotherQuestion()
-    {
+    public (Question?, Candidate?) AskAnotherQuestion() {
         if (_questionNum >= _questionsInTotal)
             return (null, null);
 
         (_lastQuestion, _lastCandidate) = _questions[_questionNum++];
         return (_lastQuestion, _lastCandidate);
     }
+
+     public string GetIntroText() {
+        string introCS = "Dámy a pánové, vítejte u prezidentské debaty, která je klíčovým okamžikem v historii našeho národa. Dnes večer představí kandidáti " + Player.Name + " a " + Enemy.Name + " různé vize naší budoucnosti. Děkujeme vám, že jste se rozhodli státi svědky tohoto zásadního rozhovoru.";
+        string introEN = "Ladies and gentlemen, welcome to the presidential debate, a pivotal moment in our nation's journey. Tonight, our candidates " + Player.Name + " and " + Enemy.Name + " present diverse visions for our future. Let's transcend partisanship, focusing on the issues that matter. Thank you for joining this critical conversation.";
+        return (_language == "english") ? introEN : introCS;
+    }
+
+    public string GetPlayerIntroText() {
+        string introEN = Player.Name + ", a seasoned politician, has more political baggage than a 10-term senator at an airport carousel. Critics say they navigate issues with all the agility of a sloth in a speed-eating contest.";
+        string introCS = Player.Name + ", seriózní kandidát s vtipným odstupem k politice. Vypadá, jako by každou chvíli přednášel důležitou tezi. Jeho oblíbeným heslem je: 'Rozhodnutí je jako dobrý vtip - potřebuje čas a správnou pointu.'";
+        return (_language == "english") ? introEN : introCS;
+    }
+
+    public string GetEnemyIntroText() {
+        string introCS = Enemy.Name + ", charismatický kandidát schopný prodat lednici Eskymákovi. Jeho kampaň je plná energie a humoru a jeho politické návrhy mají tendenci obsahovat smích, ale občas je těžké rozeznat, zda chce zlepšit stát nebo natočit sitcom.";
+        string introEN = Enemy.Name + ", a private sector enthusiast, brings as much political experience as a goldfish in a game of chess – but hey, who needs political know-how when you've got a dynamic PowerPoint presentation?";
+        return (_language == "english") ? introEN : introCS;
+    }
+
+    public string GetStartQuestionsIntroText() {
+        string introEN = "Well, let's stop stalling and get down to what everyone is waiting for - the questions.";
+        string introCS = "Přestaňme otálet a přejděme k tomu, na co všichni čekají - k otázkám.";
+        return (_language == "english") ? introEN : introCS;
+    }
+
 
     public void ProcessAnswer(Answer answer)
     {

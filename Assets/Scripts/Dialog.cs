@@ -7,11 +7,11 @@ using UnityEngine;
 // https://github.com/Maraakis/ChristinaCreatesGames/blob/main/Text%20Mesh%20Pro%20Typewriter/TypewriterEffect.cs
 public class Dialog : MonoBehaviour
 {
-    [Header("Dialog Settings")]
-    [SerializeField, Min(11)]
-    private float charactersPerSecond = 20;
+    //[Header("Dialog Settings")]
+    //[SerializeField, Min(11)]
+    private float charactersPerSecond = 30;
     [SerializeField]
-    private float interpunctuationDelay = 0.5f;
+    private float interpunctuationDelay = 0.4f;
 
     private int _currVisIndex;
     private Coroutine _typewriterCoroutine;
@@ -46,7 +46,7 @@ public class Dialog : MonoBehaviour
         PrepareNewText();
     }
 
-    public void Show()
+    public void PlayText()
     {
         dialogObj.SetActive(true);
         ResetProps();

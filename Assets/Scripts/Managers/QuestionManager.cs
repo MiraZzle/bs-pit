@@ -29,7 +29,7 @@ public class QuestionManager : MonoBehaviour
 
     private IEnumerator ShowAll()
     {
-        Question.Show();
+        Question.PlayText();
         yield return new WaitUntil(() => !Question.IsActive);
 
         IsActive = false;
