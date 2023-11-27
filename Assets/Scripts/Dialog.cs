@@ -145,6 +145,10 @@ public class Dialog : MonoBehaviour
                     }
                 }
             }
+            /*else {
+                Hide();
+                Handle();
+            }*/
 
             _currVisIndex++;
         }

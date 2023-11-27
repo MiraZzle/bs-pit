@@ -70,7 +70,7 @@ public class Candidate : MonoBehaviour {
             = { "Kazisvět", "Radovan", "Honimír", "Horymír", "Spytihněv", "Kazimír", "Dobromír", "Mečislav" };
 
         string[] lastNamesCS
-            = { "Dobrotivý", "Milosrdný", "Spravedlivý", "Krutý", "Laskavý", "Dobrosrdečný", "Zlobivý", "Urputný" };
+            = { "Dobrotivý", "Milosrdný", "Spravedlivý", "Laskavý", "Dobrosrdečný", "Zlobivý", "Urputný" };
 
         string[] namesEN = {
             "Ben Dover",   "Whimsy McSnicker", "Guffaw McChucklestein", "Barb Dwyer",

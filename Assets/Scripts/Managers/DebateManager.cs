@@ -118,8 +118,8 @@ public class DebateManager : MonoBehaviour {
     }
 
     public string GetPlayerIntroText() {
-        string introEN = Player.Name + ", a seasoned politician, has more political baggage than a 10-term senator at an airport carousel. Critics say they navigate issues with all the agility of a sloth in a speed-eating contest.";
         string introCS = Player.Name + ", seriózní kandidát s vtipným odstupem k politice. Vypadá, jako by každou chvíli přednášel důležitou tezi. Jeho oblíbeným heslem je: 'Rozhodnutí je jako dobrý vtip - potřebuje čas a správnou pointu.'";
+        string introEN = Player.Name + ", a seasoned politician, has more political baggage than a 10-term senator at an airport carousel. Critics say they navigate issues with all the agility of a sloth in a speed-eating contest.";
         return (_language == "english") ? introEN : introCS;
     }
 

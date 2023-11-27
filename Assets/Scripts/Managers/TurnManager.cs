@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -51,6 +52,7 @@ public class TurnManager : MonoBehaviour
     }
 
     bool PressedContinue() => Input.GetKeyDown(KeyCode.Space);
+    bool _inIntro = true;
 
     IEnumerator ModeratorSpeech() {
         yield return new WaitForSeconds(ModeratorDelay);
@@ -61,7 +63,6 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.PlayText();
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
         yield return new WaitUntil(() => PressedContinue());
-
 
         moderatorDialog.Hide();
 
@@ -93,7 +94,6 @@ public class TurnManager : MonoBehaviour
         yield return new WaitForSeconds(ModeratorDelay);
         Enemy.InfoCard.Show();
         yield return new WaitUntil(() => !Enemy.InfoCard.IsOpen);
-
         yield return new WaitForSeconds(ModeratorDelay);
         spotlight.SetSpotlightEnemy(false);
         yield return new WaitForSeconds(ModeratorDelay);
@@ -101,7 +101,7 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.SetText(debateManager.GetStartQuestionsIntroText());
         moderatorDialog.PlayText();
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
-        yield return new WaitForSeconds(ModeratorDelay);
+        yield return new WaitUntil(() => PressedContinue());
         moderatorDialog.Hide();
 
         StartCoroutine(GameLoop());
@@ -109,6 +109,7 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator GameLoop()
     {
+        _inIntro = false;
         debateManager.ShowBars();
 
         _availableCards = cardManager.GetRandomCards();
@@ -177,7 +178,7 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    public void Skip() {
+    public void SkipCardAttack() {
         _hasCard = true;
     }
 
@@ -196,6 +197,9 @@ public class TurnManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _canContinue = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Return) && _inIntro) {
+            moderatorDialog.Skip = true;
         }
     }
 
