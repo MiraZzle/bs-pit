@@ -54,13 +54,7 @@ public class Candidate : MonoBehaviour {
 
     public void ChangeAuthenticity(int deltaAuthenticity) {
         Authenticity = Mathf.Clamp(Authenticity + deltaAuthenticity, 0, MaxAuthenticity);
-        Debug.Log(Authenticity);
         UpdateAuthenticityBar();
-
-        if (Authenticity <= MaxAuthenticity / 10) {
-
-            //SceneManager.LoadScene("EndScene");
-        }
     }
 
     private static List<string> _usedStrings = new(); 

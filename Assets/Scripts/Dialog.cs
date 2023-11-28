@@ -27,10 +27,7 @@ public class Dialog : MonoBehaviour
     [SerializeField]
     private GameObject dialogObj;
 
-    [Header("Dialog Sound")]
-    [SerializeField]
-    private AudioClip sound;
-    [SerializeField]
+
     private SoundManager soundManager;
 
     public bool IsActive
@@ -78,6 +75,8 @@ public class Dialog : MonoBehaviour
 
     void Awake() {
         _textBox = GetComponent<TMP_Text>();
+        soundManager = GameObject.FindGameObjectWithTag("sound").GetComponent<SoundManager>();
+
         if (dialogObj is null) {
             dialogObj = gameObject;
         }
@@ -135,10 +134,9 @@ public class Dialog : MonoBehaviour
 
                 if (soundManager is not null)
                 {
-                    if (!soundManager.IsPlaying() && Char.IsLetterOrDigit(character))
+                    if (Char.IsLetterOrDigit(character))
                     {
-                        soundManager.Stop();
-                        soundManager.PlaySound(sound);
+                        soundManager.PlayWriteTextSE();
                     }
                 }
             }

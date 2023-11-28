@@ -149,11 +149,20 @@ public class DebateManager : MonoBehaviour {
     }
 
     // dont show cards when all are used and when this is the final question 
-    public bool ShouldShowCards => _numCardsUsed < CardManager.NumCards && _questionNum < _questionsInTotal-1;
     private int _numCardsUsed = 0;
-    public void ProcessCardAttack(Card card)
-    {
+    public bool ShouldShowCards => _numCardsUsed < CardManager.NumCards && _questionNum < _questionsInTotal - 1;
+
+
+    public bool DecidePlayerWin(Card card) {
+        return ProcessCardAttackLegacy(card);
+    }
+    public void UpdateAuthenticityAndVoters(Card card, bool playerWon) {
+        ProcessCardAttackLegacy(card, playerWon);
         ++_numCardsUsed;
+    }
+
+    private bool ProcessCardAttackLegacy(Card card, bool? playerWon = null)
+    {
         // if the player attacked, than the last question must have been for the enemy
 
         bool DecideWin(float multiplier)
@@ -210,10 +219,16 @@ public class DebateManager : MonoBehaviour {
 
         SetProbabilityAndMultiplier();
 
-        bool playerWon = DecideWin(probabilityMultiplier);
+        // the first time this is called (with null) this function return who won
+        if (playerWon is null) {
+            return DecideWin(probabilityMultiplier);
+        }
+        // it should be called again after that with the information of who won
+        // and it will adjust stats accordingly
+
         int loserDeltaAuth = CalculateResult(card.LoserAuthenticityDelta, powerMultiplier);
         int winnerDeltaVolici = CalculateResult(card.WinnerVoliciDelta, powerMultiplier);
-        if (playerWon)
+        if ((bool)playerWon)
         {
             Enemy.ChangeAuthenticity(loserDeltaAuth);
             ChangePlayerVoters(winnerDeltaVolici);
@@ -223,5 +238,6 @@ public class DebateManager : MonoBehaviour {
             Player.ChangeAuthenticity(loserDeltaAuth);
             ChangeEnemyVoters(winnerDeltaVolici);
         }
+        return (bool)playerWon;
     }
 }

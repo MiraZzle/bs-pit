@@ -93,20 +93,17 @@ public record Question
         _neutralAnswers.Shuffle();
     }
 
-    public Answer[] GetAnswers()
+    public List<Answer> GetAnswers()
     {
         ShuffleAnswers();
 
-        int addedAnswers = 0;
-
-        Answer[] answers = new Answer[3];
+        List<Answer> answers = new();
         // try to get 1 populist answer
         foreach (Answer answer in _populistAnswers)
         {
             if (!answer.IsUsed)
             {
-                answers[0] = answer;
-                ++addedAnswers;
+                answers.Add(answer);
                 break;
             }
         }
@@ -116,8 +113,8 @@ public record Question
         {
             if (!answer.IsUsed)
             {
-                answers[addedAnswers++] = answer;
-                if (addedAnswers == 3)
+                answers.Add(answer);
+                if (answers.Count == 3)
                     break;
             }
         }

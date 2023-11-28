@@ -4,13 +4,33 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    [SerializeField]
+    private AudioSource stampSound;
 
-    private AudioSource _source;
+    [SerializeField]
+    private AudioSource chooseAnswerSound;
 
-    void Awake() { _source = GetComponent<AudioSource>(); }
+    [SerializeField]
+    private AudioSource writeTextSound;
 
-    public bool IsPlaying() { return _source.isPlaying; }
-    public void Play(AudioClip clip) { _source.Play(); }
-    public void Stop() { _source.Stop(); }
-    public void PlaySound(AudioClip clip) { _source.PlayOneShot(clip); }
+    [SerializeField]
+    private AudioSource spotlightSound;
+
+    public void PlayStampSE() {
+        stampSound.Play();
+    }
+
+    public void PlaySpotlightSE() {
+        spotlightSound.Play();
+    }
+
+    public void PlayWriteTextSE() {
+        if (!writeTextSound.isPlaying) {
+            writeTextSound.Play();
+        }
+    }
+
+    public void PlayMouseClickSE() {
+        chooseAnswerSound.Play();
+    }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SoundVolumeControl : MonoBehaviour
 {
     // this scripts manages the sound control button that is present on the pause screen
-
+    SoundManager soundManager;
 
     [SerializeField] Image[] soundIcons = new Image[4];  // icons for the button
 
@@ -36,12 +36,14 @@ public class SoundVolumeControl : MonoBehaviour
     public void OnButtonPress() {
         // button presses cycle through the volume levels
         currentIconIndex = (currentIconIndex + 1) % soundIcons.Length;
-
+        soundManager.PlayMouseClickSE();
         SavePreferences();
         UpdateVolume();
     }
 
     void Start() {
+        soundManager = GameObject.FindGameObjectWithTag("sound").GetComponent<SoundManager>();
+
         // sets the max volume if player preferences aren't set
         if (!PlayerPrefs.HasKey(prefName)) {
             PlayerPrefs.SetInt(prefName, soundIcons.Length - 1);

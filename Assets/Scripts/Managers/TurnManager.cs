@@ -34,19 +34,13 @@ public class TurnManager : MonoBehaviour
 
     public float ModeratorDelay = 0.75f;
 
-    private Card[] _availableCards;
-
-    [SerializeField]
-    private Button[] _cardSlots;
-
-    bool _cardHandled = false;
+    static bool _cardHandled = false;
+    public static bool CardAnimationPlaying { get; set; } = false;
     public static bool IsDebating { get; private set; } = false;
 
     bool skipIntro = false;
     void Start()
     {
-        Debug.Log("TADY SE VOLA START");
-
         if (skipIntro) {
             StartCoroutine(GameLoop());
         }
@@ -118,15 +112,8 @@ public class TurnManager : MonoBehaviour
         IsDebating = true;
 
         // setup
-        _availableCards = cardManager.GetRandomCards();
         debateManager.SetUpQuestions();
-        int index = 0;
-        foreach (var cardBtn in _cardSlots) {
-            var img = cardBtn.GetComponent<Image>();
-            img.sprite = _availableCards[index++].Sprite;
-            cardBtn.onClick.AddListener(() => { HandleCards(cardBtn, _availableCards[index - 1]); });
-        }
-
+        cardManager.SetUpRandomCards();
         debateManager.ShowBars();
 
         Question? lastQuestion = null;
@@ -195,9 +182,9 @@ public class TurnManager : MonoBehaviour
                 debateManager.ProcessAnswer(selectedAnswer);
 
                 _cardHandled = false;
-                ShowCards();
+                cardManager.ShowCards();
                 yield return new WaitUntil(() => _cardHandled);
-                HideCards();
+                cardManager.HideCards();
             }
             else {
                 yield return new WaitUntil(() => PressedContinue());
@@ -241,47 +228,18 @@ public class TurnManager : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Return)) {
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKey(KeyCode.E)) {
             moderatorDialog.Skip = true;
             Player.DialogBox.Skip = true;
             Enemy.DialogBox.Skip = true;
             questionManager.SkipTyping();
         }
-        if (Input.GetKeyDown(KeyCode.Space) && _waithingForPickCard) {
+        if (Input.GetKeyDown(KeyCode.Space) && !CardAnimationPlaying) {
             _cardHandled = true;
         }
     }
 
-    bool _waithingForPickCard = false;
-
-    void ShowCards()
-    {
-        foreach (var btn in _cardSlots)
-        {
-            btn.gameObject.SetActive(true);
-        }
-        _waithingForPickCard = true;
-
-    }
-
-    void HideCards() {
-        foreach (var btn in _cardSlots) {
-            btn.gameObject.SetActive(false);
-        }
-        _waithingForPickCard = false;
-    }
-
-
-
-    void HandleCards(Button btn, Card card)
-    {
-        // dat razitko
-
-        btn.interactable = false;
-        btn.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
-
-        debateManager.ProcessCardAttack(card);
-
+    public static void CardHandled() {
         _cardHandled = true;
     }
 }

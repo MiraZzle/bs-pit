@@ -309,7 +309,7 @@ public class PropertiesManager : MonoBehaviour
             descriptionEN: "This candidate has a problem with alcohol and is rude to journalists.",
             descriptionCS: "Tento kandidát má problémy s alkoholem a chová se neomaleně vůči novinářům.",
             questionEN: "How would you comment on concerns about your behaviour towards journalists? Do you have a problem with alcohol?",
-            questionCS: "Jak byste komentoval obavy o vaše chování vůči novinářům a jak hodláte zachovat profesionální vztahy s médii?",
+            questionCS: "Jak byste komentoval obavy ohledně vašeho chování vůči novinářům? Máte problém s alkoholem?",
             ans1EN: "These are just attempts by my political opponents to discredit me! My meetings with journalists are always professional and respectful.",
             ans1CS: "Jedná se pouze pokusy mé politické konkurence diskreditovat mě! Moje setkání s novináři jsou vždy profesionální a plné respektu.",
             ans2EN: "I appreciate the role of the media in a democracy. Sometimes my behaviour can be controversial, and I am open to discussing how to improve our relations.",

@@ -8,31 +8,25 @@ public class SpotlightManager : MonoBehaviour
     public GameObject EnemyMask;
     public GameObject ModeratorMask;
 
-    [SerializeField]
-    private SoundManager sound;
-    [SerializeField]
-    private AudioClip turnOn;
+    private SoundManager soundManager;
+
+    private void Start() {
+        soundManager = GameObject.FindGameObjectWithTag("sound").GetComponent<SoundManager>();
+    }
 
     public void SetSpotlightPlayer(bool state)
     {
         PlayerMask.SetActive(state);
-        sound.PlaySound(turnOn);
+        soundManager.PlaySpotlightSE();
     }
     public void SetSpotlightEnemy(bool state)
     {
         EnemyMask.SetActive(state);
-        sound.PlaySound(turnOn);
+        soundManager.PlaySpotlightSE();
     }
     public void SetSpotlightModerator(bool state)
     {
         ModeratorMask.SetActive(state);
-        sound.PlaySound(turnOn);
-    }
-
-    public void SetSpotlight(bool player, bool moderator, bool enemy)
-    {
-        SetSpotlightPlayer(player);
-        SetSpotlightModerator(moderator);
-        SetSpotlightEnemy(enemy);
+        soundManager.PlaySpotlightSE();
     }
 }

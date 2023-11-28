@@ -48,8 +48,7 @@ public class Card
     }
 }
 
-public class CardManager : MonoBehaviour
-{
+public class CardManager : MonoBehaviour {
     const int numCardsInGame = 8;
 
     // Commie, Lover, Fascist, Putin, Drunkard, Corrupt, Murderer, Thief
@@ -61,23 +60,46 @@ public class CardManager : MonoBehaviour
     Card[] _cardsEN = new Card[numCardsInGame];
     Card[] _cardsCS = new Card[numCardsInGame];
 
-    private void CreateCards()
-    {
-        for (int i = 0; i < numCardsInGame; i++)
-        {
+    private void CreateCards() {
+        for (int i = 0; i < numCardsInGame; i++) {
             _cardsEN[i] = new Card(CardSpritesEN[i], (CardType)i);
             _cardsCS[i] = new Card(CardSpritesCS[i], (CardType)i);
         }
     }
 
-    public static int NumCards { get; private set; } = 4;
-    public Card[] GetRandomCards()
+    public const int NumCards = 4;
+
+    [SerializeField]
+    AttackCardLogic[] gameObjectCards = new AttackCardLogic[NumCards];
+
+    public void SetUpRandomCards()
     {
         Card[] cardsToShuffle = (PlayerPrefs.GetString("language") == "english") ? _cardsEN : _cardsCS;
-        NumCards = Mathf.Clamp(NumCards, 0, numCardsInGame);
         cardsToShuffle.Shuffle();
-        return cardsToShuffle.Take(NumCards).ToArray();
+
+        for (int i = 0; i < NumCards; i++) {
+            gameObjectCards[i].SetCard(cardsToShuffle[i]);
+        }
     }
+
+    public void HideCards() {
+        foreach (var card in gameObjectCards) {
+            card.HideCard();
+        }
+    }
+    public void HideAllCardsExcept(AttackCardLogic cardToStay) {
+        foreach(var card in gameObjectCards) {
+            if (card == cardToStay) continue;
+            card.HideCard();
+        }
+    }
+
+    public void ShowCards() {
+        foreach (var card in gameObjectCards) {
+            card.ShowCard();
+        }
+    }
+
 
     void Awake()
     {

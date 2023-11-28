@@ -19,7 +19,11 @@ public class MainMenu : MonoBehaviour {
     [SerializeField] private Sprite languageCZ;
     [SerializeField] private Sprite languageEN;
 
+    SoundManager soundManager;
+
     void Start() {
+        soundManager = GameObject.FindGameObjectWithTag("sound").GetComponent<SoundManager>();
+
         GameObject objImg = GameObject.Find("Language");
         flagImage = objImg.GetComponent<Image>();
 
@@ -39,6 +43,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void Debate() {
+        soundManager.PlayMouseClickSE();
         SceneManager.LoadScene("MainScene");
     }
 
@@ -52,6 +57,8 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void ChangeLanguage() {
+        soundManager.PlayMouseClickSE();
+
         string newLang = (PlayerPrefs.GetString("language") == "english") ? "czech" : "english";
 
         PlayerPrefs.SetString("language", newLang);
@@ -59,6 +66,8 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void Quit() {
+        soundManager.PlayMouseClickSE();
+
         Application.Quit();
     }
 

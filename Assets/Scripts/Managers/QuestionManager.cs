@@ -17,7 +17,7 @@ public class QuestionManager : MonoBehaviour
 
     void Start() { AnswersManager.Handler += HandleAnswer; }
 
-    public void ShowQuestion(Question question, Answer[] answers)
+    public void ShowQuestion(Question question, List<Answer> answers)
     {
         AnswersManager.SetAnswers(answers);
         Selected = null;

@@ -8,9 +8,10 @@ public class PauseLogic : MonoBehaviour {
 
 
     [SerializeField] GameObject pauseMenu;
-
+    SoundManager soundManager;
     void Start() {
         pauseMenu.SetActive(false);  // hide the pause menu at the start
+        soundManager = GameObject.FindGameObjectWithTag("sound").GetComponent<SoundManager>();
     }
 
     public static bool IsPaused { get; private set; } = false;
@@ -38,8 +39,8 @@ public class PauseLogic : MonoBehaviour {
 
     public void ReturnToStartScreen() {
         // returns back to the start screen
-
         Resume();   // resume the game first
+        soundManager.PlayMouseClickSE();
         SceneManager.LoadScene(startSceneName);  // load the actual scene
     }
 

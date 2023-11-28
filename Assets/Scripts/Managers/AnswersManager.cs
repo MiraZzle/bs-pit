@@ -8,24 +8,25 @@ public class AnswersManager : MonoBehaviour
     public GameObject AnswerPrefab;
     public GameObject Parent;
 
-    public SoundManager ButtonSoundManager;
-    public AudioClip Clip;
-
     public Action<Answer> Handler;
 
     private List<AnswerButton> _answers = new List<AnswerButton>();
     private VerticalLayoutGroup _alignment;
+    private SoundManager soundManager;
 
     // Start is called before the first frame update
-    void Start() { _alignment = GetComponent<VerticalLayoutGroup>(); }
+    void Start() { 
+        _alignment = GetComponent<VerticalLayoutGroup>();
+        soundManager = GameObject.FindGameObjectWithTag("sound").GetComponent<SoundManager>();
+    }
 
     public void Show() { Parent.SetActive(true); }
     public void Hide() { Parent.SetActive(false); }
 
-    public void SetAnswers(Answer[] answers)
+    public void SetAnswers(List<Answer> answers)
     {
         ClearAnswers();
-        for (int i = 0; i < answers.Length; i++)
+        for (int i = 0; i < answers.Count; i++)
         {
             _answers.Add(CreateAnswer(answers[i]));
         }
@@ -71,7 +72,7 @@ public class AnswersManager : MonoBehaviour
         answer.Ans = ans;
         answer.GetComponent<Button>().onClick.AddListener(() =>
                                                           {
-                                                              ButtonSoundManager.PlaySound(Clip);
+                                                              soundManager.PlayMouseClickSE();
                                                               Handler?.Invoke(ans);
                                                           });
 
