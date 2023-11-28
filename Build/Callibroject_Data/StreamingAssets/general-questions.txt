@@ -59,7 +59,7 @@ E Crime and Security
     N Budeme investovat do do modernizace policejních sil a zlepšíme spolupráci mezi jednotlivými částmi bezpečnostních složek.
     E We will invest in modernizing police forces and improve cooperation between security agencies.
     
-    N Budeme podporovat programy prevence kriminality a pracujeme na sociální integraci.
+    N Budeme podporovat programy prevence kriminality a sociální integrace.
     E We will support crime prevention programs and work on social integration.
     
     C 10 0 Zaměříme se kořeny kriminality, například chudobou a nedostatkem vzdělání, abychom snížili její základnu.
@@ -74,7 +74,7 @@ E Environment and Climate Change
     P Globální oteplování je pouze mýtus a planeta se o sebe postará sama!
     E Global warming is just a myth, and the planet will take care of itself!
 
-    N Budeme podporovat vědecký výzkum a technologické inovace na snížení emisí skleníkových plynů.
+    N Budeme podporovat vědecký výzkum a technologické inovace pro snížení emisí skleníkových plynů.
     E We will support scientific research and technological innovations to reduce greenhouse gas emissions.
 
     N Implementujeme postupné změny ve směrování průmyslu ke snížení jeho dopadu na životní prostředí.
@@ -209,7 +209,7 @@ E Science and Research
     C 10 10 Budeme investovat obrovské sumy peněz do Matfyzu a staneme se světovým lídrem ve vědeckých objevech!
     E We will invest massive amounts of money in the Faculty of Mathematics and Physics and become a global leader in scientific discoveries!
 
-    N Budeme podporovat financování klíčových výzkumných oblastí a zvyšujeme spolupráci mezi vědeckými institucemi.
+    N Budeme podporovat financování klíčových výzkumných oblastí a zvyšovat spolupráci mezi vědeckými institucemi.
     E We will support funding for key research areas and increase collaboration between scientific institutions.
 
     N Přezkoumáme stávající vědecké programy s cílem optimalizovat výzkumné zdroje.
