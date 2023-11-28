@@ -76,11 +76,9 @@ public class Dialog : MonoBehaviour
         Skip = false;
     }
 
-    void Awake()
-    {
+    void Awake() {
         _textBox = GetComponent<TMP_Text>();
-        if (dialogObj is null)
-        {
+        if (dialogObj is null) {
             dialogObj = gameObject;
         }
 

@@ -6,27 +6,34 @@ using UnityEngine;
 public class PlayerHoverLogic : MonoBehaviour
 {
     Candidate candidate;
-    TurnManager turnManager;
 
     private void Start() {
-        candidate = GetComponent<Candidate>();
-        turnManager = GameObject.FindGameObjectWithTag("logic").GetComponent<TurnManager>();
+        candidate = gameObject.GetComponent<Candidate>();
     }
 
+    private bool _shouldHide = false;
 
     private void OnMouseEnter() {
-        if (turnManager.IsDebating) {
+        _shouldHide = false;
+        if (TurnManager.IsDebating && !PauseLogic.IsPaused) {
             candidate.InfoCard.Show();
         }
     }
+
     private void OnMouseExit() {
-        if (turnManager.IsDebating) {
-            candidate.InfoCard.Hide();
+        if (TurnManager.IsDebating) {
+            _shouldHide = true;
         }
     }
 
     void Update()
     {
-        
+        if (candidate == null) {
+            Debug.Log("candidate je null");
+            return;
+        }
+        if (_shouldHide && !PauseLogic.IsPaused) {
+            candidate.InfoCard.Hide();
+        }
     }
 }

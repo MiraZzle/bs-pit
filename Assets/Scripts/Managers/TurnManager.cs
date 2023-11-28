@@ -40,11 +40,9 @@ public class TurnManager : MonoBehaviour
     private Button[] _cardSlots;
 
     bool _cardHandled = false;
+    public static bool IsDebating { get; private set; } = false;
 
     bool skipIntro = false;
-
-    public bool IsDebating { get; private set; } = false;
-
     void Start()
     {
         Debug.Log("TADY SE VOLA START");
@@ -148,8 +146,10 @@ public class TurnManager : MonoBehaviour
             // if this is the second turn of a general question, dont display it again
             if (question != lastQuestion) {
                 // if this is not the first question
-                if (lastQuestion is not null) spotlight.SetSpotlightModerator(true);
-                if (lastQuestion is not null) yield return new WaitForSeconds(ModeratorDelay);
+                if (lastQuestion is not null) {
+                    spotlight.SetSpotlightModerator(true);
+                    yield return new WaitForSeconds(ModeratorDelay);
+                }
 
                 questionManager.ShowQuestion(question, answers);
                 yield return new WaitUntil(() => !questionManager.IsActive);

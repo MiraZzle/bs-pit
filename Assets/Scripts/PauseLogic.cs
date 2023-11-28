@@ -13,12 +13,12 @@ public class PauseLogic : MonoBehaviour {
         pauseMenu.SetActive(false);  // hide the pause menu at the start
     }
 
-    bool isPaused = false;
+    public static bool IsPaused { get; private set; } = false;
 
     void Pause() {
         // pauses the game
 
-        isPaused = true;
+        IsPaused = true;
         AudioListener.pause = true;  // pause the music
         pauseMenu.SetActive(true);   // show the pause menu
         Time.timeScale = 0f;         // stop the flow of time 
@@ -27,7 +27,7 @@ public class PauseLogic : MonoBehaviour {
     void Resume() {
         // resumes the game
 
-        isPaused = false;
+        IsPaused = false;
         AudioListener.pause = false;  // resume the music
         pauseMenu.SetActive(false);   // hide the pause menu
         Time.timeScale = 1f;          // resume the flow of time
@@ -48,7 +48,7 @@ public class PauseLogic : MonoBehaviour {
         // shows / hides the pause menu upon pressing the space / escape keys 
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (isPaused) Resume();
+            if (IsPaused) Resume();
             else Pause();
         }
     }

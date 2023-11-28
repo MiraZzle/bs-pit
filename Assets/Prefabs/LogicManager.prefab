@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1896427506809761594}
   - component: {fileID: 2847148458029598246}
   - component: {fileID: 8523205865185438752}
-  - component: {fileID: 884012961169070208}
   m_Layer: 0
   m_Name: LogicManager
   m_TagString: logic
@@ -119,28 +118,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 0}
---- !u!114 &884012961169070208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4916542522409989472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 225900f0706403c5cae895f3eb437bfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questionManager: {fileID: 0}
-  debateManager: {fileID: 1896427506809761594}
-  cardManager: {fileID: 8907914535264565875}
-  moderatorDialog: {fileID: 0}
-  spotlight: {fileID: 0}
-  Player: {fileID: 0}
-  Enemy: {fileID: 0}
-  ModeratorDelay: 0.75
-  _cardSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
