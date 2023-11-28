@@ -556,6 +556,8 @@ MonoBehaviour:
   textMid: {fileID: 1841589486}
   textDown: {fileID: 817662227}
   textTitle: {fileID: 585847229}
+  trump: {fileID: 21300000, guid: 0d4d370048518a183bed688e8f7faf7f, type: 3}
+  kotleba: {fileID: 21300000, guid: 3ae79d25598aac7d7858466a40343882, type: 3}
 --- !u!82 &572344316
 AudioSource:
   m_ObjectHideFlags: 0
@@ -711,8 +713,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'DUEL: VOLBY 2025'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 90cd6182922dcad99aeef803bf99bed0, type: 2}
-  m_sharedMaterial: {fileID: 4364082702803214388, guid: 90cd6182922dcad99aeef803bf99bed0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
