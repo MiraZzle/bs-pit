@@ -9,6 +9,7 @@ using TMPro;
 public class EndSceneManager : MonoBehaviour {
     private TextMeshProUGUI nameCandidate;
     private TextMeshProUGUI textContinue;
+    private Image headCandidate;
     private float waitingTimeVideo = 4f;
 
     [SerializeField] private VideoPlayer player;
@@ -19,6 +20,9 @@ public class EndSceneManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI textDown;
     [SerializeField] private TextMeshProUGUI textTitle;
 
+    [SerializeField] private Sprite trump;
+    [SerializeField] private Sprite kotleba;
+
 
     void Start() {
         GameObject nameObj = GameObject.Find("nameCandidate");
@@ -26,6 +30,9 @@ public class EndSceneManager : MonoBehaviour {
 
         GameObject contObj = GameObject.Find("textContinue");
         textContinue = contObj.GetComponent<TextMeshProUGUI>();
+
+        GameObject headObj = GameObject.Find("headCandidate");
+        headCandidate = headObj.GetComponent<Image>();
 
         canvas.enabled = false;
         player.playOnAwake = true;
@@ -62,9 +69,12 @@ public class EndSceneManager : MonoBehaviour {
     private void DrawImage() {
         string language = PlayerPrefs.GetString("language");
         string name = PlayerPrefs.GetString("name");
+        string head = PlayerPrefs.GetString("head");
         int autenticita = PlayerPrefs.GetInt("autenticita");
         int volici = PlayerPrefs.GetInt("volici");
- 
+
+        headCandidate.sprite = (PlayerPrefs.GetString("head") == "trump") ? trump : kotleba;
+
         nameCandidate.text = name.ToUpper();
 
         if ((autenticita >= 50) && (volici >= 50)) {
