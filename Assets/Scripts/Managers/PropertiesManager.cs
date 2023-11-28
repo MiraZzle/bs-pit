@@ -186,7 +186,7 @@ public class PropertiesManager : MonoBehaviour
             ans2EN: "Everyone keeps talking about some alleged involvement, but no one can present any real evidence!",
             ans2CS: "Všichni pořád mluví o nějaké údajné účasti, ale nikdo nedokáže prezentovat žádné skutečné důkazy!",
             ans3EN: "I did attend such an event and after deep consideration, I admit it was a mistake.",
-            ans3CS: "Ano, byl jsem na této akci. Po hlubokém zvažování uznávám, že to byla chyba.");
+            ans3CS: "Ano, zúčastnil jsem se takové akce. Po hlubokém zvažování uznávám, že to byla chyba.");
 
         // commie
         CreateProperty(

@@ -42,6 +42,9 @@ public class TurnManager : MonoBehaviour
     bool _cardHandled = false;
 
     bool skipIntro = false;
+
+    public bool IsDebating { get; private set; } = false;
+
     void Start()
     {
         Debug.Log("TADY SE VOLA START");
@@ -57,6 +60,8 @@ public class TurnManager : MonoBehaviour
     bool PressedContinue() => Input.GetKeyDown(KeyCode.Space);
 
     IEnumerator IntroModeratorSpeech() {
+        IsDebating = false;
+
         yield return new WaitForSeconds(ModeratorDelay);
         spotlight.SetSpotlightModerator(true);
         yield return new WaitForSeconds(ModeratorDelay);
@@ -112,6 +117,8 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator GameLoop()
     {
+        IsDebating = true;
+
         // setup
         _availableCards = cardManager.GetRandomCards();
         debateManager.SetUpQuestions();
@@ -210,8 +217,10 @@ public class TurnManager : MonoBehaviour
         spotlight.SetSpotlightModerator(true);
         yield return new WaitForSeconds(ModeratorDelay);
 
+        IsDebating = false;
+
         //if (Player.Authenticity <= debateManager.MinAuthenticity || Enemy.Authenticity <= debateManager.MinAuthenticity) {
-            // nekoho vyhodime
+        // nekoho vyhodime
         //}
         //else {
             StartCoroutine(DebateOutro());

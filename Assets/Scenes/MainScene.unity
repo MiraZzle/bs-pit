@@ -415,6 +415,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3123899200216062918, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
     m_RemovedGameObjects: []
@@ -769,6 +797,46 @@ PrefabInstance:
       propertyPath: authenticityBarParent
       value: 
       objectReference: {fileID: 1158597093}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_Size.x
+      value: 7.1536813
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_Size.y
+      value: 6.7977886
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.08897281
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_Offset.y
+      value: 3.3988442
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4784,6 +4852,34 @@ PrefabInstance:
       propertyPath: authenticityBarParent
       value: 
       objectReference: {fileID: 951072565}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 6.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 6.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 6.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017909277400971337, guid: d7bc70863c8cc9b4c8b42e9b91fb4af6, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4863,11 +4959,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1264168054165851196, guid: c641e0070944e0e4089bc83ac7446201, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1264168054165851196, guid: c641e0070944e0e4089bc83ac7446201, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20.00001
       objectReference: {fileID: 0}
     - target: {fileID: 1264168054165851196, guid: c641e0070944e0e4089bc83ac7446201, type: 3}
       propertyPath: m_LocalPosition.x

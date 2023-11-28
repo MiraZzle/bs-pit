@@ -56,10 +56,10 @@ E Crime and Security
     P Vyhostíme všechny cizince, kteří jsou podezřelí z trestné činnosti, a tak zajistíme bezpečnost našich občanů!
     E We will deport all foreigners suspected of criminal activity to ensure the safety of our citizens!
     
-    N Investujeme do modernizace policejních sil a zlepšíme spolupráci mezi jednotlivými částmi bezpečnostních složek.
+    N Budeme investovat do do modernizace policejních sil a zlepšíme spolupráci mezi jednotlivými částmi bezpečnostních složek.
     E We will invest in modernizing police forces and improve cooperation between security agencies.
     
-    N Podporujeme programy prevence kriminality a pracujeme na sociální integraci.
+    N Budeme podporovat programy prevence kriminality a pracujeme na sociální integraci.
     E We will support crime prevention programs and work on social integration.
     
     C 10 0 Zaměříme se kořeny kriminality, například chudobou a nedostatkem vzdělání, abychom snížili její základnu.
@@ -107,7 +107,7 @@ END
 
 O Migrace a uprchlictví
 E Migration and Refugees
-    P Zavřeme naše hranice a ochráníme naši zemi před vetřelci a zločinci!
+    P Uzavřeme naše hranice a ochráníme naši zemi před vetřelci a zločinci!
     E We will close our borders and protect our country from invaders and criminals!
     
     P Zajistíme, aby naši občané měli vždy přednost před cizinci při přidělování pracovních a sociálních výhod!
@@ -206,10 +206,10 @@ E Science and Research
     P Snížíme investice do výzkumu a raději je rozdělíme mezi občany!
     E We will reduce investments in research and instead distribute them among citizens!
 
-    C 10 10 Investujeme obrovské sumy peněz do Matfyzu a staneme se světovým lídrem ve vědeckých objevech!
+    C 10 10 Budeme investovat obrovské sumy peněz do Matfyzu a staneme se světovým lídrem ve vědeckých objevech!
     E We will invest massive amounts of money in the Faculty of Mathematics and Physics and become a global leader in scientific discoveries!
 
-    N Podporujeme financování klíčových výzkumných oblastí a zvyšujeme spolupráci mezi vědeckými institucemi.
+    N Budeme podporovat financování klíčových výzkumných oblastí a zvyšujeme spolupráci mezi vědeckými institucemi.
     E We will support funding for key research areas and increase collaboration between scientific institutions.
 
     N Přezkoumáme stávající vědecké programy s cílem optimalizovat výzkumné zdroje.

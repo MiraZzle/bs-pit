@@ -69,7 +69,7 @@ public class DebateManager : MonoBehaviour {
         var _playerQuestions = QuestionLoader.GetQuestionsForCandidate(Player);
         var _enemyQuestions = QuestionLoader.GetQuestionsForCandidate(Enemy);
         var _finalQuestion = QuestionLoader.GetFinalQuestion();
-        _questions = new (Question, Candidate)[] { 
+        _questions = new (Question, Candidate)[] {
             // round 1
             (_generalQuestions[0], Player), (_generalQuestions[0], Enemy),
             (_playerQuestions[0], Player), (_enemyQuestions[0], Enemy),
@@ -80,6 +80,7 @@ public class DebateManager : MonoBehaviour {
             (_generalQuestions[2], Player), (_generalQuestions[2], Enemy),
             (_playerQuestions[2], Player), (_enemyQuestions[2], Enemy),
             (_generalQuestions[3], Player), (_generalQuestions[3], Enemy),
+            // final question 
             (_finalQuestion, Player), (_finalQuestion, Enemy)
         };
         _questionsInTotal = _questions.Length;
