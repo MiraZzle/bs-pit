@@ -196,6 +196,11 @@ public class TurnManager : MonoBehaviour
             spotlight.SetSpotlightEnemy(false);
             spotlight.SetSpotlightPlayer(false);
             lastQuestion = question;
+
+            if (candidate.Authenticity < debateManager.MinAuthenticity) {
+                // a lot of lying --> get thrown out
+                break;
+            } 
         }
 
         questionManager.HideAnswers();
@@ -206,16 +211,19 @@ public class TurnManager : MonoBehaviour
 
         IsDebating = false;
 
-        //if (Player.Authenticity <= debateManager.MinAuthenticity || Enemy.Authenticity <= debateManager.MinAuthenticity) {
-        // nekoho vyhodime
-        //}
-        //else {
-            StartCoroutine(DebateOutro());
-        //}
+        if (Player.Authenticity < debateManager.MinAuthenticity) {
+            StartCoroutine(KickOutOfDebateSpeech(Player));
+        }
+        else if (Enemy.Authenticity < debateManager.MinAuthenticity) {
+            StartCoroutine(KickOutOfDebateSpeech(Enemy));
+        }
+        else {
+            StartCoroutine(DebateOutro(kickedOut: false));
+        }
     }
 
-    IEnumerator DebateOutro() {
-        moderatorDialog.SetText(debateManager.GetOutroText());
+    IEnumerator DebateOutro(bool kickedOut) {
+        moderatorDialog.SetText(debateManager.GetOutroText(kickedOut));
         moderatorDialog.PlayText();
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
         yield return new WaitUntil(() => PressedContinue());
@@ -225,6 +233,16 @@ public class TurnManager : MonoBehaviour
         PlayerPrefs.SetInt("autenticita", debateManager.PlayerAuthenticity);
         PlayerPrefs.SetInt("volici", debateManager.PlayerVoters);
         SceneManager.LoadScene("EndScene");
+    }
+
+    IEnumerator KickOutOfDebateSpeech(Candidate candidate) {
+        moderatorDialog.SetText(debateManager.GetKickOutOfDebateText(candidate));
+        moderatorDialog.PlayText();
+        yield return new WaitUntil(() => !moderatorDialog.IsActive);
+        yield return new WaitUntil(() => PressedContinue());
+        moderatorDialog.Hide();
+
+        StartCoroutine(DebateOutro(kickedOut: true));
     }
 
     void Update() {

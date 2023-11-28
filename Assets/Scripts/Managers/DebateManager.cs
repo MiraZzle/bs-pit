@@ -27,7 +27,7 @@ public class DebateManager : MonoBehaviour {
 
     public int PlayerAuthenticity => Player.Authenticity;
     public int EnemyAuthenticity => Enemy.Authenticity;
-    public int MinAuthenticity => (int)0.15 * Candidate.MaxAuthenticity;
+    public int MinAuthenticity => (int)(0.15f * Candidate.MaxAuthenticity);
     public int PlayerVoters { get; private set; } = 50;
 
     private void ChangePlayerVoters(int deltaVolici) {
@@ -125,15 +125,21 @@ public class DebateManager : MonoBehaviour {
     public string GetKickOutOfDebateText(Candidate candidate) {
         string candidateLastName = candidate.Name.Split(' ')[1];
 
-        string textEN = "Mr " + candidateLastName + ", in this debate we stress the importance of transparency and the truthful presentation of information. Unfortunately, because of your repeated false and extremely populist statements, we have to exclude you from the debate. Thank you for your understanding and respect for the rules of this debate.";
-        string textCS = "Pane " + candidateLastName + ", v rámci této debaty zdůrazňujeme důležitost transparentnosti a pravdivé prezentace informací. Kvůli opakovaným nepravdivým a extrémně populistickým prohlášením vás bohužel musíme vyjmout z debaty. Děkujeme za pochopení a respektování pravidel této debaty.";
+        string textEN = "Mr " + candidateLastName + ", in this debate we stress the importance of transparency and the truthful presentation of information. Unfortunately, because of your repeated false and extremely populist statements, we have to exclude you from the debate.";
+        string textCS = "Pane " + candidateLastName + ", v rámci této debaty zdůrazňujeme důležitost transparentnosti a pravdivé prezentace informací. Kvůli opakovaným nepravdivým a extrémně populistickým prohlášením vás bohužel musíme vyjmout z debaty.";
         return (_language == "english") ? textEN : textCS;
 
     }
-    public string GetOutroText() {
-        string textEN = "Ladies and gentlemen, that's all from today's presidential debate. I would like to thank both candidates for their participation and their openness in discussing key issues for our country. We hope that this debate has answered your questions. Thank you for watching.";
-        string textCS = "Dámy a pánové, to je pro dnešní prezidentskou debatu vše. Chtěl bych poděkovat oběma kandidátům za jejich účast a otevřenost v diskusi o klíčových otázkách pro naši zemi. Doufáme, že vám tato debata odpověděla na vaše otázky. Děkujeme vám za sledování a přejeme šťastnou volbu.";
-        return (_language == "english") ? textEN : textCS;
+
+    public string GetOutroText(bool kickedOut) {
+        string textNormalEN = "Ladies and gentlemen, that's all from today's presidential debate. I would like to thank both candidates for their participation and their openness in discussing key issues for our country. We hope that this debate has answered your questions. Thank you for watching.";
+        string textNormalCS = "Dámy a pánové, to je pro dnešní prezidentskou debatu vše. Chtěl bych poděkovat oběma kandidátům za jejich účast a otevřenost v diskusi o klíčových otázkách pro naši zemi. Doufáme, že vám tato debata odpověděla na vaše otázky. Děkujeme vám za sledování a přejeme šťastnou volbu.";
+
+        string textKickOutEN = "Ladies and gentlemen, due to persistent misinformation, we regretfully end this debate early to uphold the integrity of our democratic process. We apologize for any inconvenience and urge viewers to seek accurate information for informed decision-making. Thank you for your understanding.";
+        string textKickOutCS = "Dámy a pánové, vzhledem k opakovaným dezinformacím bohužel musíme tuto rozpravu ukončit předčasně, abychom zachovali integritu demokratického hlasování. Omlouváme se za způsobené komplikace a děkujeme vám za pochopení.";
+
+        if (kickedOut) return (_language == "english") ? textKickOutEN : textKickOutCS;
+        else return (_language == "english") ? textNormalEN : textNormalCS;
     }
 
 
