@@ -163,7 +163,7 @@ public class PropertiesManager : MonoBehaviour
             int ans2Volici = Random.Range(3, 6);
             // admitting
             int ans3Autenticity = Random.Range(6, 9);
-            int ans3Volici = Random.Range(-5, -1);
+            int ans3Volici = Random.Range(-5, -2);
 
             List<Answer> answers
                 = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Populist),
@@ -268,8 +268,8 @@ public class PropertiesManager : MonoBehaviour
             descriptionCS: "Tento kandidát je podeželý z nelegálního financování politických stran, korupce a daňových podvodů.",
             questionEN: "How would you explain the recent allegations of tax fraud and corruption concerning you?",
             questionCS: "Jak byste vysvětlil nedávná obvinění z daňových podvodů a korupce, které se vás týkají?",
-            ans1EN: "It's a campaign, I'm a victim of political intrigue and my finances are fully transparent!",
-            ans1CS: "Je to kampaň, jsem obětí politických intrik a mé finance jsou plně transparentní!",
+            ans1EN: "It's a campaign! I'm a victim of political intrigue and my finances are fully transparent!",
+            ans1CS: "Je to kampaň! Jsem obětí politických intrik a mé finance jsou plně transparentní!",
             ans2EN: "The tax charges are very serious. I am prepared to cooperate with the tax authorities and prove my innocence.",
             ans2CS: "Daňová obvinění jsou velmi vážná. Jsem připraven spolupracovat s daňovými úřady a prokázat svoji nevinu.",
             ans3EN: "And why should I tell you all my income? Sorry duh.",

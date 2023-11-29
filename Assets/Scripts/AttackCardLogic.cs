@@ -90,9 +90,12 @@ public class AttackCardLogic : MonoBehaviour
         _stampAnimation = true;
         soundManager.PlayStampSE();
         yield return new WaitUntil(() => !_stampAnimation);
-        yield return new WaitUntil(() => PressedContinue());
+        //yield return new WaitUntil(() => PressedContinue());
+
+        yield return new WaitForSeconds(3 * animationDelay);
         HideCard();
         debateManager.UpdateAuthenticityAndVoters(_card, playerWon);
+        yield return new WaitForSeconds(3 * animationDelay);
 
         attackCard.transform.position = originalCardPositon;
         HandleCard();

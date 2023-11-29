@@ -61,8 +61,8 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.SetText(debateManager.GetIntroText());
         moderatorDialog.PlayText();
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
-        yield return new WaitUntil(() => PressedContinue());
-
+        //yield return new WaitUntil(() => PressedContinue());
+        yield return new WaitForSeconds(ModeratorDelay);
         moderatorDialog.Hide();
 
         spotlight.SetSpotlightPlayer(true);
@@ -71,7 +71,8 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.SetText(debateManager.GetPlayerIntroText());
         moderatorDialog.PlayText();
         yield return new WaitWhile(() => moderatorDialog.IsActive);
-        yield return new WaitUntil(() => PressedContinue());
+        //yield return new WaitUntil(() => PressedContinue());
+        yield return new WaitForSeconds(ModeratorDelay);
         moderatorDialog.Hide();
 
         yield return new WaitForSeconds(ModeratorDelay);
@@ -87,7 +88,8 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.SetText(debateManager.GetEnemyIntroText());
         moderatorDialog.PlayText();
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
-        yield return new WaitUntil(() => PressedContinue());
+        //yield return new WaitUntil(() => PressedContinue());
+        yield return new WaitForSeconds(ModeratorDelay);
         moderatorDialog.Hide();
 
         yield return new WaitForSeconds(ModeratorDelay);
@@ -100,9 +102,10 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.SetText(debateManager.GetStartQuestionsIntroText());
         moderatorDialog.PlayText();
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
-        yield return new WaitUntil(() => PressedContinue());
+        yield return new WaitForSeconds(ModeratorDelay);
+        //yield return new WaitUntil(() => PressedContinue());
         moderatorDialog.Hide();
-        yield return new WaitForSeconds(1.5f*ModeratorDelay);
+        yield return new WaitForSeconds(ModeratorDelay);
         
         StartCoroutine(GameLoop());
     }
@@ -115,6 +118,7 @@ public class TurnManager : MonoBehaviour
         debateManager.SetUpQuestions();
         cardManager.SetUpRandomCards();
         debateManager.ShowBars();
+        yield return new WaitForSeconds(ModeratorDelay);
 
         Question? lastQuestion = null;
         // ask questions
@@ -178,8 +182,8 @@ public class TurnManager : MonoBehaviour
 
             if (candidate == Enemy && debateManager.ShouldShowCards)
             {
-                yield return new WaitForSeconds(ModeratorDelay);
                 debateManager.ProcessAnswer(selectedAnswer);
+                yield return new WaitForSeconds(ModeratorDelay);
 
                 _cardHandled = false;
                 cardManager.ShowCards();
@@ -187,8 +191,9 @@ public class TurnManager : MonoBehaviour
                 cardManager.HideCards();
             }
             else {
-                yield return new WaitUntil(() => PressedContinue());
+                //yield return new WaitUntil(() => PressedContinue());
                 debateManager.ProcessAnswer(selectedAnswer);
+                yield return new WaitForSeconds(ModeratorDelay);
             }
 
 
@@ -227,8 +232,12 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.SetText(debateManager.GetOutroText(kickedOut));
         moderatorDialog.PlayText();
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
-        yield return new WaitUntil(() => PressedContinue());
+        //yield return new WaitUntil(() => PressedContinue());
         moderatorDialog.Hide();
+        debateManager.HideBars();
+        yield return new WaitForSeconds(ModeratorDelay);
+        spotlight.SetSpotlightModerator(false);
+        yield return new WaitForSeconds(1.5f*ModeratorDelay);
 
         // save results and load end scene
         SetPlayerPrefs();
@@ -239,7 +248,8 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.SetText(debateManager.GetKickOutOfDebateText(candidate));
         moderatorDialog.PlayText();
         yield return new WaitUntil(() => !moderatorDialog.IsActive);
-        yield return new WaitUntil(() => PressedContinue());
+        yield return new WaitForSeconds(ModeratorDelay);
+        //yield return new WaitUntil(() => PressedContinue());
         moderatorDialog.Hide();
 
         StartCoroutine(DebateOutro(kickedOut: true));

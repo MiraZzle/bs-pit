@@ -18,7 +18,7 @@ public class Candidate : MonoBehaviour {
     public void ShowAuthenticityBar() {
         authenticityBarParent.SetActive(true);
     }
-    private void HideAuthenticityBar() {
+    public void HideAuthenticityBar() {
         authenticityBarParent.SetActive(false);
     }
 

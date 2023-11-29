@@ -66,6 +66,11 @@ public class DebateManager : MonoBehaviour {
         _enemy.ShowAuthenticityBar();
     }
 
+    public void HideBars() {
+        HideVotingBar();
+        _player.HideAuthenticityBar();
+        _enemy.HideAuthenticityBar();
+    }
 
     public void SetUpQuestions() {
         var _generalQuestions = QuestionLoader.GetRandomQuestions();

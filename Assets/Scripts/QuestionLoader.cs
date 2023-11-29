@@ -298,7 +298,7 @@ public class QuestionLoader : MonoBehaviour
             "V této náročné době je důležitější než kdy jindy, abychom se jako národ spojili. I přes naše rozdíly máme společný cíl - lepší budoucnost pro Callibristán.",
             "Věřím, že dnešní večer ukázal sílu naší vize pro tento národ. Jsem přesvědčen, že s vaší podporou můžeme dosáhnout pozitivních změn pro všechny naše občany.",
             "Bez ohledu na vaši politickou příslušnost vyzývám každého, aby se voleb zúčastnil. Na vašem hlase záleží a společně můžeme utvářet budoucnost našeho národa.",
-            "Tato debata je jen jedním z kroků na dlouhé cestě. Těším se na nadcházející příležitosti, kdy budu moci opět navázat kontakt s voliči."
+            "Tato debata je jen jedním z kroků na dlouhé cestě. Těším se na nadcházející příležitosti, kdy budu moci opět navázat kontakt se svými voliči."
         };
 
         List<Answer> answers = new();
