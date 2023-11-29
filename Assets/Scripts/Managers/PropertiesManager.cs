@@ -220,7 +220,7 @@ public class PropertiesManager : MonoBehaviour
             ans1EN: "These are lies spread by my political rivals! I am an honest politician and have always served my constituents with the best of intentions.",
             ans1CS: "To jsou lži šířené moji politickou konkurencí! Jsem čestný politik a vždy jsem sloužil svým voličům s nejlepším záměrem.",
             ans2EN: "All allegations of corruption are serious and must be thoroughly investigated. I believe in an independent investigation and a fair trial.",
-            ans2CS: "Všechna obvinění z korupce jsou vážné a musí být důkladně vyšetřeny. Věřím v nezávislé vyšetřování a spravedlivý soudní proces.",
+            ans2CS: "Všechna obvinění z korupce jsou vážn8 a musí být důkladně vyšetřena. Věřím v nezávislé vyšetřování a spravedlivý soudní proces.",
             ans3EN: "Of course, I have indeed accepted bribes. I'm a politician, that's my paycheck.",
             ans3CS: "Skutečně jsem v minulosti přijmul úplatky. Vždyť jsem politik, to je moje výplata.");
 

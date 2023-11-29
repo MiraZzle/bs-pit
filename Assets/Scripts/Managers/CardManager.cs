@@ -87,25 +87,38 @@ public class CardManager : MonoBehaviour {
     }
 
     public void HideCards() {
-        pressSpaceToContinue.gameObject.SetActive(false);
+        HideHelp();
         foreach (var card in gameObjectCards) {
             card.HideCard();
         }
     }
     public void HideAllCardsExcept(AttackCardLogic cardToStay) {
-        pressSpaceToContinue.gameObject.SetActive(false);
+        HideHelp();
         foreach (var card in gameObjectCards) {
             if (card == cardToStay) continue;
             card.HideCard();
         }
     }
 
+    bool _showHelp = false;
+    void ShowHelp() {
+        if (_showHelp) pressSpaceToContinue.gameObject.SetActive(true);
+    }
+
+    void HideHelp() {
+        _showHelp = false;
+        pressSpaceToContinue.gameObject.SetActive(false);
+    }
+
     public void ShowCards() {
-        pressSpaceToContinue.gameObject.SetActive(true);
+        _showHelp = true;
+        Invoke("ShowHelp", 0.7f);
         foreach (var card in gameObjectCards) {
             card.ShowCard();
         }
     }
+
+    
 
 
     void Awake()

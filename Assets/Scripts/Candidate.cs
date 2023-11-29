@@ -54,9 +54,6 @@ public class Candidate : MonoBehaviour {
 
     public void ChangeAuthenticity(int deltaAuthenticity) {
         Authenticity = Mathf.Clamp(Authenticity + deltaAuthenticity, 0, MaxAuthenticity);
-        Debug.Log(Authenticity);
-
-        //UpdateAuthenticityBar();
     }
 
     private static List<string> _usedStrings = new(); 

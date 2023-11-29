@@ -1856,6 +1856,7 @@ MonoBehaviour:
   MasteryName: {fileID: 4753384699356043568}
   Positives: {fileID: 8693772033819317131}
   Negatives: {fileID: 2980813882130506340}
+  pressSpaceToContinue: {fileID: 6535651509546519224}
 --- !u!1 &8853820369807255036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1998,9 +1999,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3439870512028210378}
     m_Modifications:
+    - target: {fileID: 1019600965787279492, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
+      propertyPath: m_fontSize
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019600965787279492, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 4780228904238011114, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
       propertyPath: m_Name
       value: Help
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780228904238011114, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6956993835674201412, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
       propertyPath: m_Pivot.x
@@ -2092,3 +2105,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6956993835674201412, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
   m_PrefabInstance: {fileID: 6094801613147433532}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6535651509546519224 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1019600965787279492, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
+  m_PrefabInstance: {fileID: 6094801613147433532}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

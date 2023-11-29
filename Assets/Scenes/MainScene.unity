@@ -4888,6 +4888,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Press Space to Continue
       objectReference: {fileID: 0}
+    - target: {fileID: 1019600965787279492, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019600965787279492, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4780228904238011114, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
       propertyPath: m_Name
       value: Help
@@ -4958,11 +4966,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6956993835674201412, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 9.2
       objectReference: {fileID: 0}
     - target: {fileID: 6956993835674201412, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -527
+      value: -521
       objectReference: {fileID: 0}
     - target: {fileID: 6956993835674201412, guid: 2277019a1bbc8df48a2a94eecfa5abb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

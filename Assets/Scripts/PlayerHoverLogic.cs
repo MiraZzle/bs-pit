@@ -17,6 +17,7 @@ public class PlayerHoverLogic : MonoBehaviour
         _shouldHide = false;
         if (TurnManager.IsDebating && !PauseLogic.IsPaused) {
             candidate.InfoCard.Show();
+            candidate.InfoCard.HidePressSpaceToContinue();
         }
     }
 

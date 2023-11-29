@@ -15,6 +15,7 @@ public class CharacterInfoCard : MonoBehaviour
     public TMP_Text MasteryName;
     public TMP_Text Positives;
     public TMP_Text Negatives;
+    [SerializeField] TMP_Text pressSpaceToContinue;
 
     public event Action OnClose;
 
@@ -22,6 +23,8 @@ public class CharacterInfoCard : MonoBehaviour
 
     public void Show()
     {
+        _showHelp = true;
+        Invoke("ShowHelp", 0.7f);
         gameObject.SetActive(true);
         IsOpen = true;
     }
@@ -29,6 +32,16 @@ public class CharacterInfoCard : MonoBehaviour
     {
         gameObject.SetActive(false);
         IsOpen = false;
+    }
+
+    bool _showHelp = false;
+    void ShowHelp() {
+        if (_showHelp) pressSpaceToContinue.gameObject.SetActive(true);
+    }
+
+    public void HidePressSpaceToContinue() {
+        _showHelp = false;
+        pressSpaceToContinue.gameObject.SetActive(false);
     }
 
     void Update()
