@@ -165,13 +165,7 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(ModeratorDelay);
 
                 // pick a random answer
-                for (int i = 0; i < answers.Count; i++) {
-                    Debug.Log("Pred Shuffle: " + answers[i].Text);
-                }
                 answers.Shuffle();
-                for (int i = 0; i < answers.Count; i++) {
-                    Debug.Log("Po Shuffle: " + answers[i].Text);
-                }
                 selectedAnswer = answers[0];
             }
 
