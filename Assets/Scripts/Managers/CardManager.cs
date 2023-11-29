@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum CardType
 {
@@ -71,6 +73,8 @@ public class CardManager : MonoBehaviour {
 
     [SerializeField]
     AttackCardLogic[] gameObjectCards = new AttackCardLogic[NumCards];
+    [SerializeField]
+    TMP_Text pressSpaceToContinue;
 
     public void SetUpRandomCards()
     {
@@ -83,18 +87,21 @@ public class CardManager : MonoBehaviour {
     }
 
     public void HideCards() {
+        pressSpaceToContinue.gameObject.SetActive(false);
         foreach (var card in gameObjectCards) {
             card.HideCard();
         }
     }
     public void HideAllCardsExcept(AttackCardLogic cardToStay) {
-        foreach(var card in gameObjectCards) {
+        pressSpaceToContinue.gameObject.SetActive(false);
+        foreach (var card in gameObjectCards) {
             if (card == cardToStay) continue;
             card.HideCard();
         }
     }
 
     public void ShowCards() {
+        pressSpaceToContinue.gameObject.SetActive(true);
         foreach (var card in gameObjectCards) {
             card.ShowCard();
         }

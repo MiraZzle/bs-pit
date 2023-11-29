@@ -23,6 +23,8 @@ public class EndSceneManager : MonoBehaviour {
     [SerializeField] private Sprite enemyHead;
 
     [SerializeField] private GameObject redCross;
+    [SerializeField]
+    TMP_Text pressSpaceToContinue;
 
     string _language;
     bool _canContinue;
@@ -45,7 +47,6 @@ public class EndSceneManager : MonoBehaviour {
         StartCoroutine(waitForVideoPause());
 
         DrawImage();
-
     }
 
     void Update() {
@@ -64,8 +65,9 @@ public class EndSceneManager : MonoBehaviour {
         newspaper.enabled = true;
 
         // dont allow the player to skip the newspaper immediately
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         _canContinue = true;
+        pressSpaceToContinue.gameObject.SetActive(true);
     }
 
     
