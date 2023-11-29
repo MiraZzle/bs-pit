@@ -163,7 +163,7 @@ public class PropertiesManager : MonoBehaviour
             int ans2Volici = Random.Range(3, 6);
             // admitting
             int ans3Autenticity = Random.Range(6, 9);
-            int ans3Volici = Random.Range(-5, 0);
+            int ans3Volici = Random.Range(-5, -1);
 
             List<Answer> answers
                 = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Populist),
