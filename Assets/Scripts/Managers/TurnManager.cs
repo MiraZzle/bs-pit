@@ -197,7 +197,8 @@ public class TurnManager : MonoBehaviour
             spotlight.SetSpotlightPlayer(false);
             lastQuestion = question;
 
-            if (candidate.Authenticity < debateManager.MinAuthenticity) {
+            // this can not be just candidate.Authenticity - if player used a card that was denied, it wouldnt count here
+            if (Player.Authenticity < debateManager.MinAuthenticity || Enemy.Authenticity < debateManager.MinAuthenticity) {
                 // a lot of lying --> get kicked out
                 break;
             } 

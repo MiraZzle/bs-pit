@@ -9,10 +9,10 @@ using TMPro;
 public class EndSceneManager : MonoBehaviour {
     private TextMeshProUGUI nameCandidate;
     private Image headCandidate;
-    private float waitingTimeVideo = 4f;
+    private const float _waitingTimeVideo = 5f;   // if this is change then the fade in animation has to be changed as well
 
-    [SerializeField] private VideoPlayer player;
-    [SerializeField] private Canvas canvas;
+    [SerializeField] private VideoPlayer videoPlayer;
+    [SerializeField] private Canvas newspaper;
 
     [SerializeField] private TextMeshProUGUI textUp;
     [SerializeField] private TextMeshProUGUI textMid;
@@ -25,6 +25,7 @@ public class EndSceneManager : MonoBehaviour {
     [SerializeField] private GameObject redCross;
 
     string _language;
+    bool _canContinue;
 
     void Start() {
         GameObject nameObj = GameObject.Find("nameCandidate");
@@ -35,11 +36,12 @@ public class EndSceneManager : MonoBehaviour {
 
         _language = PlayerPrefs.GetString("language");
 
-        canvas.enabled = false;
-        player.playOnAwake = true;
+        newspaper.enabled = false;
+        videoPlayer.playOnAwake = true;
 
-        player.Prepare();
-        player.Play();
+        _canContinue = false;
+        videoPlayer.Prepare();
+        videoPlayer.Play();
         StartCoroutine(waitForVideoPause());
 
         DrawImage();
@@ -47,17 +49,23 @@ public class EndSceneManager : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _canContinue) {
             SceneManager.LoadScene("StartScene");
+        }
     }
 
 
 
     IEnumerator waitForVideoPause() {
-        yield return new WaitForSeconds(waitingTimeVideo);  // ceka 4 sekundy
-        player.Pause();
-        player.enabled = false;
-        canvas.enabled = true;
+        yield return new WaitForSeconds(_waitingTimeVideo);  // wait for the video to play
+        // stop the rest of the video and show the newspaper
+        videoPlayer.Pause();
+        videoPlayer.enabled = false;
+        newspaper.enabled = true;
+
+        // dont allow the player to skip the newspaper immediately
+        yield return new WaitForSeconds(0.5f);
+        _canContinue = true;
     }
 
     
