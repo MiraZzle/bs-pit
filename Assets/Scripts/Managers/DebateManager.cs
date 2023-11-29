@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
+using Random = UnityEngine.Random;
 
 #nullable enable
 
@@ -186,11 +189,29 @@ public class DebateManager : MonoBehaviour {
         float probabilityMultiplier = 1f;
         float powerMultiplier = 1f;
 
+        bool AnswerIsCommie() {
+            string[] commieStrings = new string[] {
+                "Obnovíme komunismus", "obnovíme komunismus", "restore communism", "Restore communism"
+            };
+
+            foreach (string commieString in commieStrings) {
+                if (_lastAnswer.Text.Contains(commieString)) return true;
+            }
+            return false;
+        } 
+
         void SetProbabilityAndMultiplier()
         {
             // general question
             if (_lastQuestion.Type == QuestionType.General)
             {
+                // special case for commie card and a commie answer by the enemy
+                if (card.Type == CardType.Commie && AnswerIsCommie()) {
+                    probabilityMultiplier = 3f;
+                    powerMultiplier = 1f;
+                    return;
+                }
+
                 probabilityMultiplier = 1f;
                 powerMultiplier = 0.65f;
                 return;

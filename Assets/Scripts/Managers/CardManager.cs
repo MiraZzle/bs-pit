@@ -21,16 +21,16 @@ public class Card
     public int LoserAuthenticityDelta { get; private set; }
     public Sprite Sprite { get; private set; }
 
-    private CardType _type;
+    public CardType Type { get; private set; }
     public Card(Sprite sprite, CardType type, int voliciDelta = 10, int authenticityDelta = -10)
     {
         Sprite = sprite;
-        _type = type;
+        Type = type;
         WinnerVoliciDelta = voliciDelta;
         LoserAuthenticityDelta = authenticityDelta;
     }
 
-    public bool IsRelevantToProperty(PropertyType property) => _relevantProperties[(int)_type].Contains(property);
+    public bool IsRelevantToProperty(PropertyType property) => _relevantProperties[(int)Type].Contains(property);
 
     // pole, kde je pro kazdy typ karty seznam relevantnich vlastnosti
     static List<PropertyType>[] _relevantProperties = new List<PropertyType>[Enum.GetNames(typeof(CardType)).Length];
