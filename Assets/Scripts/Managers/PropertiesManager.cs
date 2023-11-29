@@ -319,6 +319,11 @@ public class PropertiesManager : MonoBehaviour
 
         // Random bad
         _properties.Add(new Property(PropertyType.Random, "Kicked a kitty", "Nakopnul koťátko", isGood: false));
+        // DONT ADD ANOTHER BAD ONES
+        // the function that picks the properties for candidates just takes 3 random bad
+        // if another one without a question is added --> there might be 3 properties but just 1 with a question
+        // the moderator NEEDS to ask about 2 bad properties (+ the special skill)
+        // so if another bad property without question is added, the function for picking properties has to be changed
 
         // Random good
         _properties.Add(new Property(PropertyType.Random, "Diplomatic", "Diplomat", isGood: true));

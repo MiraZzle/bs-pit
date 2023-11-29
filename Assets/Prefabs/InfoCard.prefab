@@ -1726,7 +1726,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 2.966095, y: 0.00023651123, z: 11.036652, w: 0}
+  m_margin: {x: 3.3697357, y: -1.6142845, z: 13.154205, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1766,7 +1766,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 131.49, y: 182.3}
+  m_AnchoredPosition: {x: 131.49, y: 181.1}
   m_SizeDelta: {x: 313.2094, y: 28.4769}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8202851847577005777
@@ -1797,7 +1797,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Kuciak
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 85165380759be774eb09eabaf89568de, type: 2}
   m_sharedMaterial: {fileID: 1611787339465682556, guid: 85165380759be774eb09eabaf89568de, type: 2}
@@ -1832,7 +1832,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 17
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

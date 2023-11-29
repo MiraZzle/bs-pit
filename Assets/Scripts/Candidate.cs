@@ -54,7 +54,9 @@ public class Candidate : MonoBehaviour {
 
     public void ChangeAuthenticity(int deltaAuthenticity) {
         Authenticity = Mathf.Clamp(Authenticity + deltaAuthenticity, 0, MaxAuthenticity);
-        UpdateAuthenticityBar();
+        Debug.Log(Authenticity);
+
+        //UpdateAuthenticityBar();
     }
 
     private static List<string> _usedStrings = new(); 
@@ -172,10 +174,28 @@ public class Candidate : MonoBehaviour {
         return result.Substring(0, result.Length);
     }
 
-    void Start()
+    private void Start()
     {
         GenerateNewCandidate();
         UpdateAuthenticityBar();
         HideAuthenticityBar();
+    }
+
+    private void Update() {
+        float updateSpeed = 4f / (float)MaxAuthenticity;  // 4 % per second
+
+        float currentFillAmount = authenticityBar.fillAmount;
+        float desiredFillAmount = (float)Authenticity / (float)MaxAuthenticity;
+        float dist = updateSpeed * Time.deltaTime;
+
+        float newFillAmount = currentFillAmount;
+        if (Mathf.Abs(desiredFillAmount - currentFillAmount) <= dist) {
+            newFillAmount = desiredFillAmount;
+        }
+        else {
+            newFillAmount += (desiredFillAmount > currentFillAmount) ? dist : -dist;
+        }
+
+        authenticityBar.fillAmount = newFillAmount;
     }
 }
