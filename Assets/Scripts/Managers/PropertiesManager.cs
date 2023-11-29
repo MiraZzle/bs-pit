@@ -134,7 +134,7 @@ public class PropertiesManager : MonoBehaviour
         {
             // populist
             int ans1Autenticity = Random.Range(-10, -7);
-            int ans1Volici = Random.Range(7, 10);
+            int ans1Volici = -ans1Autenticity;
             // avoiding
             int ans2Autenticity = Random.Range(-2, 2);
             int ans2Volici = Random.Range(3, 6);
