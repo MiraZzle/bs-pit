@@ -73,7 +73,7 @@ public class Candidate : MonoBehaviour {
             "Hal Jalikee", "Jestin Jesterson", "Justin Time", "Drew Peacock",
         };
 
-        int minAge = 26;
+        int minAge = 30;
         int maxAge = 80;
 
         string[] biosCS = {

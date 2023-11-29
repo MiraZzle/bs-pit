@@ -243,7 +243,7 @@ public class PropertiesManager : MonoBehaviour
             ans1EN: "These are absurd accusations! I'm a politician, not a thief. This story is being spread only to discredit me.",
             ans1CS: "To jsou absurdní obvinění! Jsem politik, ne zloděj. Tato příběh se šíří pouze proto, abych byl diskreditován.",
             ans2EN: "Stories of pen theft surprise me, of course. It's important to keep a cool head and not form opinions based on unverified information.",
-            ans2CS: "Příběhy o krádeži pera mě samozřejmě překvapují. Je důležité zachovat chladnou hlavu a nezaujímat názory na základě neověřených informací.",
+            ans2CS: "Příběhy o krádeži pera mě samozřejmě překvapují. Je důležité zachovat chladnou hlavu a nepřejímat názory na základě neověřených informací.",
             ans3EN: "Yes, I stole that protocol pen. It was a nice gold trimmed one, and that's irresistible to a kleptomaniac like me.",
             ans3CS: "Ano ukradl jsem to protokolární pero. Bylo hezky zlatě zdobené a to je pro kleptomana jako jsem já neodolatelné.");
 
