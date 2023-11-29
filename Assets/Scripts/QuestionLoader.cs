@@ -1,6 +1,7 @@
 ﻿// Ignore Spelling: Volici
 #nullable enable
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -19,14 +20,16 @@ public enum AnswerType
 
 static class MyExtensions
 {
-    public static void Shuffle<T>(this IList<T> list)
-    {
-        int n = list.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = Random.Range(0, n);
-            (list[k], list[n]) = (list[n], list[k]);
+    public static void Shuffle<T>(this IList<T> list) {
+        double[] key = new double[list.Count];
+        for (int i = 0; i < key.Length; i++) {
+            key[i] = Random.Range(0f, 1f);
+        }
+
+        T[] array = list.ToArray();
+        Array.Sort(key, array);
+        for (int i = 0; i < list.Count; i++) {
+            list[i] = array[i];
         }
     }
 }

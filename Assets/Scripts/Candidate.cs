@@ -61,10 +61,10 @@ public class Candidate : MonoBehaviour {
     public void SetRandomInfo()
     {
         string[] firstNamesCS
-            = { "Kazisvět", "Radovan", "Honimír", "Horymír", "Spytihněv", "Kazimír", "Dobromír", "Mečislav" };
+            = { "Kazisvět", "Honimír", "Horymír", "Spytihněv", "Kazimír", "Dobromír", "Mečislav" };
 
         string[] lastNamesCS
-            = { "Dobrotivý", "Milosrdný", "Spravedlivý", "Laskavý", "Dobrosrdečný", "Zlobivý", "Urputný" };
+            = { "Dobrotivý", "Milosrdný", "Spravedlivý", "Laskavý", "Zlobivý", "Urputný" };
 
         string[] namesEN = {
             "Ben Dover",   "Whimsy McSnicker", "Barb Dwyer",
@@ -75,15 +75,15 @@ public class Candidate : MonoBehaviour {
         int maxAge = 80;
 
         string[] biosCS = {
-            "Expert na rychlé rozhodování a ještě rychlejší kafe. Slogan kampaně: 'Jeden espresso, jedna země, jednoznačné rozhodnutí!'",
-            "Bývalý mistr v česání medvědů, nyní se snaží česat politické problémy. Jeho motto: 'Hladce od medvědů k zákonům!'",
+            "Expert na rychlé rozhodování a ještě rychlejší kafe. Slogan kampaně: „Jeden espresso, jedna země, jednoznačné rozhodnutí!“",
+            "Bývalý mistr v česání medvědů, nyní se snaží česat politické problémy. Jeho motto: „Hladce od medvědů k zákonům!“",
             "Přináší nový pohled na politiku, protože se vždy snažil vidět věci z výšky - doslova, byl totiž druhým nejvyšším chlapec ve své třídě.",
             "Jediný kandidát, který dokáže rozpoznat 50 odstínů šedi v politických jednáních a zároveň uvařit skvělý guláš.",
             "Jeho zkušenosti s vyjednáváním začaly u stolu s rodiči o prodloužení večerního vysílání, nyní se s nimi snaží vyjednat novou budoucnost Callibristánu.",
             "Má nejlepší smysl pro humor v politice - každý jeho projev začíná vtipem a končí aplausem.",
             "Jeho hlavní politická strategie je postavena na dvou pilířích: pravidelná koupel v pramenité vodě a každodenní poslech 'Eye of the Tiger' při cvičení.",
             "Pracoval jako detektiv na odhalování tajných vzkazů ve školních poznámkách. Teď se věnuje odhalování skrytých potřeb národa.",
-            "Bývalý mistr ve střelbě ze squashe, teď zamířil svou přesnost k politickým cílům. Jeho heslo: 'Zásah do srdce problému!'",
+            "Bývalý mistr ve střelbě ze squashe, teď zamířil svou přesnost k politickým cílům. Jeho heslo: „Zásah do srdce problému!“",
             "Pracoval jako detektiv na odhalování tajných vzkazů ve školních poznámkách. Teď se věnuje odhalování skrytých potřeb národa.",
         };
 

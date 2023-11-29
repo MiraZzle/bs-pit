@@ -165,7 +165,13 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(ModeratorDelay);
 
                 // pick a random answer
+                for (int i = 0; i < answers.Count; i++) {
+                    Debug.Log("Pred Shuffle: " + answers[i].Text);
+                }
                 answers.Shuffle();
+                for (int i = 0; i < answers.Count; i++) {
+                    Debug.Log("Po Shuffle: " + answers[i].Text);
+                }
                 selectedAnswer = answers[0];
             }
 
@@ -176,7 +182,7 @@ public class TurnManager : MonoBehaviour
 
             yield return new WaitUntil(() => !candidate.DialogBox.IsActive);
 
-            if (candidate == debateManager.Enemy && debateManager.ShouldShowCards)
+            if (candidate == Enemy && debateManager.ShouldShowCards)
             {
                 yield return new WaitForSeconds(ModeratorDelay);
                 debateManager.ProcessAnswer(selectedAnswer);
@@ -198,7 +204,7 @@ public class TurnManager : MonoBehaviour
             lastQuestion = question;
 
             if (candidate.Authenticity < debateManager.MinAuthenticity) {
-                // a lot of lying --> get thrown out
+                // a lot of lying --> get kicked out
                 break;
             } 
         }
@@ -230,8 +236,7 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.Hide();
 
         // save results and load end scene
-        PlayerPrefs.SetInt("autenticita", debateManager.PlayerAuthenticity);
-        PlayerPrefs.SetInt("volici", debateManager.PlayerVoters);
+        SetPlayerPrefs();
         SceneManager.LoadScene("EndScene");
     }
 
@@ -243,6 +248,17 @@ public class TurnManager : MonoBehaviour
         moderatorDialog.Hide();
 
         StartCoroutine(DebateOutro(kickedOut: true));
+    }
+
+    void SetPlayerPrefs() {
+        PlayerPrefs.SetString("playerName", Player.Name);
+        PlayerPrefs.SetString("enemyName", Enemy.Name);
+
+        PlayerPrefs.SetInt("playerAuthenticity", Player.Authenticity);
+        PlayerPrefs.SetInt("enemyAuthenticity", Enemy.Authenticity);
+        PlayerPrefs.SetInt("minAuthenticity", debateManager.MinAuthenticity);
+
+        PlayerPrefs.SetInt("playerVoters", debateManager.PlayerVoters);
     }
 
     void Update() {

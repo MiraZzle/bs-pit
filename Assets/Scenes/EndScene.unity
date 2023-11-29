@@ -298,10 +298,11 @@ RectTransform:
   m_Children:
   - {fileID: 771361059}
   - {fileID: 1077878992}
+  - {fileID: 734888386}
   - {fileID: 1841589485}
   - {fileID: 817662226}
-  - {fileID: 734888386}
   - {fileID: 585847228}
+  - {fileID: 915055083}
   m_Father: {fileID: 2016469699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -454,7 +455,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3d8d62f4b5424287d8e408f751b94bf9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -556,8 +557,9 @@ MonoBehaviour:
   textMid: {fileID: 1841589486}
   textDown: {fileID: 817662227}
   textTitle: {fileID: 585847229}
-  trump: {fileID: 21300000, guid: 0d4d370048518a183bed688e8f7faf7f, type: 3}
-  kotleba: {fileID: 21300000, guid: 3ae79d25598aac7d7858466a40343882, type: 3}
+  playerHead: {fileID: 21300000, guid: f1469fa0474001846a95fec1ac995ea4, type: 3}
+  enemyHead: {fileID: 21300000, guid: bd61f35babd7e6942863e46715e00865, type: 3}
+  redCross: {fileID: 915055082}
 --- !u!82 &572344316
 AudioSource:
   m_ObjectHideFlags: 0
@@ -688,7 +690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 139.64989, y: 549.2266}
+  m_AnchoredPosition: {x: 138, y: 572}
   m_SizeDelta: {x: 931.83, y: 66.7351}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &585847229
@@ -713,8 +715,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'DUEL: VOLBY 2025'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 31a7588bc1e6deb4e9250124c5cf9bd9, type: 2}
+  m_sharedMaterial: {fileID: 1653205940839804257, guid: 31a7588bc1e6deb4e9250124c5cf9bd9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -822,7 +824,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: 461}
+  m_AnchoredPosition: {x: 140, y: 466}
   m_SizeDelta: {x: 931.83, y: 88.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &734888387
@@ -845,11 +847,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Souboj dvou finalist\u016F, posledn\xEDch dvou kandid\xE1t\u016F uch\xE1zej\xEDc\xEDch
-    se o post prezidenta Callibrist\xE1nu je u konce. "
+  m_text: "V boji o post prezidenta Callibrist\xE1nu se odehr\xE1l intenzivn\xED
+    souboj, ve kter\xE9m v\u0161ak populista \" + loserName + \" nakonec nezv\xEDt\u011Bzil."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 31a7588bc1e6deb4e9250124c5cf9bd9, type: 2}
+  m_sharedMaterial: {fileID: 1653205940839804257, guid: 31a7588bc1e6deb4e9250124c5cf9bd9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -880,8 +882,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 8
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -909,7 +911,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.08602905, w: 7.626587}
+  m_margin: {x: 0, y: 0, z: -0.08602905, w: 22.39144}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -980,7 +982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0d4d370048518a183bed688e8f7faf7f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bd61f35babd7e6942863e46715e00865, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1032,8 +1034,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: 92}
-  m_SizeDelta: {x: 931.83, y: 88.12}
+  m_AnchoredPosition: {x: 140, y: 101}
+  m_SizeDelta: {x: 931.83, y: 100.0579}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &817662227
 MonoBehaviour:
@@ -1055,11 +1057,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I p\u0159es v\u0161echny jeho kvality, se dostal do situace, kde se musel
-    vyrovnat s populistick\xFDm tlakem, co\u017E bohu\u017Eel nezvl\xE1dl."
+  m_text: "Tento v\xFDsledek m\u016F\u017Ee m\xEDt v\xFDznamn\xE9 d\u016Fsledky pro
+    budoucnost politick\xE9 kultury a \xFArovn\u011B politick\xE9ho dialogu dialogu
+    v zemi."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 31a7588bc1e6deb4e9250124c5cf9bd9, type: 2}
+  m_sharedMaterial: {fileID: 1653205940839804257, guid: 31a7588bc1e6deb4e9250124c5cf9bd9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1090,7 +1093,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1119,7 +1122,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.08602905, w: 7.626587}
+  m_margin: {x: 0, y: 0, z: -0.08602905, w: 32.06945}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1132,6 +1135,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817662225}
+  m_CullTransparentMesh: 1
+--- !u!1 &915055082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 915055083}
+  - component: {fileID: 915055085}
+  - component: {fileID: 915055084}
+  m_Layer: 5
+  m_Name: RedCross
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &915055083
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915055082}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4.5, y: 3.2744284, z: 3.2744284}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 465543296}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -185.4, y: 335.9}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &915055084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915055082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3cf0a2c1d5a7e8c49831d2782f477920, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &915055085
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915055082}
   m_CullTransparentMesh: 1
 --- !u!1 &1071693672
 GameObject:
@@ -1485,140 +1563,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342731619}
   m_CullTransparentMesh: 1
---- !u!1 &1396107730
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1396107731}
-  - component: {fileID: 1396107733}
-  - component: {fileID: 1396107732}
-  m_Layer: 5
-  m_Name: textContinue
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1396107731
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396107730}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2016469699}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 621, y: -507.47}
-  m_SizeDelta: {x: 856.1223, y: 65.0526}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1396107732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396107730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: PRESS SPACE TO CONTINUE ...
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4278190265
-  m_fontColor: {r: 0.7255721, g: 0, b: 0, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 2
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1396107733
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396107730}
-  m_CullTransparentMesh: 1
 --- !u!1 &1612891650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,8 +1796,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 297, y: 278}
-  m_SizeDelta: {x: 617.1279, y: 295.3537}
+  m_AnchoredPosition: {x: 297.0001, y: 283.50134}
+  m_SizeDelta: {x: 617.1279, y: 306.3563}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1841589486
 MonoBehaviour:
@@ -1875,16 +1819,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Volby skon\u010Dily p\u0159ekvapiv\xFDm v\xFDsledkem. Favorizovan\xFD
-    kandid\xE1t, Dobrom\xEDr Laskav\xFD, toti\u017E navzdory v\u0161em odhad\u016Fm
-    prohr\xE1l.\nJe to \u010Dlov\u011Bk, kter\xFD si sv\xFDm vystupov\xE1n\xEDm a
-    n\xE1zory z\xEDskal srdce predev\u0161\xEDm v mlad\u0161\xED \u010D\xE1sti spole\u010Dnosti.
-    Boj o k\u0159eslo vedl \u010Destn\u011B, reprezentativn\u011B, bez ur\xE1\u017Eek,
-    lhan\xED a t\xEDm se jeho vliv a pole p\u016Fsobnosti \u0161\xED\u0159ilo i mezi
-    ostatn\xED spole\u010Densk\xE9 vrstvy.\n"
+  m_text: 'Today the presidential election has ended with the victory of the favorite 
+    Jestin Jesterson. After a duel with Jestin Jesterson, Jesterson received strong
+    support from the voters and promises unity and development of the country under
+    his leadership. His victory brings hope for prosperity and a united society in
+    Callibristan. Jesterson accepted his defeat with respect. Both candidates conducted
+    their campaigns with civility and respect for their voters.
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 31a7588bc1e6deb4e9250124c5cf9bd9, type: 2}
+  m_sharedMaterial: {fileID: 1653205940839804257, guid: 31a7588bc1e6deb4e9250124c5cf9bd9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1915,8 +1860,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 8
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1944,7 +1889,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0.10412598, w: -1.7390137}
+  m_margin: {x: -16.17337, y: 0, z: 0.10412598, w: 31.744965}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2158,7 +2103,6 @@ RectTransform:
   - {fileID: 1342731620}
   - {fileID: 2092947474}
   - {fileID: 465543296}
-  - {fileID: 1396107731}
   - {fileID: 199112174}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

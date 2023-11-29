@@ -244,8 +244,8 @@ public class PropertiesManager : MonoBehaviour
             ans1CS: "To jsou absurdní obvinění! Jsem politik, ne zloděj. Tato příběh se šíří pouze proto, abych byl diskreditován.",
             ans2EN: "Stories of pen theft surprise me, of course. It's important to keep a cool head and not form opinions based on unverified information.",
             ans2CS: "Příběhy o krádeži pera mě samozřejmě překvapují. Je důležité zachovat chladnou hlavu a nezaujímat názory na základě neověřených informací.",
-            ans3EN: "Yes, I stole a protocol pen. It was a nice gold trimmed one, and that's irresistible to a kleptomaniac like me.",
-            ans3CS: "Ano ukradl jsem protokolární pero. Bylo hezky zlatě zdobené a to je pro kleptomana jako jsem já neodolatelné.");
+            ans3EN: "Yes, I stole that protocol pen. It was a nice gold trimmed one, and that's irresistible to a kleptomaniac like me.",
+            ans3CS: "Ano ukradl jsem to protokolární pero. Bylo hezky zlatě zdobené a to je pro kleptomana jako jsem já neodolatelné.");
 
         // SSKuciak
         CreateSpecialSkill(
@@ -286,8 +286,8 @@ public class PropertiesManager : MonoBehaviour
             ans1CS: "Jedná se o útoky na mou osobní rodinnou situaci! Je to věc soukromí, která nemá nic společného s mou politickou kariérou.",
             ans2EN: "My family situation is a personal matter that does not affect my ability to serve the citizens. Let's focus on the political issues.",
             ans2CS: "Má rodinná situace je osobní záležitost, která nemá vliv na mou schopnost sloužit občanům. Zaměřme se na politické otázky.",
-            ans3EN: "Yes, I have many children and wives. But at the same time I like to spread awareness about traditional family values.",
-            ans3CS: "Ano, mám mnoho dětí a manželek. Zároveň ale rád šířím osvětu o tradičních rodinných hodnotách.");
+            ans3EN: "Yes, I have many children and wives. In my political agenda I spread awareness about traditional family values.",
+            ans3CS: "Ano, mám mnoho dětí a manželek. V rámci své potické agendy šířím osvětu o tradičních rodinných hodnotách.");
 
         // SSFlakanec
         CreateSpecialSkill(

@@ -8,7 +8,6 @@ using TMPro;
 
 public class EndSceneManager : MonoBehaviour {
     private TextMeshProUGUI nameCandidate;
-    private TextMeshProUGUI textContinue;
     private Image headCandidate;
     private float waitingTimeVideo = 4f;
 
@@ -20,19 +19,21 @@ public class EndSceneManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI textDown;
     [SerializeField] private TextMeshProUGUI textTitle;
 
-    [SerializeField] private Sprite trump;
-    [SerializeField] private Sprite kotleba;
+    [SerializeField] private Sprite playerHead;
+    [SerializeField] private Sprite enemyHead;
 
+    [SerializeField] private GameObject redCross;
+
+    string _language;
 
     void Start() {
         GameObject nameObj = GameObject.Find("nameCandidate");
         nameCandidate = nameObj.GetComponent<TextMeshProUGUI>();
 
-        GameObject contObj = GameObject.Find("textContinue");
-        textContinue = contObj.GetComponent<TextMeshProUGUI>();
-
         GameObject headObj = GameObject.Find("headCandidate");
         headCandidate = headObj.GetComponent<Image>();
+
+        _language = PlayerPrefs.GetString("language");
 
         canvas.enabled = false;
         player.playOnAwake = true;
@@ -41,16 +42,13 @@ public class EndSceneManager : MonoBehaviour {
         player.Play();
         StartCoroutine(waitForVideoPause());
 
-        textContinue.enabled = false;
-
         DrawImage();
+
     }
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space))
             SceneManager.LoadScene("StartScene");
-        
-        Invoke("enableContinue", 5f);
     }
 
 
@@ -62,69 +60,161 @@ public class EndSceneManager : MonoBehaviour {
         canvas.enabled = true;
     }
 
-    private void enableContinue() {
-        textContinue.enabled = true;
-    }
     
     private void DrawImage() {
-        string language = PlayerPrefs.GetString("language");
-        string name = PlayerPrefs.GetString("name");
-        string head = PlayerPrefs.GetString("head");
-        int autenticita = PlayerPrefs.GetInt("autenticita");
-        int volici = PlayerPrefs.GetInt("volici");
+        string playerName = PlayerPrefs.GetString("playerName");
+        string enemyName = PlayerPrefs.GetString("enemyName");
+        int playerAuthenticity = PlayerPrefs.GetInt("playerAuthenticity");
+        int enemyAuthenticity = PlayerPrefs.GetInt("enemyAuthenticity");
+        int minAuthenticity = PlayerPrefs.GetInt("minAuthenticity");
+        int playerVoters = PlayerPrefs.GetInt("playerVoters");
 
-        headCandidate.sprite = (PlayerPrefs.GetString("head") == "trump") ? trump : kotleba;
+        bool kickedOutEnding;
+        string winnerName = "";
+        string loserName = "";
+        bool winnerPopulist = false;
+        bool loserPopulist = false;
+        
+        Sprite head;
 
-        nameCandidate.text = name.ToUpper();
+        void SetWinnerAndLoser() {
+            // player was kicked out
+            if (playerAuthenticity < minAuthenticity) {
+                kickedOutEnding = true;
+                // player was kicked out
+                loserName = playerName;
+                winnerName = enemyName;
+                head = playerHead;
+                return;
+            }
+            // enemy was kicked out
+            if (enemyAuthenticity < minAuthenticity) {
+                kickedOutEnding = true;
+                // enemy was kicked out
+                loserName = enemyName;
+                winnerName = playerName;
+                head = enemyHead;
+                return;
+            }
+            // normal ending
+            // same voters --> decide by authenticity
+            if (playerVoters == 50) {
+                winnerName = (playerAuthenticity >= enemyAuthenticity) ? playerName : enemyName;
+            }
+            else {
+                winnerName = (playerVoters > 50) ? playerName : enemyName;
+            }
+            kickedOutEnding = false;
+            loserName = (winnerName == playerName) ? enemyName : playerName;
+            int winnerAuthenticity = (winnerName == playerName) ? playerAuthenticity : enemyAuthenticity;
+            int loserAuthenticity = (winnerName == playerName) ? enemyAuthenticity : playerAuthenticity;
+            winnerPopulist = (winnerAuthenticity < 50);
+            loserPopulist = (loserAuthenticity < 50);
 
-        if ((autenticita >= 50) && (volici >= 50)) {
-            if (language == "english") {
-                textUp.text = "The battle of the two finalists, the last two candidates vying for the Callibristan presidency, is over.";
-                textMid.text = "The election ended with a surprising and unexpected result. The unfavoured candidate, " + name + ", won against all odds! He fought all the slander, insults, misinformation and general populism he had to face. Unlike his opponent, who was running for head of state for the second time, he ran a decent and honest campaign.";
-                textDown.text = "The election of " + name + " means that values such as mutual respect and tolerance still carry weight in our society.";
-                textTitle.text = ("Duel: elections " + Random.Range(2020, 2100)).ToUpper();
-            } else {
-                textUp.text = "Souboj dvou finalistů, posledních dvou kandidátů ucházejících se o post prezidenta Callibristánu je u konce. ";
-                textMid.text = "Volby skončily překvapivým a nečekaným výsledkem. Nefavorizovaný kandidát, " + name + ", totiž navzdory všem odhadům zvítězil! Popasoval se se všemi pomluvami, urážkami, dezinformacemi a obecně populismem, kterému musel čelit. Narozdíl od svého oponenta, který se o hlavu státu ucházel podruhé, vedl kampaň slušně a čestně.";
-                textDown.text = "Jeho zvolení ukazuje, že v naší společnosti hodnoty jako jsou vzájemný respekt a tolerance, stále mají svou váhu.";
-                textTitle.text = ("Duel: volby " + Random.Range(2020, 2100)).ToUpper();
-            }
-        } else if ((autenticita >= 50) && (volici < 50)) {
-            if (language == "english") {
-                textUp.text = "The battle of the two finalists, the last two candidates vying for the Callibristan presidency, is over.";
-                textMid.text = "The election ended with a surprising result. The favoured candidate, " + name + ", lost against all odds. He is a man who won the hearts of the younger part of society with his appearance and opinions. He fought the battle for the seat honestly, representatively, without insults or lies, and thus his influence and reach spread to other social strata.";
-                textDown.text = "In spite of all his qualities, he found himself in a situation where he had to cope with populist pressure, which unfortunately he did not manage.";
-                textTitle.text = ("Duel: elections " + Random.Range(2020, 2100)).ToUpper();
-            } else {
-                textUp.text = "Souboj dvou finalistů, posledních dvou kandidátů ucházejících se o post prezidenta Callibristánu je u konce. ";
-                textMid.text = "Volby skončily překvapivým výsledkem. Favorizovaný kandidát, " + name + ", totiž navzdory všem odhadům prohrál. Je to člověk, který si svým vystupováním a názory získal srdce predevším v mladší části společnost. Boj o křeslo vedl čestně, reprezentativně, bez urážek, lhaní a tím se jeho vliv a pole působnosti šířilo i mezi ostatní společenské vrstvy.";
-                textDown.text = "I přes všechny jeho kvality, se dostal do situace, kde se musel vyrovnat s populistickým tlakem, což bohužel nezvládl.";
-                textTitle.text = ("Duel: volby " + Random.Range(2020, 2100)).ToUpper();
-            }
-        } else if ((autenticita < 50) && (volici >= 50)) {
-            if (language == "english") {
-                textUp.text = "A dramatic story has unfolded in the political contest for the presidency, which ended with the victory of the populist " + name +".";
-                textMid.text = "His path to triumph has been marked by the systematic dissemination of misinformation, the cultivation of hatred and the incitement of fear. This strategy, despite its controversial nature, has proved effective in a polarised political environment. " + name + " thus gained the support of those who were swayed by emotions and unverified information.";
-                textDown.text = "His victory now resonates positively or negatively throughout society, with some seeing hope in his triumph while others worry about the future of democracy.";
-                textTitle.text = ("Duel: elections " + Random.Range(2020, 2100)).ToUpper();
-            } else {
-                textUp.text = "V politickém souboji o prezidentský úřad se odehrál dramatický příběh, který skončil vítězstvím populisty " + name + ".";
-                textMid.text = "Jeho cesta k triumfu byla poznamenána systematickým šířením dezinformací, kultivací nenávisti a vyvoláváním strachu. Tato strategie, i přes její kontroverznost, se ukázala být účinnou v polarizovaném politickém prostředí. " + name + " tak získal podporu těch, kteří se nechali ovlivnit emocemi a neověřenými informacemi. Jeho vítězství nyní kladně či negativně ";
-                textDown.text = "rezonuje v celé společnosti, přičemž někteří vidí v jeho triumfu naději, zatímco jiní mají obavy o budoucnost demokracie.";
-                textTitle.text = ("Duel: volby " + Random.Range(2020, 2100)).ToUpper();
-            }
-        } else {
-            if (language == "english") {
-                textUp.text = "The battle for the post of president of the republic was an intense contest, but the populist " + name + " did not win in the end.";
-                textMid.text = "Despite his efforts to spread lies, disinformation, incite hatred and create an atmosphere of fear, the electorate has shown resistance to this strategy. The clear rejection of " +name+ " in the presidential election indicates that society is resisting the methods of manipulation and is looking for other value-based approaches in politics. \"I will not give up so easily!\" he told a reporter in an interview.";
-                textDown.text = "This outcome may have important implications for the future of political culture and dialogue in the country.";
-                textTitle.text = ("Duel: elections " + Random.Range(2020, 2100)).ToUpper();
-            } else {
-                textUp.text = "V boji o post prezidenta republiky se odehrál intenzivní souboj, ve kterém však populista " + name + " nakonec nezvítězil.";
-                textMid.text = "I přes jeho snahu šířit lži, dezinformace, podněcovat nenávist a vytvářet atmosféru plnou strachu, voliči ukázali odpor vůči této strategii. Jeho jasné odmítnutí v prezidentských volbách naznačuje, že společnost se staví proti metodám manipulace a hledá jiné hodnotové přístupy v politice. \"Tak snadno se nevzdám!\", řekl  reportérce v rozhovoru.";
-                textDown.text = "Tento výsledek může mít významné důsledky pro budoucnost politické kultury a dialogu v zemi.";
-                textTitle.text = ("Duel: volby " + Random.Range(2020, 2100)).ToUpper();
-            }
+            head = (winnerName == playerName) ? playerHead : enemyHead;
         }
+
+        SetWinnerAndLoser();
+        headCandidate.sprite = head;
+
+        // set title
+        SetTitle();
+
+        // kicked out ending
+        if (kickedOutEnding) {
+            nameCandidate.text = loserName.ToUpper();
+            redCross.SetActive(true);
+            SetKickedOutText(loserName, winnerName);
+            return;
+        }
+
+        // normal ending
+        nameCandidate.text = winnerName.ToUpper();
+        redCross.SetActive(false);
+        SetNormalEndingText(winnerName, loserName, winnerPopulist, loserPopulist);
+    }
+
+    private void SetTitle() {
+        string titleTextEN = "Duel: elections " + Random.Range(2023, 2090);
+        string titleTextCS = "Duel: volby " + Random.Range(2023, 2090);
+        textTitle.text = (_language == "english") ? titleTextEN.ToUpper() : titleTextCS.ToUpper();
+    }
+
+    private void SetKickedOutText(string kickedOutName, string otherName) {
+        string kickLastName = kickedOutName.Split(' ')[1];
+        string otherFirstName = otherName.Split(' ')[0];
+        string otherLastName = otherName.Split(' ')[1];
+        string kickLastNameCS = kickLastName[..^1] + "ého";  // Zlobivý --> Zlobivého
+        string otherNameCs = otherFirstName + "u " + otherLastName[..^1] + "ému";  // Kazisvětu Zlobivému
+
+        string textUpCS = "Závěrečné kolo prezidentské debaty bylo nečekaně ukončeno, když byl kandidát " + kickedOutName + " vyloučen z debaty kvůli opakovaným nepravdivým a populistickým výrokům.";
+        string textMidCS = kickLastNameCS + " neúcta k pravidlům diskuze vedla organizátory k rozhodujícímu kroku, pro zachování integrity debaty. Vzhledem k tomu, že na pódiu byli pouze dva kandidáti, vyloučení " + kickLastNameCS + " ponechalo " + otherNameCs + " možnost debatu uzavřít sólo. Tento incident poukazuje na důležitost zachování pravdivosti v politickém diskurzu a ponechává voličům zásadní rozhodnutí na základě argumentů zbývajícího kandidáta.";
+        string textDownCS = "Tento incident znovu rozvířil diskusi o důležitosti ověřování faktů a zodpovědnosti v politických debatách. Tím vyvolal výzvy k větší transparentnosti a kontrole výroků politiků.";
+        
+        string textUpEN = "In an unprecedented turn of events, the final round of the presidential debate came to an abrupt end as candidate " + kickedOutName + " faced exclusion for repeatedly making false and populistic statements.";
+        string textMidEN = kickLastName + "'s disrespect for the rules of the debate led the organizers to take a decisive step to preserve the integrity of the debate.. With only two candidates on the stage, the exclusion of " + kickLastName + " left " + otherName + " to conclude the debate solo. The incident highlights the importance of maintaining truthfulness in political discourse, leaving voters with a crucial decision based on the merits of the other candidates's arguments.";
+        string textDownEN = "The incident has reignited discussions on the role of fact-checking and accountability in political debates, prompting calls for increased transparency and scrutiny of politicians' statements.";
+
+        textUp.text   = (_language == "english") ? textUpEN   : textUpCS;
+        textMid.text  = (_language == "english") ? textMidEN  : textMidCS;
+        textDown.text = (_language == "english") ? textDownEN : textDownCS;
+    }
+
+    private void SetNormalEndingText(string winnerName, string loserName, bool winnerPopulist, bool loserPopulist) {
+        string textUpCS = "";
+        string textUpEN = "";
+        string textMidCS = "";
+        string textMidEN = "";
+        string textDownCS = "";
+        string textDownEN = "";
+
+        string winnerLastName = winnerName.Split(' ')[1];
+        string loserLastName = loserName.Split(' ')[1];
+        string loserLastNameCS = loserLastName[..^1] + "ého";  // Zlobivý --> Zlobivého
+        string winnerLastNameCS = winnerLastName[..^1] + "ého";  // Zlobivý --> Zlobivého
+
+        if (winnerPopulist && loserPopulist) {
+            textUpCS = "Politický souboji o prezidentský úřad Callibristánu byl dramatický příběh, který skončil vítězstvím populisty " + winnerLastNameCS + ".";
+            textMidCS = "Jeho cesta k triumfu byla poznamenána systematickým šířením dezinformací, kultivací nenávisti a vyvoláváním strachu. Tato strategie, i přes její kontroverznost, se ukázala být účinnou v polarizovaném politickém prostředí. " + winnerLastName + " tak získal podporu těch, kteří se nechali ovlivnit emocemi a neověřenými informacemi. „Tak snadno se nevzdám!“ řekl poražený kandidát " + loserName + " reportérce v rozhovoru.";
+            textDownCS = "Vítězství " + winnerLastNameCS + " nyní ve společnosti rezonuje jak pozitivně, tak negativně, přičemž někteří v jeho triumfu vidí naději, zatímco jiní se obávají o budoucnost demokracie.";
+
+            textUpEN = "The political contest for the presidency of Callibristan was a dramatic story that ended with the victory of the populist " + winnerLastName + ".";
+            textMidEN = "His path to triumph has been marked by the systematic spread of disinformation, the cultivation of hatred and the incitement of fear. This strategy, despite its controversial nature, has proved effective in a polarised political environment. " + winnerLastName + " thus gained the support of those who were swayed by emotions and unverified information. “I'm not giving up that easily!” " + loserName + ", the defeated candidate, said in an interview with a journalist.";
+            textDownEN = "The victory of " + winnerLastName + " now resonates both positively and negatively in society, with some seeing hope in his triumph while others fear for the future of democracy.";
+        }
+        if (winnerPopulist && !loserPopulist) {
+            textUpCS = "Souboj dvou finalistů, posledních dvou kandidátů ucházejících se o post prezidenta Callibristánu je u konce.";
+            textMidCS = "Volby skončily nečekaným výsledkem. Favorizovaný kandidát, " + loserName + ", totiž navzdory všem odhadům prohrál. Je to člověk, který si svým vystupováním a názory získal srdce predevším v mladší části společnost. Boj o křeslo vedl čestně, reprezentativně, bez urážek a bez lhaní. Volby nakonec vyhrál populista " + winnerName + ".";
+            textDownCS = "Jeho vítězství nyní ve společnosti rezonuje jak pozitivně, tak negativně, přičemž někteří v jeho triumfu vidí naději, zatímco jiní se obávají o budoucnost demokracie.";
+
+            textUpEN = "The battle of the two finalists, the last two candidates running for president of Callibristan, is over.";
+            textMidEN = "The election ended with an unexpected result. The favored candidate, " + loserName + ", lost against all odds. He is a man who has won the hearts of the younger generation with his demeanour and views. He fought for the seat honestly, representatively, without insults and without lying. In the end, the election was won by the populist " + winnerName + ".";
+            textDownEN = "His victory now resonates both positively and negatively in society, with some seeing hope in his triumph while others fear for the future of democracy.";
+        }
+        if (!winnerPopulist && loserPopulist) {
+            textUpCS = "V boji o post prezidenta Callibristánu se odehrál intenzivní souboj, ve kterém však populista " + loserName + " nakonec nezvítězil.";
+            textMidCS = "Navzdory jeho snaze šířit lži, dezinformace, podněcovat nenávist a vytvářet atmosféru plnou strachu, voliči ukázali odpor vůči této strategii. Jasné odmítnutí " + loserLastNameCS + " v prezidentských volbách naznačuje, že společnost se staví proti metodám manipulace a hledá jiné hodnotové přístupy v politice. „Tak snadno bych se nevzdal!“, řekl vítěz voleb " + winnerName + " reportérce v rozhovoru.";
+            textDownCS = "Tento výsledek může mít významné důsledky pro budoucnost politické kultury a úrovně politického dialogu v zemi.";
+
+            textUpEN = "The battle for the post of president of Callibristan was an intense contest, but the populist " + loserName + " did not win in the end.";
+            textMidEN = "Despite his efforts to spread lies, disinformation, incite hatred and create an atmosphere of fear, the electorate has shown resistance to this strategy. The clear rejection of " + loserLastName + " in the presidential election indicates that society is resisting the methods of manipulation and is looking for other value-based approaches in politics. “I wouldn't give up so easily!” told the winner of the election " + winnerName + " a reporter in an interview.";
+            textDownEN = "This outcome may have important implications for the future of political culture and the standard of political dialogue in the country.";
+        }
+        if (!winnerPopulist && !loserPopulist) {
+            string winnerNameCS = winnerName.Split(' ')[0] + "a " + winnerLastNameCS;  // Mečislav Zlobivý --> Mečislava Zlobivého
+            string loserNameCS = winnerName.Split(' ')[0] + "em " + winnerLastName + "m";    // Mečislav Zlobivý   --> Mečislavem Zlobivým
+
+            textUpCS = "Souboj dvou finalistů, posledních dvou kandidátů ucházejících se o post prezidenta Callibristánu je u konce.";
+            textMidCS = "Dnes skončily prezidentské volby vítězstvím favorita, " + winnerNameCS + ". Po souboji s " + loserNameCS + " získal " + winnerLastName + " silnou podporu voličů a slibuje jednotu a rozvoj země ve svém vedení. Jeho výhra přináší naději na prosperitu a sjednocenou společnost v Callibristánu. " + loserLastName + " přijal porážku s respektem. Oba kandidáti vedli kampaň slušně a s úctou ke svým voličům.";
+            textDownCS = "Tyto volby ukázaly, že hodnoty jako vzájemný respekt a tolerance mají v naší společnosti stále svou váhu.";
+
+            textUpEN = "The battle of the two finalists, the last two candidates running for president of Callibristan, is over.";
+            textMidEN = "Today the presidential election has ended with the victory of the favorite, " + winnerName + ". After a duel with " + loserName + ", " + winnerLastName + " received strong support from the voters and promises unity and development of the country under his leadership. His victory brings hope for prosperity and a united society in Callibristan. " + loserLastName + " accepted his defeat with respect. Both candidates conducted their campaigns with civility and respect for their voters.";
+            textDownEN = "This election has shown that values such as mutual respect and tolerance still have weight in our society.";
+        }
+
+        textUp.text = (_language == "english") ? textUpEN : textUpCS;
+        textMid.text = (_language == "english") ? textMidEN : textMidCS;
+        textDown.text = (_language == "english") ? textDownEN : textDownCS;
     }
 }
