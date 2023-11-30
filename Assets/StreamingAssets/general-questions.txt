@@ -45,7 +45,7 @@ E Healthcare
     E We will increase investments in primary care and prevention to reduce the burden on acute healthcare.
 
     C 7 -3 Poskytneme prémiovou zdravotní péči a snížené čekací doby těm, kteří za ně zaplatí.
-    E We will provide premium health care and reduced wait times to those who pay for it.
+    E We will provide premium healthcare and reduced wait times to those who pay for it.
 END
 
 O Kriminalita a bezpečnost
@@ -53,7 +53,7 @@ E Crime and Security
     P Zavedeme tvrdší tresty a posílíme policii, aby naše města byla bezpečnější!
     E We will implement tougher penalties and strengthen the police to make our cities safer!
 
-    P Vyhostíme všechny cizince, kteří jsou podezřelí z trestné činnosti, a tak zajistíme bezpečnost našich občanů!
+    P Vyhostíme všechny cizince, kteří jsou podezřelí z trestné činnosti, čímž zajistíme bezpečnost našich občanů!
     E We will deport all foreigners suspected of criminal activity to ensure the safety of our citizens!
     
     N Budeme investovat do do modernizace policejních sil a zlepšíme spolupráci mezi jednotlivými částmi bezpečnostních složek.
@@ -62,7 +62,7 @@ E Crime and Security
     N Budeme podporovat programy prevence kriminality a sociální integrace.
     E We will support crime prevention programs and work on social integration.
     
-    C 10 0 Zaměříme se kořeny kriminality, například chudobou a nedostatkem vzdělání, abychom snížili její základnu.
+    C 7 2 Zaměříme se kořeny kriminality, například chudobou a nedostatkem vzdělání, abychom snížili její základnu.
     E We will address the root causes of crime, such as poverty and lack of education, to reduce its base.
 END
 
@@ -140,7 +140,7 @@ E Education
     N Zreformujeme učební plány tak, aby lépe odpovídaly potřebám současného trhu práce.
     E We will reform curricula to better meet the needs of the current job market.
     
-    C 7 7 Podpoříme učitele a zlepšíme podmínky vzdělávání s cílem zvýšit kvalitu výuky.
+    C 6 6 Podpoříme učitele a zlepšíme podmínky vzdělávání s cílem zvýšit kvalitu výuky.
     E We will support teachers and improve educational conditions to increase the quality of teaching.
 END
 
@@ -158,7 +158,7 @@ E Foreign Policy
     N Posílíme diplomatické vztahy a spolupráci s našimi sousedy a partnery.
     E We will strengthen diplomatic relations and cooperation with our neighbors and partners.
 
-    C 5 5 Budeme hájit naše zájmy, ale zároveň hledat kompromisy a společné řešení s mezinárodní komunitou.
+    C 6 6 Budeme hájit naše zájmy, ale zároveň hledat kompromisy a společné řešení s mezinárodní komunitou.
     E We will defend our interests but also seek compromises and shared solutions with the international community.
 END
 
@@ -197,7 +197,7 @@ E Family Policy
     N Budeme pracovat na zlepšení dostupnosti a kvality mateřské a rodičovské dovolené a podporovat rovnost pohlaví v pracovním životě.
     E We will work to improve the accessibility and quality of maternity and parental leave and promote gender equality in the workplace.
 
-    C 8 0 Zavedeme manželství pro všechny.
+    C 8 1 Zavedeme manželství pro všechny.
     E We will legalize marriage for everyone.
 END
 

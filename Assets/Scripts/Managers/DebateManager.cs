@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
 using Random = UnityEngine.Random;
 
 #nullable enable
-
 
 
 public class DebateManager : MonoBehaviour {
@@ -55,7 +53,6 @@ public class DebateManager : MonoBehaviour {
     void Start() {
         _player = _playerObject.GetComponent<Candidate>();
         _enemy = _enemyObject.GetComponent<Candidate>();
-        PlayerPrefs.SetString("name", _player.Name);
         _language = PlayerPrefs.GetString("language");
         HideVotingBar();
     }
@@ -73,9 +70,9 @@ public class DebateManager : MonoBehaviour {
     }
 
     public void SetUpQuestions() {
-        var _generalQuestions = QuestionLoader.GetRandomQuestions();
-        var _playerQuestions = QuestionLoader.GetQuestionsForCandidate(_player);
-        var _enemyQuestions = QuestionLoader.GetQuestionsForCandidate(_enemy);
+        var _generalQuestions = QuestionLoader.GetGeneralQuestions();             // 4 questions for both
+        var _playerQuestions = QuestionLoader.GetQuestionsForCandidate(_player);  // 3 questions for player
+        var _enemyQuestions = QuestionLoader.GetQuestionsForCandidate(_enemy);    // 3 questions for enemy
         var _finalQuestion = QuestionLoader.GetFinalQuestion();
         _questions = new (Question, Candidate)[] {
             // round 1
@@ -125,8 +122,8 @@ public class DebateManager : MonoBehaviour {
     }
 
     public string GetStartQuestionsIntroText() {
-        string introEN = "Well, let's stop stalling and get down to what everyone is waiting for - the questions.";
-        string introCS = "Přestaňme otálet a přejděme k tomu, na co všichni čekají - k otázkám.";
+        string introEN = "Well, let's stop stalling and get down to what everyone is waiting for – the questions.";
+        string introCS = "Přestaňme otálet a přejděme k tomu, na co všichni čekají – k otázkám.";
         return (_language == "english") ? introEN : introCS;
     }
 
@@ -149,7 +146,6 @@ public class DebateManager : MonoBehaviour {
         if (kickedOut) return (_language == "english") ? textKickOutEN : textKickOutCS;
         else return (_language == "english") ? textNormalEN : textNormalCS;
     }
-
 
     public void ProcessAnswer(Answer answer)
     {
@@ -259,7 +255,7 @@ public class DebateManager : MonoBehaviour {
         // and it will adjust stats accordingly
 
         int loserDeltaAuth = CalculateResult(card.LoserAuthenticityDelta, powerMultiplier);
-        int winnerDeltaVolici = CalculateResult(card.WinnerVoliciDelta, powerMultiplier);
+        int winnerDeltaVolici = CalculateResult(card.WinnerVotersDelta, powerMultiplier);
         if ((bool)playerWon)
         {
             _enemy.ChangeAuthenticity(loserDeltaAuth);

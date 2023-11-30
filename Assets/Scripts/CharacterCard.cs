@@ -24,7 +24,7 @@ public class CharacterInfoCard : MonoBehaviour
     public void Show()
     {
         _showHelp = true;
-        Invoke("ShowHelp", 0.7f);
+        Invoke(nameof(ShowHelp), 1f);
         gameObject.SetActive(true);
         IsOpen = true;
     }

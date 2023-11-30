@@ -174,7 +174,7 @@ public class TurnManager : MonoBehaviour
             }
 
             // process the answer
-            selectedAnswer.IsUsed = true;
+            selectedAnswer.UseAnswer();
             candidate.DialogBox.SetText(selectedAnswer.Text);
             candidate.DialogBox.PlayText();
 

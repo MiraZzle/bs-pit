@@ -30,7 +30,6 @@ public class PlayerHoverLogic : MonoBehaviour
     void Update()
     {
         if (candidate == null) {
-            Debug.Log("candidate je null");
             return;
         }
         if (_shouldHide && !PauseLogic.IsPaused) {

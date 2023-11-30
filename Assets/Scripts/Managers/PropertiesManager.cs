@@ -27,22 +27,20 @@ public class Property {
     private string _textEN;
     private string _textCS;
     public string Text => (PlayerPrefs.GetString("language") == "english") ? _textEN : _textCS;
+    public bool IsUsed { get; private set; } = false;
+    public void UseProperty() => IsUsed = true;
 
-    public bool IsGood { get; private set; }
-    public bool IsUsed { get; set; } = false;
+    private List<Question> _questions = new();
 
-    private readonly List<Question> _questions = new List<Question>();
-
-    public Property(PropertyType type, string textEN, string textCS, bool isGood)
+    public Property(PropertyType type, string textEN, string textCS)
     {
         Type = type;
         _textEN = textEN;
         _textCS = textCS;
-        IsGood = isGood;
     }
 
-    public Property(PropertyType type, string textEN, string textCS, bool isGood, List<Question> questions)
-        : this(type, textEN, textCS, isGood)
+    public Property(PropertyType type, string textEN, string textCS, List<Question> questions)
+        : this(type, textEN, textCS)
     {
         _questions = questions;
     }
@@ -58,8 +56,9 @@ public class Property {
     public void Reset()
     {
         IsUsed = false;
-        foreach (Question question in _questions)
+        foreach (Question question in _questions) {
             question.ResetAnswers();
+        }
     }
 }
 
@@ -70,9 +69,8 @@ public class SpecialSkill : Property
 
     public string Description => (PlayerPrefs.GetString("language") == "english") ? _descriptionEN : _descriptionCS;
 
-    public SpecialSkill(PropertyType type, string textEN, string textCS, string descriptionEN, string descriptionCS,
-                        List<Question> questions)
-        : base(type, textEN, textCS, false, questions)
+    public SpecialSkill(PropertyType type, string textEN, string textCS, string descriptionEN, string descriptionCS, List<Question> questions)
+        : base(type, textEN, textCS, questions)
     {
         _descriptionEN = descriptionEN;
         _descriptionCS = descriptionCS;
@@ -81,36 +79,47 @@ public class SpecialSkill : Property
 
 public class PropertiesManager : MonoBehaviour
 {
-    private static List<Property> _properties = new();
+    private static List<Property> _badProperties = new();
+    private static List<Property> _goodProperties = new();
     private static List<SpecialSkill> _specialSkills = new();
 
-    public Property[] GetCandidateProperties(bool good, int num = 3)
-    {
-        _properties.Shuffle();
-        int addedProperties = 0;
-        Property[] randomProperties = new Property[num];
-        foreach (Property property in _properties)
-        {
-            if (property.IsGood == good && !property.IsUsed) {
-                property.IsUsed = true;
-                randomProperties[addedProperties++] = property;
-            }
-            
-            if (addedProperties == num)
-                break;
+    const int _numProperties = 3;
+    static public List<Property> GetGoodCandidateProperties() {
+        _goodProperties.Shuffle();
+        List<Property> randomProperties = new();
+        foreach (Property property in _goodProperties) {
+            if (property.IsUsed) continue;
+
+            randomProperties.Add(property);
+            property.UseProperty();
+            if (randomProperties.Count == _numProperties) break;
         }
 
         return randomProperties;
     }
 
-    public SpecialSkill GetSpecialSkill()
+    static public List<Property> GetBadCandidateProperties() {
+        _badProperties.Shuffle();
+        List<Property> randomProperties = new();
+        foreach (Property property in _badProperties) {
+            if (property.IsUsed) continue;
+
+            randomProperties.Add(property);
+            property.UseProperty();
+            if (randomProperties.Count == _numProperties) break;
+        }
+
+        return randomProperties;
+    }
+
+    public static SpecialSkill GetSpecialSkill()
     {
         _specialSkills.Shuffle();
         foreach (var skill in _specialSkills)
         {
             if (!skill.IsUsed)
             {
-                skill.IsUsed = true;
+                skill.UseProperty();
                 return skill;
             }
         }
@@ -118,12 +127,11 @@ public class PropertiesManager : MonoBehaviour
         return null;
     }
 
-    public void ResetProperties()
+    private static void ResetProperties()
     {
-        foreach (Property property in _properties)
-        {
-            property.Reset();
-        }
+        foreach (Property property in _badProperties) property.Reset();
+        foreach (Property property in _goodProperties) property.Reset();
+        foreach (Property property in _specialSkills) property.Reset();
     }
 
     static void LoadProperties()
@@ -148,7 +156,9 @@ public class PropertiesManager : MonoBehaviour
                                      new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real) };
 
             Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers, type);
-            _properties.Add(new Property(type, textEN, textCS, isGood, new List<Question> { question }));
+
+            Property newProperty = new Property(type, textEN, textCS, new List<Question> { question });
+            (isGood ? _goodProperties : _badProperties).Add(newProperty);
         }
 
         static void CreateSpecialSkill(string textEN, string textCS, PropertyType type, string descriptionEN,
@@ -178,9 +188,9 @@ public class PropertiesManager : MonoBehaviour
         // WITH QUESTIONS
         // fascist
         CreateProperty(
-            "Neo-fascist", "Neofšista", PropertyType.Fascist, isGood: false,
+            "Neo-fascist", "Neofašista", PropertyType.Fascist, isGood: false,
             questionEN: "Can you comment on your alleged participation in neo-fascist events?",
-            questionCS: "Múžete se nějak vyjádřit k vaší údajné účasti na neofašistických akcích?",
+            questionCS: "Můžete se nějak vyjádřit k vaší údajné účasti na neofašistických akcích?",
             ans1EN: "It's a campaign and all lies! I am opposed to all extremist movements and have always defended democratic values.",
             ans1CS: "Je to kampaň a samé lži! Jsem odpůrcem všech extrémistických hnutí a vždy jsem hájil demokratické hodnoty.",
             ans2EN: "Everyone keeps talking about some alleged involvement, but no one can present any real evidence!",
@@ -215,12 +225,12 @@ public class PropertiesManager : MonoBehaviour
         // corrupt
         CreateProperty(
             "Corrupt", "Zkorumpovaný", PropertyType.Corrupt, isGood: false,
-            questionEN: "Can you comment on the allegations of corruption and explain what measures you would take to restore public confidence?",
-            questionCS: "Můžete komentovat obvinění z korupce a objasnit, jaké opatření byste přijal pro obnovení důvěry veřejnosti?",
+            questionEN: "Can you comment on the allegations of corruption and explain what measures you would take to restore the public confidence in you?",
+            questionCS: "Můžete komentovat obvinění z korupce a objasnit, jaké opatření byste přijal pro obnovení důvěry veřejnosti ve vás?",
             ans1EN: "These are lies spread by my political rivals! I am an honest politician and have always served my constituents with the best of intentions.",
-            ans1CS: "To jsou lži šířené moji politickou konkurencí! Jsem čestný politik a vždy jsem sloužil svým voličům s nejlepším záměrem.",
+            ans1CS: "To jsou lži šířené moji politickou konkurencí! Jsem čestný politik a vždy jsem sloužil svým voličům s tím nejlepším záměrem.",
             ans2EN: "All allegations of corruption are serious and must be thoroughly investigated. I believe in an independent investigation and a fair trial.",
-            ans2CS: "Všechna obvinění z korupce jsou vážn8 a musí být důkladně vyšetřena. Věřím v nezávislé vyšetřování a spravedlivý soudní proces.",
+            ans2CS: "Všechna obvinění z korupce jsou vážná a musí být důkladně vyšetřena. Věřím v nezávislé vyšetřování a spravedlivý soudní proces.",
             ans3EN: "Of course, I have indeed accepted bribes. I'm a politician, that's my paycheck.",
             ans3CS: "Skutečně jsem v minulosti přijmul úplatky. Vždyť jsem politik, to je moje výplata.");
 
@@ -233,7 +243,8 @@ public class PropertiesManager : MonoBehaviour
             ans1CS: "To jsou jen nesmyslné pomluvy! Moje osobní životní volby nemají nic společného s mým politickým působením. Nejsem ožrala ožralý!",
             ans2EN: "My personal life is my private life. It is important to focus on my public achievements and political contributions to the citizens.",
             ans2CS: "Můj osobní život je mé soukromí. Je důležité se zaměřit na mé veřejné úspěchy a politické přínosy pro občany.",
-            ans3EN: "I'm from Moravia.", ans3CS: "Jsem z Moravy.");
+            ans3EN: "I'm from Moravia.",
+            ans3CS: "Jsem z Moravy.");
 
         // kleptoman
         CreateProperty(
@@ -257,7 +268,7 @@ public class PropertiesManager : MonoBehaviour
             ans1EN: "These are absurd accusations from political opponents! I would never be involved in such a heinous act. This is pure fiction.",
             ans1CS: "Jedná se o absurdní obvinění ze strany mých politických oponentů! Nikdy bych se nezapletl do takového hnusného činu. To je čistá fikce.",
             ans2EN: "Such allegations are very serious and must be properly investigated by law enforcement authorities. We should await the results of the investigation.",
-            ans2CS: "Taková obvinění jsou velmi vážná a musí být řádně vyšetřena orgány činnými v trestním řízení. Měli bychom počkat na výsledky vyšetřování.",
+            ans2CS: "Taková obvinění jsou velmi vážná a musí být řádně vyšetřena soudem v trestním řízení. Měli bychom počkat na výsledky vyšetřování.",
             ans3EN: "Maybe I did it, maybe I didn't. Keep poking around and you might start to regret it.",
             ans3CS: "Možná jsem to udělal, možná ne. Šťourejte dál a možná toho začnete litovat.");
 
@@ -318,7 +329,7 @@ public class PropertiesManager : MonoBehaviour
             ans3CS: "Ano, mám problém s alkoholem, což ovlivňuje mé chování. Na druhou stranu, novináři jsou příživníci a měli bychom je zrušit.");
 
         // Random bad
-        _properties.Add(new Property(PropertyType.Random, "Kicked a kitty", "Nakopnul koťátko", isGood: false));
+        _badProperties.Add(new Property(PropertyType.Random, "Kicked a kitty", "Nakopnul koťátko"));
         // DONT ADD ANOTHER BAD ONES
         // the function that picks the properties for candidates just takes 3 random bad
         // if another one without a question is added --> there might be 3 properties but just 1 with a question
@@ -326,21 +337,28 @@ public class PropertiesManager : MonoBehaviour
         // so if another bad property without question is added, the function for picking properties has to be changed
 
         // Random good
-        _properties.Add(new Property(PropertyType.Random, "Diplomatic", "Diplomat", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Charismatic", "Charizmatický", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Honest", "Upřímný", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Fair", "Spravedlivý", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Ethically minded", "Eticky smýšlející", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Highly educated", "Vysoce vzdělaný", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Good strategist", "Dobrý stratég", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Intelligent", "Inteligetní", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Creative", "Kreativní", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Purposeful", "Cílevědomý", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Ambitions", "Ambiciózní", isGood: true));
-        _properties.Add(new Property(PropertyType.Random, "Well Organized", "Organizovaný", isGood: true));
+        _goodProperties.Add(new Property(PropertyType.Random, "Diplomatic", "Diplomat"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Charismatic", "Charizmatický"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Honest", "Upřímný"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Fair", "Spravedlivý"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Ethically minded", "Eticky smýšlející"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Highly educated", "Vysoce vzdělaný"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Good strategist", "Dobrý stratég"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Intelligent", "Inteligetní"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Creative", "Kreativní"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Purposeful", "Cílevědomý"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Ambitions", "Ambiciózní"));
+        _goodProperties.Add(new Property(PropertyType.Random, "Well Organized", "Organizovaný"));
     }
 
+    private static bool _loadedProperties = false;
     void Awake() { 
-        LoadProperties(); 
+        if (!_loadedProperties) {
+            LoadProperties();
+            _loadedProperties = true;
+        }
+        else {
+            ResetProperties();
+        }
     }
 }

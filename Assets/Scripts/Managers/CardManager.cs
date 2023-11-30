@@ -19,7 +19,7 @@ public enum CardType
 
 public class Card
 {
-    public int WinnerVoliciDelta { get; private set; }
+    public int WinnerVotersDelta { get; private set; }
     public int LoserAuthenticityDelta { get; private set; }
     public Sprite Sprite { get; private set; }
 
@@ -28,7 +28,7 @@ public class Card
     {
         Sprite = sprite;
         Type = type;
-        WinnerVoliciDelta = voliciDelta;
+        WinnerVotersDelta = voliciDelta;
         LoserAuthenticityDelta = authenticityDelta;
     }
 
@@ -112,13 +112,11 @@ public class CardManager : MonoBehaviour {
 
     public void ShowCards() {
         _showHelp = true;
-        Invoke("ShowHelp", 0.7f);
+        Invoke(nameof(ShowHelp), 1f);
         foreach (var card in gameObjectCards) {
             card.ShowCard();
         }
     }
-
-    
 
 
     void Awake()

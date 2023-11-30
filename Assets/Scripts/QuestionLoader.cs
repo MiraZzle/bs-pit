@@ -45,7 +45,9 @@ public record Answer
 
     public AnswerType Type { get; private set; }
 
-    public bool IsUsed = false;
+    public bool IsUsed { get; private set; } = false;
+    public void UseAnswer() => IsUsed = true;
+    public bool Reset() => IsUsed = false;
     public Answer(int deltaAuthenticity, int deltaVolici, string textEN, string textCS, AnswerType type)
     {
         DeltaAuthenticity = deltaAuthenticity;
@@ -73,8 +75,7 @@ public record Question
     private List<Answer> _populistAnswers = new();
     private List<Answer> _neutralAnswers = new();
 
-    public Question(string textEN, string textCS, QuestionType type, List<Answer> answers,
-                    PropertyType? property = null)
+    public Question(string textEN, string textCS, QuestionType type, List<Answer> answers, PropertyType? property = null)
     {
         _textEN = textEN;
         _textCS = textCS;
@@ -96,6 +97,7 @@ public record Question
         _neutralAnswers.Shuffle();
     }
 
+    private const int _answerNum = 3;
     public List<Answer> GetAnswers()
     {
         ShuffleAnswers();
@@ -117,7 +119,7 @@ public record Question
             if (!answer.IsUsed)
             {
                 answers.Add(answer);
-                if (answers.Count == 3)
+                if (answers.Count == _answerNum)
                     break;
             }
         }
@@ -127,10 +129,8 @@ public record Question
 
     public void ResetAnswers()
     {
-        foreach (var answer in _populistAnswers)
-            answer.IsUsed = false;
-        foreach (var answer in _neutralAnswers)
-            answer.IsUsed = false;
+        foreach (var answer in _populistAnswers) answer.Reset();
+        foreach (var answer in _neutralAnswers) answer.Reset();
     }
 }
 
@@ -138,11 +138,11 @@ public class QuestionLoader : MonoBehaviour
 {
     static string _questionsFilePath = Path.Combine(Application.streamingAssetsPath, "general-questions.txt");
 
-    static List<Question> _questions = new List<Question>();
+    static List<Question> _questions = new();
 
-    static string[] questionSpecialString = { "O" };
-    static string[] englishSpecialString = { "E" };
-    static string[] answerSpecialStrings = { "P", "N", "C" };
+    static readonly string[] _questionSpecialString = { "O" };
+    static readonly string[] _englishSpecialString = { "E" };
+    static readonly string[] _answerSpecialStrings = { "P", "N", "C" };
 
     static void LoadQuestionsFromFile()
     {
@@ -175,11 +175,11 @@ public class QuestionLoader : MonoBehaviour
 
         Answer? LoadAnswer(StreamReader reader)
         {
-            string[] answerLineCS = ReadUntilSpecialString(reader, answerSpecialStrings);
+            string[] answerLineCS = ReadUntilSpecialString(reader, _answerSpecialStrings);
             if (answerLineCS[0] == "END")
                 return null; // end of question
 
-            string[] answerLineEN = ReadUntilSpecialString(reader, englishSpecialString);
+            string[] answerLineEN = ReadUntilSpecialString(reader, _englishSpecialString);
 
             string answerTextCS = null;
             string answerTextEN = TextFromLine(answerLineEN, 1);
@@ -213,8 +213,8 @@ public class QuestionLoader : MonoBehaviour
 
         Question? LoadQuestion(StreamReader reader)
         {
-            string[] questionLineCS = ReadUntilSpecialString(reader, questionSpecialString);
-            string[] questionLineEN = ReadUntilSpecialString(reader, englishSpecialString);
+            string[] questionLineCS = ReadUntilSpecialString(reader, _questionSpecialString);
+            string[] questionLineEN = ReadUntilSpecialString(reader, _englishSpecialString);
             if (questionLineCS == null)
                 return null; // end of stream
 
@@ -256,9 +256,8 @@ public class QuestionLoader : MonoBehaviour
     }
 
     // this should be called at the start of the game to get 4 random general questions
-    public static Question[] GetRandomQuestions(int count = 4)
+    public static Question[] GetGeneralQuestions(int count = 4)
     {
-        ResetQuestions();
         _questions.Shuffle();
         return _questions.Take(4).ToArray();
     }
@@ -309,5 +308,15 @@ public class QuestionLoader : MonoBehaviour
         return new Question(questionTextEN, questionTextCS, QuestionType.General, answers);
     }
 
-    void Awake() { LoadQuestionsFromFile(); }
+
+    private static bool _loadedQuestions = false;
+    void Awake() {
+        if (!_loadedQuestions) {
+            LoadQuestionsFromFile();
+            _loadedQuestions = true;
+        }
+        else {
+            ResetQuestions();
+        }
+    }
 }

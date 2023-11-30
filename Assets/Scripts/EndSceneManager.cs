@@ -65,7 +65,7 @@ public class EndSceneManager : MonoBehaviour {
         newspaper.enabled = true;
 
         // dont allow the player to skip the newspaper immediately
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         _canContinue = true;
         pressSpaceToContinue.gameObject.SetActive(true);
     }
