@@ -6,6 +6,9 @@
    <b>Bullsh*t Pit</b> is a presidential debate simulator <br>developed for <a href="https://itch.io/jam/gds-jam-2023"> GDS Jam 2023 </a>.
 </p>
 
+## Goal and scope
+The Goal of this project was to create a simulator for some sort of a political debate. The core gameplay focuses around answering given questions and balancing between populism and honesty. The conetnt is limited due to the given time constraints of 48 hours to complete the game. 
+
 ## Installation
 1. Clone this repository or download it as a ZIP file
       ```bash
