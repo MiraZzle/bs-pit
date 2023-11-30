@@ -80,8 +80,8 @@ public class EndSceneManager : MonoBehaviour {
         int playerVoters = PlayerPrefs.GetInt("playerVoters");
 
         bool kickedOutEnding;
-        string winnerName = "";
-        string loserName = "";
+        string winnerName;
+        string loserName;
         bool winnerPopulist = false;
         bool loserPopulist = false;
         
