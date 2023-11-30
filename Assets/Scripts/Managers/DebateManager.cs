@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using Unity.VisualScripting;
 
 #nullable enable
 
@@ -32,14 +33,11 @@ public class DebateManager : MonoBehaviour {
     public int PlayerVoters { get; private set; } = 50;
 
     private void ChangePlayerVoters(int deltaVolici) {
-        PlayerVoters += deltaVolici;
-        PlayerVoters = Mathf.Clamp(PlayerVoters, 0, 100);
+        PlayerVoters = Mathf.Clamp(PlayerVoters + deltaVolici, 0, 100);
         _votingBar.UpdateSlider(PlayerVoters);
     }
     private void ChangeEnemyVoters(int deltaVolici) {
-        PlayerVoters -= deltaVolici;
-        PlayerVoters = Mathf.Clamp(PlayerVoters, 0, 100);
-        _votingBar.UpdateSlider(PlayerVoters);
+        ChangePlayerVoters(-deltaVolici);
     }
 
     [SerializeField]
@@ -182,9 +180,7 @@ public class DebateManager : MonoBehaviour {
         }
         int CalculateResult(int number, float multiplier)
         {
-            float result = number * multiplier;
-            float roundedResult = (result > 0) ? Mathf.Ceil(result) : Mathf.Floor(result);
-            return (int)roundedResult;
+            return (int)Mathf.Round(number * multiplier);
         }
 
         float probabilityMultiplier = 1f;
@@ -201,27 +197,75 @@ public class DebateManager : MonoBehaviour {
             return false;
         } 
 
-        void SetProbabilityAndMultiplier()
+        void SetProbabilityMultiplier() {
+            float real = 3f;
+            float neutral = 1f;
+            float populist = 0.9f;
+            float irelevant = 0.6f;
+            float general = 1f;
+
+            // general question
+            if (_lastQuestion.Type == QuestionType.General) {
+                // special case for commie card and a commie answer by the enemy
+                if (card.Type == CardType.Commie && AnswerIsCommie()) {
+                    probabilityMultiplier = real;
+                    return;
+                }
+                probabilityMultiplier = general;
+                return;
+            }
+            // personal question - irrelevant
+            if (!card.IsRelevantToProperty((PropertyType)_lastQuestion.AssociatedProperty!)) {
+                probabilityMultiplier = irelevant;
+                return;
+            }
+
+            // personal question - relevant
+            switch (_lastAnswer.Type) {
+                case AnswerType.Populist:
+                    probabilityMultiplier = populist;
+                    break;
+                case AnswerType.Neutral:
+                    probabilityMultiplier = neutral;
+                    break;
+                case AnswerType.Real:
+                    probabilityMultiplier = real;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void SetPowerMultiplier(bool playerWon)
         {
+            float playerLost = 1f;
+            float irelevant = 0.5f;
+            float populist = 1.5f;
+            float neutral = 1f;
+            float real = 0.7f;
+            
+            // if player lost
+            if (!playerWon) {
+                powerMultiplier = playerLost;
+                return;
+            }
+
             // general question
             if (_lastQuestion.Type == QuestionType.General)
             {
                 // special case for commie card and a commie answer by the enemy
                 if (card.Type == CardType.Commie && AnswerIsCommie()) {
-                    probabilityMultiplier = 3f;
-                    powerMultiplier = 1f;
+                    powerMultiplier = real;
                     return;
                 }
 
-                probabilityMultiplier = 1f;
-                powerMultiplier = 0.65f;
+                powerMultiplier = irelevant;
                 return;
             }
             // personal question - irrelevant
             if (!card.IsRelevantToProperty((PropertyType)_lastQuestion.AssociatedProperty!))
             {
-                probabilityMultiplier = 0.5f;
-                powerMultiplier = 1f;
+                powerMultiplier = irelevant;
                 return;
             }
 
@@ -229,23 +273,21 @@ public class DebateManager : MonoBehaviour {
             switch (_lastAnswer.Type)
             {
                 case AnswerType.Populist:
-                    probabilityMultiplier = 1f;
-                    powerMultiplier = 1.5f;
+                    powerMultiplier = populist;
                     break;
                 case AnswerType.Neutral:
-                    probabilityMultiplier = 1f;
-                    powerMultiplier = 1f;
+                    powerMultiplier = neutral;
                     break;
                 case AnswerType.Real:
-                    probabilityMultiplier = 3f;
-                    powerMultiplier = 0.5f;
+                    powerMultiplier = real;
                     break;
                 default:
                     break;
             }
         }
 
-        SetProbabilityAndMultiplier();
+
+        SetProbabilityMultiplier();
 
         // the first time this is called (with null) this function return who won
         if (playerWon is null) {
@@ -254,6 +296,7 @@ public class DebateManager : MonoBehaviour {
         // it should be called again after that with the information of who won
         // and it will adjust stats accordingly
 
+        SetPowerMultiplier((bool)playerWon!);
         int loserDeltaAuth = CalculateResult(card.LoserAuthenticityDelta, powerMultiplier);
         int winnerDeltaVolici = CalculateResult(card.WinnerVotersDelta, powerMultiplier);
         if ((bool)playerWon)

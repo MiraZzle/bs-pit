@@ -148,12 +148,13 @@ public class PropertiesManager : MonoBehaviour
             int ans2Volici = Random.Range(3, 6);
             // admitting
             int ans3Autenticity = Random.Range(6, 9);
-            int ans3Volici = Random.Range(-2, 2);
+            int ans3Volici = Random.Range(-5, -2);
 
-            List<Answer> answers
-                = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Populist),
-                                     new Answer(ans2Autenticity, ans2Volici, ans2EN, ans2CS, AnswerType.Neutral),
-                                     new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real) };
+            List<Answer> answers = new() { 
+                new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Populist),
+                new Answer(ans2Autenticity, ans2Volici, ans2EN, ans2CS, AnswerType.Neutral),
+                new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real) 
+            };
 
             Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers, type);
 
@@ -167,7 +168,7 @@ public class PropertiesManager : MonoBehaviour
         {
             // populist
             int ans1Autenticity = Random.Range(-10, -7);
-            int ans1Volici = Random.Range(7, 10);
+            int ans1Volici = -ans1Autenticity;
             // avoiding
             int ans2Autenticity = Random.Range(-2, 2);
             int ans2Volici = Random.Range(3, 6);
@@ -175,10 +176,11 @@ public class PropertiesManager : MonoBehaviour
             int ans3Autenticity = Random.Range(6, 9);
             int ans3Volici = Random.Range(-5, -2);
 
-            List<Answer> answers
-                = new List<Answer> { new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Populist),
-                                     new Answer(ans2Autenticity, ans2Volici, ans2EN, ans2CS, AnswerType.Neutral),
-                                     new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real) };
+            List<Answer> answers = new() {
+                new Answer(ans1Autenticity, ans1Volici, ans1EN, ans1CS, AnswerType.Populist),
+                new Answer(ans2Autenticity, ans2Volici, ans2EN, ans2CS, AnswerType.Neutral),
+                new Answer(ans3Autenticity, ans3Volici, ans3EN, ans3CS, AnswerType.Real)
+            };
 
             Question question = new Question(questionEN, questionCS, QuestionType.Personal, answers, type);
             _specialSkills.Add(
@@ -278,7 +280,7 @@ public class PropertiesManager : MonoBehaviour
             descriptionEN: "This candidate is accused of illegal financing of political parties, corruption and tax fraud.",
             descriptionCS: "Tento kandidát je podeželý z nelegálního financování politických stran, korupce a daňových podvodů.",
             questionEN: "How would you explain the recent allegations of tax fraud and corruption concerning you?",
-            questionCS: "Jak byste vysvětlil nedávná obvinění z daňových podvodů a korupce, které se vás týkají?",
+            questionCS: "Jak byste vysvětlil nedávná obvinění z daňových podvodů a korupce, která se vás týkají?",
             ans1EN: "It's a campaign! I'm a victim of political intrigue and my finances are fully transparent!",
             ans1CS: "Je to kampaň! Jsem obětí politických intrik a mé finance jsou plně transparentní!",
             ans2EN: "The tax charges are very serious. I am prepared to cooperate with the tax authorities and prove my innocence.",

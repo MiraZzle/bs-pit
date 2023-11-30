@@ -37,7 +37,7 @@ public class CharacterInfoManager : MonoBehaviour
         int maxAge = 80;
 
         string[] biosCS = {
-            "Expert na rychlé rozhodování a ještě rychlejší kafe. Slogan kampaně: „Jeden espresso, jedna země, jednoznačné rozhodnutí!“",
+            "Expert na rychlé rozhodování a ještě rychlejší kafe. Slogan kampaně: „Jedno espresso, jedna země, jednoznačná rozhodnutí!“",
             "Bývalý mistr v česání medvědů, nyní se snaží česat politické problémy. Jeho motto: „Hladce od medvědů k zákonům!“",
             "Přináší nový pohled na politiku, protože se vždy snažil vidět věci z výšky - doslova, byl totiž druhým nejvyšším chlapec ve své třídě.",
             "Jediný kandidát, který dokáže rozpoznat 50 odstínů šedi v politických jednáních a zároveň uvařit skvělý guláš.",

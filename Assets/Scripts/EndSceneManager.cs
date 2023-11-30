@@ -212,7 +212,7 @@ public class EndSceneManager : MonoBehaviour {
         }
         if (!winnerPopulist && !loserPopulist) {
             string winnerNameCS = winnerName.Split(' ')[0] + "a " + winnerLastNameCS;  // Mečislav Zlobivý --> Mečislava Zlobivého
-            string loserNameCS = winnerName.Split(' ')[0] + "em " + winnerLastName + "m";    // Mečislav Zlobivý   --> Mečislavem Zlobivým
+            string loserNameCS = loserName.Split(' ')[0] + "em " + loserName + "m";    // Mečislav Zlobivý   --> Mečislavem Zlobivým
 
             textUpCS = "Souboj dvou finalistů, posledních dvou kandidátů ucházejících se o post prezidenta Callibristánu je u konce.";
             textMidCS = "Dnes skončily prezidentské volby vítězstvím favorita, " + winnerNameCS + ". Po souboji s " + loserNameCS + " získal " + winnerLastName + " silnou podporu voličů a slibuje jednotu a rozvoj země ve svém vedení. Jeho výhra přináší naději na prosperitu a sjednocenou společnost v Callibristánu. " + loserLastName + " přijal porážku s respektem. Oba kandidáti vedli kampaň slušně a s úctou ke svým voličům.";

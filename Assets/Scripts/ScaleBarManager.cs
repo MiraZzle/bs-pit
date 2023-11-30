@@ -9,13 +9,13 @@ public class ScaleBarManager : MonoBehaviour {
     [SerializeField] private TMP_Text percentLeft;
     [SerializeField] private TMP_Text percentRight;
 
-    float _desiredPercentage;
+    int _desiredPercentage;
 
     private void Start() {
-        UpdateSlider(50f);
+        UpdateSlider(50);
     }
 
-    public void UpdateSlider(float percentValue) {
+    public void UpdateSlider(int percentValue) {
         _desiredPercentage = percentValue;
     }
 
@@ -36,7 +36,7 @@ public class ScaleBarManager : MonoBehaviour {
 
         imageSlider.fillAmount = newFillAmount;
 
-        int currentPercentage = (int)(100 * newFillAmount);
+        int currentPercentage = (int)Mathf.Round(100 * newFillAmount);
 
         percentLeft.text = currentPercentage + "%";
         percentRight.text = 100 - currentPercentage + "%";

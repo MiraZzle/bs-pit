@@ -33,17 +33,31 @@ public class Candidate : MonoBehaviour {
 
     public const int MaxAuthenticity = 100;
 
-    public int Authenticity = MaxAuthenticity / 2;
+    public int Authenticity { get; private set; } = MaxAuthenticity / 2;
 
-    void Awake() { 
-        UpdateAuthenticityBar();
-        InfoCard.Hide();
-    }
 
-    void UpdateAuthenticityBar() {
+    void SetUpAuthenticityBar() {
         if (authenticityBar is not null) {
             authenticityBar.fillAmount = (float)Authenticity / (float)MaxAuthenticity;
         }
+    }
+
+    void UpdateAuthenticityBar() {
+        float updateSpeed = 4f / (float)MaxAuthenticity;  // 4 % per second
+
+        float currentFillAmount = authenticityBar.fillAmount;
+        float desiredFillAmount = (float)Authenticity / (float)MaxAuthenticity;
+        float dist = updateSpeed * Time.deltaTime;
+
+        float newFillAmount = currentFillAmount;
+        if (Mathf.Abs(desiredFillAmount - currentFillAmount) <= dist) {
+            newFillAmount = desiredFillAmount;
+        }
+        else {
+            newFillAmount += (desiredFillAmount > currentFillAmount) ? dist : -dist;
+        }
+
+        authenticityBar.fillAmount = newFillAmount;
     }
 
     public void ChangeAuthenticity(int deltaAuthenticity) {
@@ -89,26 +103,13 @@ public class Candidate : MonoBehaviour {
 
     private void Start()
     {
+        InfoCard.Hide();
         GenerateNewCandidate();
-        UpdateAuthenticityBar();
+        SetUpAuthenticityBar();
         HideAuthenticityBar();
     }
 
     private void Update() {
-        float updateSpeed = 4f / (float)MaxAuthenticity;  // 4 % per second
-
-        float currentFillAmount = authenticityBar.fillAmount;
-        float desiredFillAmount = (float)Authenticity / (float)MaxAuthenticity;
-        float dist = updateSpeed * Time.deltaTime;
-
-        float newFillAmount = currentFillAmount;
-        if (Mathf.Abs(desiredFillAmount - currentFillAmount) <= dist) {
-            newFillAmount = desiredFillAmount;
-        }
-        else {
-            newFillAmount += (desiredFillAmount > currentFillAmount) ? dist : -dist;
-        }
-
-        authenticityBar.fillAmount = newFillAmount;
+        UpdateAuthenticityBar();
     }
 }

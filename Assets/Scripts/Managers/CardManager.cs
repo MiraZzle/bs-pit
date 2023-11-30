@@ -24,11 +24,11 @@ public class Card
     public Sprite Sprite { get; private set; }
 
     public CardType Type { get; private set; }
-    public Card(Sprite sprite, CardType type, int voliciDelta = 10, int authenticityDelta = -10)
+    public Card(Sprite sprite, CardType type, int votersDelta = 10, int authenticityDelta = -10)
     {
         Sprite = sprite;
         Type = type;
-        WinnerVotersDelta = voliciDelta;
+        WinnerVotersDelta = votersDelta;
         LoserAuthenticityDelta = authenticityDelta;
     }
 

@@ -62,7 +62,7 @@ E Crime and Security
     N Budeme podporovat programy prevence kriminality a sociální integrace.
     E We will support crime prevention programs and work on social integration.
     
-    C 7 2 Zaměříme se kořeny kriminality, například chudobou a nedostatkem vzdělání, abychom snížili její základnu.
+    C 7 2 Zaměříme se kořeny kriminality, například chudobou a nedostatek vzdělání, abychom snížili její základnu.
     E We will address the root causes of crime, such as poverty and lack of education, to reduce its base.
 END
 
@@ -80,7 +80,7 @@ E Environment and Climate Change
     N Implementujeme postupné změny ve směrování průmyslu ke snížení jeho dopadu na životní prostředí.
     E We will implement gradual changes in the direction of industry to reduce its impact on the environment.
     
-    N Budeme pracovat na mezinárodní spolupráci na globální úrovni, abychom řešili klimatické změny jako celosvětový problém.
+    N Budeme podporovat mezinárodní spolupráci na globální úrovni, abychom řešili klimatické změny jako celosvětový problém.
     E We will work on international cooperation at the global level to address climate change as a worldwide problem.
 END
 
