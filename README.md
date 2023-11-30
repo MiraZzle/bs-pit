@@ -9,6 +9,12 @@
 ## Goal and scope
 The Goal of this project was to create a simulator for some sort of a political debate. The core gameplay focuses around answering given questions and balancing between populism and honesty. The conetnt is limited due to the given time constraints of 48 hours to complete the game. 
 
+## Prerequisites
+Before diving into this project, ensure that you meet the following prerequisites to guarantee a seamless experience:
+
+1. **Unity Engine** : The project was developed using [Unity](https://unity.com/) [2022.3.14f1]. It's highly recommended to use the latest release.
+2. **.NET Runtime** : Ensure that you have the .NET Runtime installed on your system. You can download and install the latest version from the official [.NET Website](https://dotnet.microsoft.com/en-us/).
+
 ## Installation
 1. Clone this repository or download it as a ZIP file
       ```bash
