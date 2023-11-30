@@ -9,7 +9,7 @@
 ## Installation
 1. Clone this repository or download it as a ZIP file
       ```bash
-   git clone https://github.com/MiraZzle/Callibroject
+   git clone https://github.com/MiraZzle/bullshit-pit
    ```
 2. Launch Unity and select "Open Project." Navigate to the directory where you've either cloned or extracted the game, and Unity will automatically load the project.
 
