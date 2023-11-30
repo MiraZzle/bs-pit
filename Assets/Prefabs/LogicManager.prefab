@@ -72,12 +72,18 @@ MonoBehaviour:
   CardSpritesCS:
   - {fileID: 21300000, guid: 3d5c8944751fc9b42b40299518e9900f, type: 3}
   - {fileID: 21300000, guid: acff740a214709a45994462e35c729fd, type: 3}
-  - {fileID: 21300000, guid: 63ef11af8af1a7d40b7fd25a3610a9bb, type: 3}
+  - {fileID: 21300000, guid: 547231513df3bbf438f668ee2da95ab4, type: 3}
   - {fileID: 21300000, guid: f7dc3d19b85996849aa9d173f3629b20, type: 3}
   - {fileID: 21300000, guid: 3fcf0ddb49099cd419d4f61a7c59c22c, type: 3}
   - {fileID: 21300000, guid: e5d49e167a66b3e4186bc4fb88478eeb, type: 3}
   - {fileID: 21300000, guid: 11e489735f022f9459a86b4ce39af3d7, type: 3}
   - {fileID: 21300000, guid: 380183b1b1dde3f43920e5858e184a7f, type: 3}
+  gameObjectCards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  pressSpaceToContinue: {fileID: 0}
 --- !u!114 &1896427506809761594
 MonoBehaviour:
   m_ObjectHideFlags: 0
