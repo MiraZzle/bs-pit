@@ -166,7 +166,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4120825573618273050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,8 +341,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 50%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8076621db2874c247b256a8fbac14eef, type: 2}
-  m_sharedMaterial: {fileID: -5740220516213559011, guid: 8076621db2874c247b256a8fbac14eef, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 27f23a9cc3bacc2478576349a9b0d627, type: 2}
+  m_sharedMaterial: {fileID: 1262429263067696901, guid: 27f23a9cc3bacc2478576349a9b0d627, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -700,8 +700,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 50 %
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8076621db2874c247b256a8fbac14eef, type: 2}
-  m_sharedMaterial: {fileID: -5740220516213559011, guid: 8076621db2874c247b256a8fbac14eef, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 27f23a9cc3bacc2478576349a9b0d627, type: 2}
+  m_sharedMaterial: {fileID: 1262429263067696901, guid: 27f23a9cc3bacc2478576349a9b0d627, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
