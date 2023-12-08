@@ -7,7 +7,7 @@
 </p>
 
 ## Goal and scope
-The Goal of this project was to create a simulator for some sort of a political debate. The core gameplay focuses around answering given questions and balancing between populism and honesty. The conetnt is limited due to the given time constraints of 48 hours to complete the game. 
+The objective of this project was to develop a simulation for a political debate scenario. The central gameplay revolves around responding to provided questions while striking a balance between populism and honesty. Content creation was constrained by a limited timeframe of 48 hours allocated for the game's completion.
 
 ## Prerequisites
 Before diving into this project, ensure that you meet the following prerequisites to guarantee a seamless experience:
